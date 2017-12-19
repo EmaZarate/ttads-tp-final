@@ -2,7 +2,7 @@
 ## Integrantes:
 Emanuel Zárate, legajo: 38347
 
-Javier 
+Javier Mattos, legajo: 40026
 ## Tema:
 Nuestro sistema administrará el alquiler de diferentes salones con o sin servicio de catering.
 ## Descripción del sistema y funcionalidades:
