@@ -26,6 +26,6 @@ Ademas el sistema servira para promocionar el alquiler de los salones mostrando 
 
 ## Modelo de Dominio
 
-![GitHub Logo]
+![GitHub Logo](https://github.com/EmaZarate/ttads-tp-final/blob/master/Modelo%20de%20Dominio/Modelo%20de%20Dominio.png)
 
 
