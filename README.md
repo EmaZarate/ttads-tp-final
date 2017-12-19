@@ -17,8 +17,7 @@ Un cliente puede abonar el precio del salón en cuotas, estas deberan ser regist
 Si en una reserva se supera la capacidad maxima del salon el sistema lo debera informar pero si el usuario lo decide la puede realizar de todas maneras.
 
 Ademas el sistema servira para promocionar el alquiler de los salones mostrando fotos de 360 grados, una descripción del salon y fotos de eventos realizados.
-
-
-
+##Modelo de Dominio
+![GitHub Logo](https://github.com/EmaZarate/ttads-tp-final/blob/master/Modelo%20de%20Dominio/Modelo%20de%20Dominio.png)
 
 
