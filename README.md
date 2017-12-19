@@ -9,7 +9,7 @@ Nuestro sistema administrará el alquiler de diferentes salones con o sin servic
 
 Cuando una persona hace una reserva esta puede ser con o sin servicio de catering, si es con servicio el precio del salon se calcula en base al menú elegido y la cantidad de personas(precio=precio del menu * cantidad de personas), si hay niños de entre 3 a 6 años estos pagan la mitad de la tarjeta y los menores de 3 años no pagan. Si es sin servicio esta se calcula al momento de realizar la reserva.
 
-Se registrara una persona encargada del alquiler del salon ingresando sus datos personales.
+Se registrara una persona encargada del alquiler del salon ingresando sus datos personales y se le asigna una cuenta con la cual podra ingresar al sistema y cargar sus invitados para su fiesta, esta lista no podra exceder la cantidad de personas que informo al momento de realizar el evento, en cualquier momento el cliente puede listar sus invitados.
 
 Si por cualquier motivo el cliente en el momento de la fiesta desea quedarse más horas se le cobrara las horas extras, este precio se define en el momento de la reserva. Existiendo un limite de horas extra a las cuales el cliente podrá acceder en funcion del horario en que se realiza el evento.
 
@@ -20,8 +20,6 @@ Si en una reserva se supera la capacidad maxima del salon el sistema lo debera i
 Cada lunes se enviará un mail al usuario administrador informando todas las fistas que hay en esa semana.
 
 Se podra imprimir un listado con todas las fiestas en el rango de fecha seleccionado por el usuario administrador, ya sea fiestas ya realizadas o por realizar.
-
-Llegada la fecha de realizacion del evento se emitirá una lista con los datos de los invitados a modo de checklist para poder controlar el ingreso de los invitados a la misma.
 
 Ademas el sistema servira para promocionar el alquiler de los salones mostrando fotos de 360 grados, una descripción del salon y fotos de eventos realizados.
 
