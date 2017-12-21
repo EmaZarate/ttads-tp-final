@@ -1,0 +1,26 @@
+{
+  "name": "salones",
+  "version": "1.0.0",
+  "description": "Gestiones de salones de eventos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmaZarate/ttads-tp-final.git"
+  },
+  "author": "Emanuel Zárate and Javier Mattos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmaZarate/ttads-tp-final/issues"
+  },
+  "homepage": "https://github.com/EmaZarate/ttads-tp-final#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "method-override": "^2.3.10",
+    "mongoose": "^4.13.7"
+  }
+}
