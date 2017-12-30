@@ -13,7 +13,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
-mongoose.connect('mongodb://localhost/GestionSalones');
+mongoose.connect('mongodb://localhost/GestionSalones', { useMongoClient: true });
+mongoose.Promise = global.Promise;
 require('./models/client.js');
 
 app.use(require('./routes'));
