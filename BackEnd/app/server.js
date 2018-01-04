@@ -17,6 +17,7 @@ mongoose.connect('mongodb://localhost/GestionSalones', { useMongoClient: true })
 mongoose.Promise = global.Promise;
 require('./models/client.js');
 require('./models/room.js');
+require('./models/person.js');
 
 app.use(require('./routes'));
 

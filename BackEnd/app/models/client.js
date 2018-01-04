@@ -1,9 +1,7 @@
 var mongoose = require ('mongoose');
-
-var clientSchema=  mongoose.Schema({
-  name:{type:String, required:true},
-  surname:{type:String, required:true},
-  phone:{type:Number},
+extend = require('mongoose-schema-extend');
+var personSchema = require('./person.js');
+var clientSchema=  personSchema.extend({
   email:{type:String},
   address:{type:String},
   password:{type:String}
