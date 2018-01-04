@@ -6,7 +6,7 @@ var room = mongoose.model('room');
 router.get('/', (req,res) => {
   room.find({})
   .then( rooms => {
-    if(!rooms) {return res.sendStatus(401) ; }
+    if(!rooms) {return res.sendStatus(404) ; }
     return res.json(rooms)
   })
 });
@@ -15,7 +15,7 @@ router.get('/:name', (req,res) =>{
     let name=req.params.name;
     room.find({ name:name})
     .then( room =>{
-      if(!room){return res.sendStatus(401);}
+      if(!room){return res.sendStatus(404);}
       return res.json(room)
     });
 });
@@ -25,7 +25,7 @@ router.post('/',(req,res)=>{
   let instRoom = new room(req.body);
   instRoom.save()
   .then(room => {
-    if(!room){return res.sendStatus(401);}
+    if(!room){return res.sendStatus(404);}
     return res.json(room)
   });
 });
@@ -47,7 +47,7 @@ router.delete('/:_id',(req,res)=>{
  let id = req.params._id;
  room.findByIdAndRemove(id)
  .then( room => {
-   if(!room){ return res.sendStatus(401);}
+   if(!room){ return res.sendStatus(404);}
    return res.json(room.name)
  })
 });
