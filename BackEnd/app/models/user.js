@@ -2,10 +2,11 @@ var mongoose = require ('mongoose');
 extend = require('mongoose-schema-extend');
 var personSchema = require('./person.js');
 
-var clientSchema=  personSchema.extend({
+var userSchema=  personSchema.extend({
   email:{type:String},
   address:{type:String},
-  password:{type:String}
+  password:{type:String},
+  permits:{type:mongoose.Schema.Types.ObjectId, ref:'permits'}
 });
 
-mongoose.model('client',clientSchema);
+mongoose.model('user',userSchema);
