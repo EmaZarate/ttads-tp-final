@@ -12,6 +12,7 @@ const port = 3000;
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(methodOverride());
+app.use('/images',express.static('images'));
 
 mongoose.connect('mongodb://localhost/GestionSalones', { useMongoClient: true });
 mongoose.Promise = global.Promise;
