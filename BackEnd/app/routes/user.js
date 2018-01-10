@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 var userModel = mongoose.model('user');
 var permitsModel = mongoose.model('permits');
 
-router.get('/:id', (req,res) => {
-    userModel.find({_id:req.params.id}) 
+router.get('/:_id', (req,res) => {
+    userModel.find({_id:req.params._id}) 
    .populate('permits')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
@@ -38,8 +38,8 @@ router.get('/:id_admin/:name', (req,res) =>{
     }) 
 });
 
-router.get('/:name/:surname', (req,res) =>{
-  userModel.find({_id:req.params.id_admin}) 
+router.get('/:_id_admin/:name/:surname', (req,res) =>{
+  userModel.find({_id:req.params._id_admin}) 
   .populate('permits')
   .then(user=>{
      if(!user){return res.sendStatus(404) }
@@ -62,7 +62,7 @@ router.post('/:id',(req,res)=>{
   .populate('permits')
   .then(user=>{
      if(user[0].permits.type==="administrador"){
-       permitsModel.find({type:req.body.typePermits})
+       permitsModel.find({type:req.body.permission})
        .then(permits=>{
          let instUser = new userModel();
          instUser.name = req.body.name;
@@ -71,9 +71,10 @@ router.post('/:id',(req,res)=>{
          instUser.email = req.body.email;
          instUser.address = req.body.address;
          instUser.password = req.body.password;
-         instUser.permits = permits._id
+         instUser.permits = permits[0]._id
          instUser.save()
          .then(user => {
+           console.log(user)
            if(!user) { return res.sendStatus(404) }
            else { return res.sendStatus(200)}
           })
@@ -86,27 +87,52 @@ router.post('/:id',(req,res)=>{
 });
 
 router.put('/:_id',(req,res)=>{
-  let id = req.params._id;
-  let name = req.body.name;
-  let surname = req.body.surname;
-  let phone = req.body.phone;
-  let email = req.body.email;
-  let address = req.body.address;
-  let password = req.body.password;
-  user.findOneAndUpdate({ "_id":id },{ "$set": { "name":name, "surname":surname,"phone":phone,"email":email,"address":address,"password":password }})
+  userModel.find({_id:req.params._id}) 
+  .populate('permits')
   .then(user=>{
-    if(!user){return res.sendStatus(400);}
-    return res.sendStatus(200)
-  })
+     if(user[0].permits.type==="administrador"){
+       permitsModel.find({type:req.body.permission})
+       .then(permission=>{
+        let id = req.body._id;
+        let name = req.body.name;
+        let surname = req.body.surname;
+        let phone = req.body.phone;
+        let email = req.body.email;
+        let address = req.body.address;
+        let password = req.body.password;
+        let permits = permission[0]._id
+        userModel.findOneAndUpdate({ "_id":id },{ "$set": { "name":name, "surname":surname,"phone":phone,"email":email,"address":address,"password":password,"permits":permits }})
+         .then(user => {
+           if(!user) { return res.sendStatus(404) }
+           else { return res.sendStatus(200)}
+          })
+        })  
+      }
+     else{
+       return res.json({permiso:'no tiene permiso'})
+      }
+   }) 
 });
 
-router.delete('/:_id',(req,res)=>{
- let id = req.params._id;
- user.findByIdAndRemove(id)
- .then( user => {
-   if(!user){ return res.sendStatus(404);}
-   return res.sendStatus(200)
- })
+router.delete('/:_id_admin/:_id',(req,res)=>{
+
+  userModel.find({_id:req.params._id_admin}) 
+   .populate('permits')
+   .then(user=>{
+      if(user[0].permits.type==="administrador"){
+        let id = req.params._id;
+        userModel.findByIdAndRemove(id)
+        .then( user => {
+          if(!user){ return res.sendStatus(404);}
+          return res.sendStatus(200)
+         })
+      }
+     else{
+       return res.json({permiso:'no tiene permiso'})
+      }
+    }) 
+ 
+ 
 });
 
 
