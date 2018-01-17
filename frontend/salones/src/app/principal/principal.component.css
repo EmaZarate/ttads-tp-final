@@ -1,0 +1,20 @@
+h1{
+  text-align: center;
+}
+.textoInicial{
+  text-align: center;
+  margin: 0px 50px 0px 50px;
+}
+hr{
+  width: 80%;
+  border: 0.5px solid rgb(172, 172, 172);
+}
+h2{
+  text-align: center;
+  margin-bottom: 6%
+}
+
+h3{
+  border-bottom: solid 1px rgb(172, 172, 172);
+  display: inline-block;
+}

@@ -5,7 +5,7 @@ var roomSchema = mongoose.Schema({
  address:{type:String,required:true},
  capacity:{type:Number},
  description:{type:String},
- images:{type:[]}
+ images:{ type:{} }
 },{timestamps:true});
 
 mongoose.model('room',roomSchema);
