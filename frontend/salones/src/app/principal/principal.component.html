@@ -1,6 +1,9 @@
 <div class="row justify-content-md-center">
+
   <div class="col-lg-12 col-sm-12">
-    <h1 class="display-3"> Salones para eventos Pérez</h1>
+    <h1 class="display-4"> Salones para eventos Pérez</h1>
+  </div>
+  <div class="col-12">
     <p class="textoInicial">Veni a disfrutar de nuestros salones para organizar el evento que desees al mejor precio, sdfasdfsdfsadfdsfsdfsdfsd
     safsadfsd adfas dfasdfsadf sdfsadfsdf asdfsadf sadfsd fsdf sadfas dfsdfsadfsdfasdfsdf asdfasd sdfsdf sadf sa dfsadfsadfas df sadf sadf onloadedmetadata=
   sdfsadfsdf sadfasdf sadfasd f</p>
@@ -9,14 +12,7 @@
 </div>
 <hr>
 <h2 class="display-4">Nuestros Salones</h2>
-<div class="row">
-  <div class="col-lg-5 offset-lg-1 col-sm-12">
-    <h3>{{matisa.name}}</h3>
-     <p>{{matisa.description}}</p>
 
-  </div>
-  <div class="col-lg-5 col-sm-12">
-   <img src="http://localhost:3000/images/matisa/{{matisa.images.frente}}" alt="" class="img-thumbnail">
-  </div>
-
+<div class="salon">
+  <app-salon *ngFor="let room of rooms" [room]="room"></app-salon>
 </div>

@@ -63,7 +63,7 @@ router.put('/:_id_admin/:_id',(req,res)=>{
 });
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id}) 
+  userModel.find({_id:req.params._id_admin}) 
    .populate('permits')
    .then(user=>{
       if(user[0].permits.type==="administrador"){

@@ -6,15 +6,26 @@ h1{
   margin: 0px 50px 0px 50px;
 }
 hr{
-  width: 80%;
-  border: 0.5px solid rgb(172, 172, 172);
+  width: 85%;
+  border: 0.8px solid rgb(172, 172, 172);
 }
 h2{
   text-align: center;
-  margin-bottom: 6%
+  margin: 30px 0px 50px 0px;
+  font-family: Verdana;
+  font-stretch: ultra-expanded;
 }
 
 h3{
   border-bottom: solid 1px rgb(172, 172, 172);
   display: inline-block;
+}
+
+@media (min-width: 991.99px) {
+  .textoInicial{
+    padding: 0% 20% 0% 20%
+  }
+  .salones{
+
+  }
 }

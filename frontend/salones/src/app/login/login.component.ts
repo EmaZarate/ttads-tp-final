@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SalonesService} from '../service/salones.service'
 
 @Component({
   selector: 'app-login',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  user:any;
+  
+
+  constructor(private service:SalonesService) { }
 
   ngOnInit() {
+      // this.service.login("claudiaangelamerlo1965@gmail.com","claudia1965").subscribe(user=>this.user=user[0])
   }
 
+  login(email, password){
+
+    this.service.login(email,password).subscribe(user=>{this.user=user[0]})
+  }
 }

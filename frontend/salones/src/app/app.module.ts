@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { PrincipalComponent } from './principal/principal.component';
 import { SalonesService } from './service/salones.service';
+import { SalonComponent } from './salones/salon/salon.component';
 
 
 
@@ -19,6 +20,7 @@ import { SalonesService } from './service/salones.service';
     FooterComponent,
     LoginComponent,
     PrincipalComponent,
+    SalonComponent,
 
   ],
   imports: [

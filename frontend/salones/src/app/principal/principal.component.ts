@@ -8,12 +8,12 @@ import {SalonesService} from '../service/salones.service';
 })
 export class PrincipalComponent implements OnInit {
 
-  matisa:any;
+  rooms:any;
 
   constructor(private service:SalonesService) {}
 
   ngOnInit() {
-    this.service.getRoom("Matisa").subscribe(room =>{this.matisa=room[0]})
+    this.service.getRooms().subscribe(rooms =>{this.rooms=rooms})
   }
 
 }
