@@ -2,9 +2,11 @@
 h3{
   margin-bottom: 30px;
   font-weight: bold;
+  color: #007bff!important;
 }
 .margen{
   margin-top: 5%;
+  background-color: rgb(255, 255, 255)
 }
 .img-thumbnail{
   border: solid 0px ;
@@ -14,5 +16,10 @@ h3{
 @media (min-width: 991.99px) {
   h3{
     margin-bottom: 60px;
+  }
+}
+@media (min-width: 200px) {
+  h3{
+    margin-bottom: 30px;
   }
 }

@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import {LoginComponent} from './login/login.component'
-import {PrincipalComponent} from './principal/principal.component'
+import {LoginComponent} from './login/login.component';
+import {PrincipalComponent} from './principal/principal.component';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: '/principal', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'principal', component: PrincipalComponent}
+  { path: 'principal', component: PrincipalComponent},
+  { path: 'administracion', loadChildren: 'app/area-administracion/area-administracion.module#AreaAdministracionModule'},
+  { path: '', redirectTo: '/principal', pathMatch: 'full' },
+
 ];
 
 @NgModule({

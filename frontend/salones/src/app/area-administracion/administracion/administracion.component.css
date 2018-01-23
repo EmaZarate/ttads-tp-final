@@ -1,0 +1,6 @@
+.nav-link{
+  border-left: solid 1px rgb(172, 172, 172);
+}
+ .last{
+   border-right: solid 1px rgb(172, 172, 172);
+ }
