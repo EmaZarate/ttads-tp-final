@@ -12,9 +12,9 @@ router.get('/', (req,res) => {
   })
 });
 
-router.get('/:name', (req,res) =>{
-    let name=req.params.name;
-    room.find({ name:name})
+router.get('/:_id', (req,res) =>{
+    let id=req.params._id;
+    room.find({ _id:id})
     .then( room =>{
       if(!room){return res.sendStatus(404);}
       return res.json(room)

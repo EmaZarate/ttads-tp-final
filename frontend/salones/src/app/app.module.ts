@@ -10,6 +10,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { PrincipalComponent } from './principal/principal.component';
 import { SalonesService } from './service/salones.service';
 import { SalonComponent } from './salones/salon/salon.component';
+import { PaginaNoEncontradaComponent } from './paginaNoEncontrada/paginaNoEncontrada.component';
 //import {AreaAdministracionModule} from './area-administracion/area-administracion.module';
 
 
@@ -23,6 +24,7 @@ import { SalonComponent } from './salones/salon/salon.component';
     LoginComponent,
     PrincipalComponent,
     SalonComponent,
+    PaginaNoEncontradaComponent,
 
 
   ],

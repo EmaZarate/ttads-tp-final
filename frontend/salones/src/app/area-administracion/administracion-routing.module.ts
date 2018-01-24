@@ -2,11 +2,11 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdministracionComponent } from './administracion/administracion.component';
-import {SalonesComponent}          from './salones/salones.component'
+import {SalonesComponent}          from './salones/salones.component';
+import {SalonComponent}          from './salon/salon.component'
 
 
-
-const crisisCenterRoutes: Routes = [
+const AreaAdministracionRoutes: Routes = [
   {
         path: '',
         component: AdministracionComponent,
@@ -14,6 +14,10 @@ const crisisCenterRoutes: Routes = [
           {
             path: 'salones',
             component: SalonesComponent
+          },
+          {
+            path: 'salon/:id',
+            component: SalonComponent
           }
         ]
   }
@@ -21,7 +25,7 @@ const crisisCenterRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(crisisCenterRoutes)
+    RouterModule.forChild(AreaAdministracionRoutes)
   ],
   exports: [
     RouterModule

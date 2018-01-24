@@ -1,0 +1,31 @@
+<form>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Nombre</label>
+      <input type="text" class="form-control" id="name" value="{{salon.name}}">
+    </div>
+    <div class="col-md-4">
+      <label >Dirección</label>
+      <input type="text" class="form-control" id="address" value="{{salon.address}}">
+    </div>
+    <div class="col-md-4">
+      <label >Capacidad</label>
+      <input type="text" class="form-control" id="capacity" value="{{salon.capacity}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label>Descripción</label>
+      <input type="text" class="form-control description" id="description" value="{{salon.description}}">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5 offset-md-2 col-6 marginbutton">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+    <div class="col-md-5 col-6">
+        <button type="submit" class="btn btn-secondary">Atras y Deshacer</button>
+    </div>
+  </div>
+</form>

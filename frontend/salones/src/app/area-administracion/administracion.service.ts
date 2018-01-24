@@ -20,8 +20,6 @@ export class AdministracionService {
         let oneRoom: string=this.coneccion+"rooms";
         return this.http.get(oneRoom).map((res:Response) => res.json());
       }
-  login(email,password): Observable<any>{
-    let login: string = this.coneccion+"login"+"/"+email+"/"+password;
-    return this.http.get(login).map((res:Response)=> res.json());
-  }
+
+
 }
