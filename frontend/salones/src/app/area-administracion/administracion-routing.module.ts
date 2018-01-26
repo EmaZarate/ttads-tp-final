@@ -18,6 +18,10 @@ const AreaAdministracionRoutes: Routes = [
           {
             path: 'salon/:id',
             component: SalonComponent
+          },
+          {
+            path: 'salon',
+            component: SalonComponent
           }
         ]
   }

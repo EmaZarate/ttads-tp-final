@@ -50,7 +50,8 @@ router.put('/:_id_admin/:_id',(req,res)=>{
         let address = req.body.address;
         let capacity = req.body.capacity;
         let description = req.body.description;
-        room.findOneAndUpdate( {"_id":id} , { "$set": {"name":name,"address":address,"capacity":capacity,"description":description }})
+        let images = req.body.images;      
+        room.findOneAndUpdate( {"_id":id} , { "$set": {"name":name,"address":address,"capacity":capacity,"description":description,"images":images }})
         .then(room => {
         if(!room){return res.sendStatus(401);}
         return res.json(room);
