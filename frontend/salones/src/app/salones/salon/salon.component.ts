@@ -1,7 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
-  selector: 'app-salon',
+  selector: 'app-salon-inicio',
   templateUrl: './salon.component.html',
   styleUrls: ['./salon.component.css']
 })

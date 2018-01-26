@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-administracion',
+  selector: 'app-salon',
   templateUrl: './salon.component.html',
   styleUrls: ['./salon.component.css']
 })

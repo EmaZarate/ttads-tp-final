@@ -10,7 +10,7 @@ export class AdministracionService {
   constructor(private http:Http) { }
  coneccion: String="http://localhost:3000/api/"
 
-
+ //Room
 
   getRoom(name): Observable <any>{
       let oneRoom: string=this.coneccion+"rooms"+"/"+name;
@@ -40,7 +40,36 @@ export class AdministracionService {
     return this.http.delete(this.coneccion + "rooms/5a552002110466aafe6141e9/"+id, options)
                .map((res:Response)=>res.json());
    }
+   
+ //Menu
+  getMenu(name): Observable <any>{
+    let oneRoom: string=this.coneccion+"menus"+"/"+name;
+    return this.http.get(oneRoom).map((res:Response) => res.json());
+    }
+
+  getMenus(): Observable <any>{
+      let oneRoom: string=this.coneccion+"menus";
+      return this.http.get(oneRoom).map((res:Response) => res.json());
+    }
+  insertMenu(menu): Observable<any>{
+  let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post(this.coneccion + "menus/5a552002110466aafe6141e9",menu, options)
+                 .map((res:Response)=>res.json());
+  } 
+  updateMenu(menu): Observable<any>{
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.put(this.coneccion + "menus/5a552002110466aafe6141e9/"+menu._id,menu, options)
+                 .map((res:Response)=>res.json());
   
+    }
+  deleteMenu(id): Observable<any>{
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.delete(this.coneccion + "menus/5a552002110466aafe6141e9/"+id, options)
+             .map((res:Response)=>res.json());
+  }
 
-
+//clientes
 }

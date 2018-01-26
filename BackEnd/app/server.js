@@ -20,6 +20,7 @@ require('./models/user.js');
 require('./models/room.js');
 require('./models/guest.js');
 require('./models/permits.js');
+require('./models/menu.js');
 
 app.use(require('./routes')); 
 

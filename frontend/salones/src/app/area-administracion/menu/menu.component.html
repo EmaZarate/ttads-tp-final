@@ -1,0 +1,40 @@
+<form>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Nombre</label>
+      <input type="text" class="form-control" #name value="{{menu.name}}">
+    </div>
+    <div class="col-md-4">
+      <label >Precio</label>
+      <input type="number" class="form-control" #price value="{{menu.price}}">
+    </div>
+    <div class="col-md-4">
+      <label >Bebida</label>
+      <input type="text" class="form-control" #drink value="{{menu.drink}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Entrada</label>
+      <input type="text" class="form-control" #starter value="{{menu.starter}}">
+    </div>
+    <div class="col-md-4">
+      <label >Plato Principal</label>
+      <input type="text" class="form-control" #mainCourse value="{{menu.mainCourse}}">
+    </div>
+    <div class="col-md-4">
+      <label >Postre</label>
+      <input type="text" class="form-control" #dessert value="{{menu.dessert}}">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5 offset-md-2 col-6 marginbutton">
+        <button  class="btn btn-primary" type="button" 
+        (click)="save(name.value,price.value,drink.value,starter.value,mainCourse.value,dessert.value)">Guardar</button>
+    </div>
+    <div class="col-md-5 col-6">
+        <button type="button" class="btn btn-secondary" (click)="goBack()" >Atras y Deshacer</button>
+    </div>
+  </div>
+</form>

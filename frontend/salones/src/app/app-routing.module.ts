@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'principal', component: PrincipalComponent},
   { path: 'administracion', loadChildren: 'app/area-administracion/area-administracion.module#AreaAdministracionModule'},
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
-  //{ path: '**', component: PaginaNoEncontradaComponent}
+  { path: '**', component: PaginaNoEncontradaComponent}
 ];
 
 @NgModule({
