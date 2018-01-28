@@ -5,4 +5,4 @@ var singSchema = mongoose.Schema({
  amount:{type:Number,required:true}
 },{timestamps:true});
 
-mongoose.model('sing',singSchema);
+mongoose.model('sign',singSchema);
