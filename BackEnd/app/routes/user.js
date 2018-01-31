@@ -3,10 +3,12 @@ const router = require('express').Router();
 const bodyParser = require('body-parser');
 var userModel = mongoose.model('user');
 var permitsModel = mongoose.model('permits');
+var reservationModel = mongoose.model('reservation');
 
 router.get('/:_id', (req,res) => {
     userModel.find({_id:req.params._id})
    .populate('permits')
+   .populate('reservation')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
         userModel.find({})
@@ -22,8 +24,9 @@ router.get('/:_id', (req,res) => {
 
 
 router.get('/:_id_admin/:_id', (req,res) =>{
-  userModel.find({_id:req.params._id_admin}) 
+  userModel.find({_id:req.params._id_admin})
    .populate('permits')
+   .populate('reservation')
    .then(user=>{
       if(!user){return res.sendStatus(404) }
       else if(user[0].permits.type==="administrador"){
@@ -43,6 +46,7 @@ router.get('/:_id_admin/:_id', (req,res) =>{
 router.get('/:_id_admin/:name/:surname', (req,res) =>{
   userModel.find({_id:req.params._id_admin})
   .populate('permits')
+  .populate('reservation')
   .then(user=>{
      if(!user){return res.sendStatus(404) }
      else if(user[0].permits.type==="administrador"){
@@ -62,6 +66,7 @@ router.get('/:_id_admin/:name/:surname', (req,res) =>{
 router.post('/:_id',(req,res)=>{
   userModel.find({_id:req.params._id})
   .populate('permits')
+  .populate('reservation')
   .then(user=>{
      if(user[0].permits.type==="administrador"){
        permitsModel.find({type:req.body.permission})
@@ -90,6 +95,7 @@ router.post('/:_id',(req,res)=>{
 router.put('/:_id',(req,res)=>{
   userModel.find({_id:req.params._id})
   .populate('permits')
+  .populate('reservation')
   .then(user=>{
      if(user[0].permits.type==="administrador"){
        permitsModel.find({type:req.body.permission})
@@ -119,6 +125,7 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
 
   userModel.find({_id:req.params._id_admin})
    .populate('permits')
+   .populate('reservation')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
         let id = req.params._id;
