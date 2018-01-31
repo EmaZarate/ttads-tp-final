@@ -20,13 +20,14 @@ router.get('/:_id', (req,res) => {
     }) 
 });
 
-router.get('/:id_admin/:name', (req,res) =>{
-  userModel.find({_id:req.params.id_admin}) 
+router.get('/:_id_admin/:_id', (req,res) =>{
+  userModel.find({_id:req.params._id_admin}) 
    .populate('permits')
    .then(user=>{
       if(!user){return res.sendStatus(404) }
       else if(user[0].permits.type==="administrador"){
-        userModel.find({name:req.params.name})
+        userModel.find({_id:req.params._id})
+        .populate('permits')
         .then(users=>{
           if(!users) { return res.json('usuario no encontrado') }
           else{ return res.json(users) }
@@ -76,7 +77,7 @@ router.post('/:id',(req,res)=>{
          .then(user => {
            console.log(user)
            if(!user) { return res.sendStatus(404) }
-           else { return res.sendStatus(200)}
+           else { return res.status(200).send(user);}
           })
        })  
       }
@@ -104,7 +105,7 @@ router.put('/:_id',(req,res)=>{
         userModel.findOneAndUpdate({ "_id":id },{ "$set": { "name":name, "surname":surname,"phone":phone,"email":email,"address":address,"password":password,"permits":permits }})
          .then(user => {
            if(!user) { return res.sendStatus(404) }
-           else { return res.sendStatus(200)}
+           else { return res.status(200).send(user); }
           })
         })  
       }
@@ -124,7 +125,7 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
         userModel.findByIdAndRemove(id)
         .then( user => {
           if(!user){ return res.sendStatus(404);}
-          return res.sendStatus(200)
+          return res.status(200).send(user);
          })
       }
      else{

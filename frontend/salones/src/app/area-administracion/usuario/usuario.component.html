@@ -1,0 +1,49 @@
+<form>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Nombre</label>
+      <input type="text" class="form-control" #name value="{{usuario.name}}">
+    </div>
+    <div class="col-md-4">
+      <label >Apellido</label>
+      <input type="text" class="form-control" #surname value="{{usuario.surname}}">
+    </div>
+    <div class="col-md-4">
+      <label >Telefono</label>
+      <input type="text" class="form-control" #phone value="{{usuario.phone}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Dirección</label>
+      <input type="text" class="form-control" #address value="{{usuario.address}}">
+    </div>
+    <div class="col-md-4">
+      <label >Email</label>
+      <input type="text" class="form-control" #email value="{{usuario.email}}">
+    </div>
+    <div class="col-md-4">
+      <label >Contraseña</label>
+      <input type="text" class="form-control" #password value="{{usuario.password}}">
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-4">
+          <label>State</label>
+          <select #tipo class="form-control">
+            <option value={{value1Permiso}}>{{primerPermiso}}</option>
+            <option value={{value2Permiso}}>{{segundoPermiso}}</option>
+          </select>
+      </div>
+    </div>
+  
+  <div class="row">
+    <div class="col-md-5 offset-md-2 col-6 marginbutton">
+        <button  class="btn btn-primary" type="button" 
+        (click)="save(name.value,surname.value,phone.value,address.value,email.value,password.value,tipo.value)">Guardar</button>
+    </div>
+    <div class="col-md-5 col-6">
+        <button type="button" class="btn btn-secondary" (click)="goBack()" >Atras y Deshacer</button>
+    </div>
+  </div>
+</form>

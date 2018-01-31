@@ -11,8 +11,11 @@ import {SalonComponent}                from './salon/salon.component'
 import { AdministracionRoutingModule } from './administracion-routing.module';
 import { MenusComponent } from './menus/menus.component';
 import { MenuComponent } from './menu/menu.component';
-import { ClientesComponent } from './clientes/clientes.component';
-import { ClienteComponent } from './cliente/cliente.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { ReservasComponent } from './reservas/reservas.component';
+import { ReservaComponent } from './reserva/reserva.component';
+
 
 @NgModule({
   imports: [
@@ -26,8 +29,11 @@ import { ClienteComponent } from './cliente/cliente.component';
     SalonComponent,
     MenusComponent,
     MenuComponent,
-    ClientesComponent,
-    ClienteComponent
+    UsuariosComponent,
+    UsuarioComponent,
+    ReservasComponent,
+    ReservaComponent
+    
   ],
   providers: [
     AdministracionService

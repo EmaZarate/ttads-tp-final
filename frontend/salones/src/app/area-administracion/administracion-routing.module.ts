@@ -6,8 +6,9 @@ import {SalonesComponent}          from './salones/salones.component';
 import {SalonComponent}          from './salon/salon.component';
 import {MenusComponent}          from './menus/menus.component';
 import {MenuComponent}           from './menu/menu.component';
-import {ClientesComponent}       from './clientes/clientes.component';
-import {ClienteComponent}        from './cliente/cliente.component'
+import {UsuariosComponent}       from './usuarios/usuarios.component';
+import {UsuarioComponent}        from './usuario/usuario.component'
+import {ReservasComponent}       from './reservas/reservas.component'; 
 
 const AreaAdministracionRoutes: Routes = [
   { path: '', component: AdministracionComponent,children: [
@@ -17,9 +18,10 @@ const AreaAdministracionRoutes: Routes = [
           { path: 'menus', component: MenusComponent},
           { path: 'menu/:id', component: MenuComponent},
           { path: 'menu', component: MenuComponent},
-          { path: 'clientes', component: ClientesComponent},
-          { path: 'cliente/:id', component: ClienteComponent},
-          { path: 'cliente', component: ClienteComponent},
+          { path: 'usuarios', component: UsuariosComponent},
+          { path: 'usuario/:id', component: UsuarioComponent},
+          { path: 'usuario', component: UsuarioComponent},
+          { path: 'reservas', component: ReservasComponent},
           { path: '', redirectTo: '/administracion/menus', pathMatch: 'full' },
         ]
   }

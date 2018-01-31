@@ -4,6 +4,9 @@
  .last{
    border-right: solid 1px rgb(172, 172, 172);
  }
+ .active{
+   font-weight: bold
+ }
 
 .margen{
   margin-bottom: 20px

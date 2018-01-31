@@ -72,4 +72,31 @@ export class AdministracionService {
   }
 
 //clientes
+  getUsuario(id): Observable <any>{
+    let oneRoom: string=this.coneccion+"users"+"/5a552002110466aafe6141e9"+"/"+id;
+    return this.http.get(oneRoom).map((res:Response) => res.json());
+    }
+ 
+  getUsuarios(): Observable <any>{
+    let oneRoom: string=this.coneccion+"users/5a552002110466aafe6141e9";
+    return this.http.get(oneRoom).map((res:Response) => res.json());
+    }
+  insertUsuario(usuario): Observable<any>{
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.coneccion + "users/5a552002110466aafe6141e9",usuario, options)
+               .map((res:Response)=>res.json());
+    } 
+  updateUsuario(usuario): Observable<any>{
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.coneccion + "users/5a552002110466aafe6141e9",usuario, options)
+               .map((res:Response)=>res.json());
+    }
+  deleteUsuario(id): Observable<any>{
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.delete(this.coneccion + "users/5a552002110466aafe6141e9/"+id, options)
+           .map((res:Response)=>res.json());
+    }
 }
