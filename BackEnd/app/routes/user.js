@@ -5,7 +5,7 @@ var userModel = mongoose.model('user');
 var permitsModel = mongoose.model('permits');
 
 router.get('/:_id', (req,res) => {
-    userModel.find({_id:req.params._id}) 
+    userModel.find({_id:req.params._id})
    .populate('permits')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
@@ -17,8 +17,9 @@ router.get('/:_id', (req,res) => {
      else{
        return res.json({permiso:'no tiene permiso'})
       }
-    }) 
+    })
 });
+
 
 router.get('/:_id_admin/:_id', (req,res) =>{
   userModel.find({_id:req.params._id_admin}) 
@@ -36,11 +37,11 @@ router.get('/:_id_admin/:_id', (req,res) =>{
      else{
        return res.json({permiso:'no tiene permiso'})
       }
-    }) 
+    })
 });
 
 router.get('/:_id_admin/:name/:surname', (req,res) =>{
-  userModel.find({_id:req.params._id_admin}) 
+  userModel.find({_id:req.params._id_admin})
   .populate('permits')
   .then(user=>{
      if(!user){return res.sendStatus(404) }
@@ -54,12 +55,12 @@ router.get('/:_id_admin/:name/:surname', (req,res) =>{
     else{
       return res.json({permiso:'no tiene permiso'})
      }
-   }) 
+   })
 });
 
 
-router.post('/:id',(req,res)=>{
-  userModel.find({_id:req.params.id}) 
+router.post('/:_id',(req,res)=>{
+  userModel.find({_id:req.params._id})
   .populate('permits')
   .then(user=>{
      if(user[0].permits.type==="administrador"){
@@ -72,23 +73,22 @@ router.post('/:id',(req,res)=>{
          instUser.email = req.body.email;
          instUser.address = req.body.address;
          instUser.password = req.body.password;
-         instUser.permits = permits[0]._id
+         instUser.permits = permits[0]._id;
          instUser.save()
          .then(user => {
-           console.log(user)
            if(!user) { return res.sendStatus(404) }
            else { return res.status(200).send(user);}
           })
-       })  
+       })
       }
      else{
        return res.json({permiso:'no tiene permiso'})
       }
-  }) 
+  })
 });
 
 router.put('/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id}) 
+  userModel.find({_id:req.params._id})
   .populate('permits')
   .then(user=>{
      if(user[0].permits.type==="administrador"){
@@ -107,17 +107,17 @@ router.put('/:_id',(req,res)=>{
            if(!user) { return res.sendStatus(404) }
            else { return res.status(200).send(user); }
           })
-        })  
+        })
       }
      else{
        return res.json({permiso:'no tiene permiso'})
       }
-   }) 
+   })
 });
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
 
-  userModel.find({_id:req.params._id_admin}) 
+  userModel.find({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
@@ -131,9 +131,9 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
      else{
        return res.json({permiso:'no tiene permiso'})
       }
-    }) 
- 
- 
+    })
+
+
 });
 
 

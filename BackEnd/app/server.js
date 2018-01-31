@@ -21,13 +21,14 @@ require('./models/room.js');
 require('./models/guest.js');
 require('./models/permits.js');
 require('./models/menu.js');
-
-app.use(require('./routes')); 
+require('./models/sign.js');
+require('./models/reservation.js');
+app.use(require('./routes'));
 
 var router= express.Router();
 
 app.use(router);
 
 app.listen(port, () =>{
-  console.log('we are live on' + port);
+  console.log('we are live on ' + port);
 });

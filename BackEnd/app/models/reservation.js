@@ -14,4 +14,6 @@ var reservationSchema = mongoose.Schema({
    menu:{type:mongoose.Schema.Types.ObjectId, ref:'menu'},
    sing: [{type:mongoose.Schema.Types.ObjectId, ref:'sing'}],
    guest: [{type:mongoose.Schema.Types.ObjectId, ref:'guest'}],
-})
+},{timestamps:true});
+
+mongoose.model('reservation',reservationSchema);
