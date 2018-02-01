@@ -10,9 +10,6 @@ var menuModel = mongoose.model('menu');
 router.get('/:_id', (req,res) => {
     userModel.find({_id:req.params._id})
    .populate('room')
-   .populate('sign')
-   .populate('guest')
-   .populate('menu')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
         reservationModel.find({})
@@ -28,6 +25,7 @@ router.get('/:_id', (req,res) => {
 
 router.get('/:_id/:_id_reservation', (req,res) => {
     userModel.find({_id:req.params._id})
+   .populate('client')
    .populate('room')
    .populate('sign')
    .populate('guest')
@@ -47,10 +45,6 @@ router.get('/:_id/:_id_reservation', (req,res) => {
 
 router.post('/:_id',(req,res)=>{
   userModel.find({_id:req.params._id})
-  .populate('room')
-  .populate('sign')
-  .populate('guest')
-  .populate('menu')
   .then(user=>{
      if(user[0].permits.type==="administrador"){
        let instReservation = new reservation(req.body);
@@ -68,10 +62,6 @@ router.post('/:_id',(req,res)=>{
 
 router.put('/:_id/:_id_reservation',(req,res)=>{
   userModel.find({_id:req.params._id})
-  .populate('room')
-  .populate('sign')
-  .populate('guest')
-  .populate('menu')
   .then(user=>{
      if(user[0].permits.type==="administrador"){
         let _id_reservation = req.params._id_reservation;
@@ -98,10 +88,6 @@ router.put('/:_id/:_id_reservation',(req,res)=>{
 
 router.delete('/:_id/:_id_reservation',(req,res)=>{
   userModel.find({_id:req.params._id})
-  .populate('room')
-  .populate('sign')
-  .populate('guest')
-  .populate('menu')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
         let _id_reservation = req.params._id_reservation;

@@ -10,6 +10,7 @@ var reservationSchema = mongoose.Schema({
    extraHourPrice: {type:Number},
    state: {type:String},
    amount: {type:Number},
+   client:{type:mongoose.Schema.Types.ObjectId, ref:'user'},
    room:{type:mongoose.Schema.Types.ObjectId, ref:'room'},
    menu:{type:mongoose.Schema.Types.ObjectId, ref:'menu'},
    sing: [{type:mongoose.Schema.Types.ObjectId, ref:'sing'}],

@@ -4,7 +4,7 @@ import { CommonModule }   from '@angular/common';
 
 import { AdministracionService }       from './administracion.service';
 
-import {AdministracionComponent}       from './administracion/administracion.component';
+import {AdministracionComponent}       from './administracion-nav/administracion.component';
 import { SalonesComponent}             from './salones/salones.component';
 import {SalonComponent}                from './salon/salon.component'
 
@@ -13,8 +13,11 @@ import { MenusComponent } from './menus/menus.component';
 import { MenuComponent } from './menu/menu.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuarioComponent } from './usuario/usuario.component';
-import { ReservasComponent } from './reservas/reservas.component';
+import { ReservasComponent } from './reservas/reservas.component'
 import { ReservaComponent } from './reserva/reserva.component';
+import { ReservasVistasComponent } from './reservas-vistas/reservas-vistas.component';
+import { ReservasCalendarioComponent } from './reservas-calendario/reservas-calendario.component';
+
 
 
 @NgModule({
@@ -32,7 +35,9 @@ import { ReservaComponent } from './reserva/reserva.component';
     UsuariosComponent,
     UsuarioComponent,
     ReservasComponent,
-    ReservaComponent
+    ReservaComponent,
+    ReservasVistasComponent,
+    ReservasCalendarioComponent,
     
   ],
   providers: [
