@@ -22,13 +22,13 @@ router.get('/:_id', (req, res) => {
   })
 });
 
-router.post('/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id})
+router.post('/:_id_admin/:_id_reservation',(req,res)=>{
+  userModel.find({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
         let instSign = new sign(req.body);
-        let id = req.body.id_reservation
+        let id = req.params._id_reservation
         instSign.save()
        .then(Reserva.findOne({"_id": id}).then(reserva => {
         if(!reserva){return res.sendStatus(404);}

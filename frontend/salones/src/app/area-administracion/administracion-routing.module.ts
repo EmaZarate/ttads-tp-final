@@ -22,12 +22,15 @@ const AreaAdministracionRoutes: Routes = [
           { path: 'menu/:id', component: MenuComponent},
           { path: 'menu', component: MenuComponent},
           { path: 'usuarios', component: UsuariosComponent},
+          { path: 'usuario', component: UsuarioComponent},
           { path: 'usuario/:id', component: UsuarioComponent},
           { path: 'reservas', component: ReservasVistasComponent, children:[
             { path:'lista', component:ReservasComponent},
             { path:'calendario', component:ReservasCalendarioComponent},
             { path:'', redirectTo:'/administracion/reservas/lista', pathMatch: 'full'}
           ]},
+          { path: 'reserva', component:ReservaComponent},
+          { path: 'reserva/:id', component:ReservaComponent},
           { path: '', redirectTo: '/administracion/menus', pathMatch: 'full' },
         ]
   }

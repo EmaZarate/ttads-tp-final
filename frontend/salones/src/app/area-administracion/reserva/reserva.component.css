@@ -1,0 +1,17 @@
+.row{
+    margin: 10px 5px 5px 5px;
+  }
+  
+  label{
+    margin-top: 10px
+}  
+
+  @media (min-width: 991.99px) {
+  button{
+    margin-top: 50px
+  }
+  form{
+    margin-bottom: 5%
+  }
+  }
+  
