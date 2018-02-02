@@ -26,13 +26,13 @@ export class AdministracionService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.coneccion + "rooms/5a552002110466aafe6141e9",salon, options)
                    .map((res:Response)=>res.json());
-  } 
+  }
   updateRoom(salon): Observable<any>{
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.put(this.coneccion + "rooms/5a552002110466aafe6141e9/"+salon._id,salon, options)
                    .map((res:Response)=>res.json());
-    
+
       }
    deleteRoom(id): Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -40,7 +40,7 @@ export class AdministracionService {
     return this.http.delete(this.coneccion + "rooms/5a552002110466aafe6141e9/"+id, options)
                .map((res:Response)=>res.json());
    }
-   
+
  //Menu
   getMenu(name): Observable <any>{
     let oneRoom: string=this.coneccion+"menus"+"/"+name;
@@ -56,13 +56,13 @@ export class AdministracionService {
       let options = new RequestOptions({ headers: headers });
       return this.http.post(this.coneccion + "menus/5a552002110466aafe6141e9",menu, options)
                  .map((res:Response)=>res.json());
-  } 
+  }
   updateMenu(menu): Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
       return this.http.put(this.coneccion + "menus/5a552002110466aafe6141e9/"+menu._id,menu, options)
                  .map((res:Response)=>res.json());
-  
+
     }
   deleteMenu(id): Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -76,7 +76,7 @@ export class AdministracionService {
     let oneRoom: string=this.coneccion+"users"+"/5a552002110466aafe6141e9"+"/"+id;
     return this.http.get(oneRoom).map((res:Response) => res.json());
     }
- 
+
   getUsuarios(): Observable <any>{
     let oneRoom: string=this.coneccion+"users/5a552002110466aafe6141e9";
     return this.http.get(oneRoom).map((res:Response) => res.json());
@@ -86,7 +86,7 @@ export class AdministracionService {
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.coneccion + "users/5a552002110466aafe6141e9",usuario, options)
                .map((res:Response)=>res.json());
-    } 
+    }
   updateUsuario(usuario): Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
