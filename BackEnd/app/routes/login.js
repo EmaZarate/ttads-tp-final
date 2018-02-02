@@ -1,5 +1,4 @@
   var mongoose = require('mongoose');
-
 const router = require('express').Router();
 const bodyParser = require('body-parser');
 var session = require('express-session');
@@ -18,7 +17,7 @@ router.get('/:email/:password', (req,res) => {
           else {
             req.session.admin = false;
           } */
-          console.log(req.session.user);
+          req.session.save();
           return res.json(user)
         }
     })

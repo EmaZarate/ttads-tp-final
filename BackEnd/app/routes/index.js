@@ -1,5 +1,5 @@
-var router = require('express').Router();
 var session = require('express-session');
+var router = require('express').Router();
 
 router.use('/api/users', require('./user'));
 router.use('/api/rooms', require('./room'));

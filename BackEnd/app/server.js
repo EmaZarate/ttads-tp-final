@@ -3,8 +3,10 @@ var mongoose    = require('mongoose');
 var bodyParser  = require('body-parser');
 var cors        = require('cors');
 var methodOverride = require('method-override');
+var router= express.Router();
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+
 
 var app = express();
 app.use(cors());
@@ -31,7 +33,7 @@ require('./models/sign.js');
 require('./models/reservation.js');
 app.use(require('./routes'));
 
-var router= express.Router();
+
 
 app.use(router);
 

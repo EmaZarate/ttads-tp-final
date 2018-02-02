@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
+var session = require('express-session');
 const router = require('express').Router();
 const bodyParser = require('body-parser');
 var room = mongoose.model('room');
 var userModel = mongoose.model('user')
-var session = require('express-session');
+
 
 
 router.get('/', (req,res) => {
