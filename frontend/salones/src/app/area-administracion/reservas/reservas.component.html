@@ -1,3 +1,29 @@
-<p>
-  reservas works!
-</p>
+<div class="row">
+  <div class="col-lg-2 col-sm-12">
+    <button type="button" name="button" (click)="goNewReservation()" class="btn btn-success NewDelete">Nueva Reserva</button>
+    <button type="button" class="btn btn-danger NewDelete" (click)="deleted()" > Eliminar</button>
+  </div>
+  <div class="col-lg-8 col-sm-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Estado</th>
+          <th scope="col"></th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let menu of menus index as i; first as isFirst">
+         <th scope="row">{{i}}</th>
+         <td>{{reservas.date}}</td>
+         <td>{{reservas.state}}</td>
+         <td>
+           <button type="button" (click)="goReservation(menu._id)" class="btn btn-primary">Seleccionar</button>
+          <button type="button" (click)="deleteReservation(menu._id)" class="btn btn-danger" [class.delete]="delete">X</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -42,7 +42,7 @@ router.post('/:_id',(req,res)=>{
    .then(user=>{
       if(user[0].permits.type==="administrador"){
         let instSign = new sign(req.body);
-        let id = req.body.id_reservation
+        let id = req.params._id_reservation
         instSign.save()
        .then(Reserva.findOne({"_id": id}).then(reserva => {
         if(!reserva){return res.sendStatus(404);}

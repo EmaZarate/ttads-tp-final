@@ -1,3 +1,97 @@
-<p>
-  reserva works!
-</p>
+<form>
+  <div class="row">
+    <div class="col-md-3">
+      <label >Fecha</label>
+      <input type="date" class="form-control" #name value="{{usuario.name}}">
+    </div>
+    <div class="col-md-3">
+      <label >Tipo</label>
+      <select #tipo class="form-control">
+        <option  value="Con Servicio">Con Servicio</option>
+        <option value="Sin Servicio">Sin Servicio</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label >Hora de Inicio</label>
+      <input type="time" class="form-control" #phone value="{{usuario.phone}}">
+    </div>
+    <div class="col-md-3">
+      <label >Hora Fin</label>
+      <input type="time" class="form-control" #phone value="{{usuario.phone}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Salon</label>
+      <select #tipo class="form-control">
+        <option *ngFor="let salon of salones" value={{salon_id}}>{{salon.name}}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label >Cliente</label>
+      <select #tipo class="form-control">
+        <option *ngFor="let cliente of clientes" value={{cliente._id}}>{{cliente.name}} {{cliente.surname}}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label >Menu</label>
+      <input type="text" class="form-control" #password value="{{usuario.password}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Cantidad de Adultos</label>
+      <input type="text" class="form-control" #address value="{{usuario.address}}">
+    </div>
+    <div class="col-md-4">
+      <label >Cantidad de menores</label>
+      <input type="text" class="form-control" #email value="{{usuario.email}}">
+    </div>
+    <div class="col-md-4">
+      <label >Cantidad de bebes</label>
+      <input type="text" class="form-control" #password value="{{usuario.password}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Estado</label>
+      <input type="text" class="form-control" #address value="{{usuario.address}}">
+    </div>
+    <div class="col-md-4">
+      <label >Precio hora extra</label>
+      <input type="text" class="form-control" #address value="{{usuario.address}}">
+    </div>
+    <div class="col-md-4">
+      <label >Monto</label>
+      <input type="text" class="form-control" #email value="{{usuario.email}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label >Descripción</label>
+      <input type="text" class="form-control" #email value="{{usuario.email}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label >Seña y entragas</label>
+      <input type="text" class="form-control" #email value="{{usuario.email}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label >Invitados</label>
+      <input type="text" class="form-control" #email value="{{usuario.email}}">
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-5 offset-md-2 col-6 marginbutton">
+        <button  class="btn btn-primary" type="button" 
+        (click)="save(name.value,surname.value,phone.value,address.value,email.value,password.value,tipo.value)">Guardar</button>
+    </div>
+    <div class="col-md-5 col-6">
+        <button type="button" class="btn btn-secondary" (click)="goBack()" >Atras y Deshacer</button>
+    </div>
+  </div>
+</form>
