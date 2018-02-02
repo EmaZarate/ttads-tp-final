@@ -14,6 +14,8 @@ export class ReservaComponent implements OnInit {
   reserva:any={}
   salones:any={};
   clientes:any={};
+  menus:any={};
+
   constructor(
     private route:ActivatedRoute,
     private service:AdministracionService,
@@ -23,6 +25,8 @@ export class ReservaComponent implements OnInit {
   ngOnInit() {
     this.service.getRooms().subscribe(salones=>{ this.salones=salones });
     this.service.getUsuarios().subscribe(clientes=>{ this.clientes=clientes });
+    this.service.getMenus().subscribe(menus=>{ this.menus=menus });
+    
     this.id = this.route.snapshot.paramMap.get('id');
     if(this.id===null){
         

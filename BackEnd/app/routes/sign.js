@@ -5,14 +5,15 @@ var sign = mongoose.model('sign');
 var userModel = mongoose.model('user');
 var Reserva = mongoose.model('reservation');
 
-router.get('/', (req,res) => {
-  sign.find({})
-  .then( signs => {
-    if(!signs) {return res.sendStatus(404) ; }
-    return res.json(signs)
+router.get('/:_idReservation', (req,res) => {
+  let _idReservation = req.params._idReservation
+  Reserva.findById(_idReservation)
+  .populate('sing')
+  .then(reservation=>{
+    return res.status(200).send(reservation.sing)
   })
 });
-
+/*
 router.get('/:_id', (req, res) => {
   let _id = req.params._id;
   sign.findById(_id)
@@ -21,7 +22,7 @@ router.get('/:_id', (req, res) => {
       return res.json({'signs': sings})
   })
 });
-
+*/
 router.post('/:_id_admin/:_id_reservation',(req,res)=>{
   userModel.find({_id:req.params._id_admin})
    .populate('permits')

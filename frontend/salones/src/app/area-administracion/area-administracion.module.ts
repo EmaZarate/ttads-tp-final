@@ -17,6 +17,7 @@ import { ReservasComponent } from './reservas/reservas.component'
 import { ReservaComponent } from './reserva/reserva.component';
 import { ReservasVistasComponent } from './reservas-vistas/reservas-vistas.component';
 import { ReservasCalendarioComponent } from './reservas-calendario/reservas-calendario.component';
+import { SeñasComponent } from './señas/señas.component';
 
 
 
@@ -38,6 +39,7 @@ import { ReservasCalendarioComponent } from './reservas-calendario/reservas-cale
     ReservaComponent,
     ReservasVistasComponent,
     ReservasCalendarioComponent,
+    SeñasComponent,
     
   ],
   providers: [

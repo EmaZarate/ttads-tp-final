@@ -128,4 +128,9 @@ export class AdministracionService {
       return this.http.delete(this.coneccion + "reservation/5a552002110466aafe6141e9/"+id, options)
              .map((res:Response)=>res.json());
       }
+    
+    getSeñas(idReserva){
+      let señas: string=this.coneccion+"sings"+"/"+idReserva;
+      return this.http.get(señas).map((res:Response) => res.json());
+    }
 }
