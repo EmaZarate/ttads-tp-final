@@ -6,8 +6,14 @@ var roomModel = mongoose.model('room');
 var guestModel = mongoose.model('guest');
 var signModel = mongoose.model('sign');
 var menuModel = mongoose.model('menu');
+var session = require('express-session');
+
 
 router.get('/:_id', (req,res) => {
+  if(!req.session.user){
+    return res.status(401).send();
+  }
+  else{
     userModel.find({_id:req.params._id})
    .populate('room')
    .then(user=>{
@@ -21,9 +27,13 @@ router.get('/:_id', (req,res) => {
        return res.json({permiso:'no tiene permiso'})
       }
     })
-});
+}});
 
 router.get('/:_id/:_id_reservation', (req,res) => {
+  if(!req.session.user){
+    return res.status(401).send();
+  }
+  else{
     userModel.find({_id:req.params._id})
    .populate('client')
    .populate('room')
@@ -41,9 +51,13 @@ router.get('/:_id/:_id_reservation', (req,res) => {
        return res.json({permiso:'no tiene permiso'})
       }
     })
-});
+}});
 
 router.post('/:_id',(req,res)=>{
+  if(!req.session.user){
+    return res.status(401).send();
+  }
+  else{
   userModel.find({_id:req.params._id})
   .then(user=>{
      if(user[0].permits.type==="administrador"){
@@ -58,9 +72,13 @@ router.post('/:_id',(req,res)=>{
       return res.json({permiso:'no tiene permiso'})
      }
    })
-});
+}});
 
 router.put('/:_id/:_id_reservation',(req,res)=>{
+  if(!req.session.user){
+    return res.status(401).send();
+  }
+  else{
   userModel.find({_id:req.params._id})
   .then(user=>{
      if(user[0].permits.type==="administrador"){
@@ -84,9 +102,13 @@ router.put('/:_id/:_id_reservation',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
    })
-});
+}});
 
 router.delete('/:_id/:_id_reservation',(req,res)=>{
+  if(!req.session.user){
+    return res.status(401).send();
+  }
+  else{
   userModel.find({_id:req.params._id})
    .then(user=>{
       if(user[0].permits.type==="administrador"){
@@ -101,9 +123,7 @@ router.delete('/:_id/:_id_reservation',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
     })
-
-
-});
+}});
 
 
 module.exports=router;

@@ -1,14 +1,26 @@
-var mongoose = require('mongoose');
+  var mongoose = require('mongoose');
+
 const router = require('express').Router();
 const bodyParser = require('body-parser');
+var session = require('express-session');
 var userModel = mongoose.model('user');
 
-
 router.get('/:email/:password', (req,res) => {
-    userModel.find({email:req.params.email,password:req.params.password}) 
+    userModel.findOne({email:req.params.email,password:req.params.password})
+    .populate('permits')
     .then(user=>{
         if(!user){ return res.sendStatus(404)}
-        else{ return res.json(user)}
+        else{
+          req.session.user = user;
+    /*      if(user[0].permits.type==="administrador"){
+            req.session.admin = true;
+          }
+          else {
+            req.session.admin = false;
+          } */
+          console.log(req.session.user);
+          return res.json(user)
+        }
     })
 });
 

@@ -3,6 +3,8 @@ var mongoose    = require('mongoose');
 var bodyParser  = require('body-parser');
 var cors        = require('cors');
 var methodOverride = require('method-override');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 
 var app = express();
 app.use(cors());
@@ -11,8 +13,12 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(methodOverride());
 app.use('/images',express.static('images'));
+app.use(session({secret: "anystring", saveUninitialized: true, resave: false }))
+
+
 
 mongoose.connect('mongodb://localhost/GestionSalones', { useMongoClient: true });
 mongoose.Promise = global.Promise;

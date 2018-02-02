@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 var sign = mongoose.model('sign');
 var userModel = mongoose.model('user');
 var Reserva = mongoose.model('reservation');
+var session = require('express-session');
+
+
 
 router.get('/:_idReservation', (req,res) => {
   let _idReservation = req.params._idReservation
@@ -13,18 +16,41 @@ router.get('/:_idReservation', (req,res) => {
     return res.status(200).send(reservation.sing)
   })
 });
-/*
+
+
+router.get('/', (req,res) => {
+  if(!req.session.user){
+    return res.status(401).send();
+  }
+  else{
+  sign.find({})
+  .then( signs => {
+    if(!signs) {return res.sendStatus(404) ; }
+    return res.json(signs)
+  })
+}});
+
+
 router.get('/:_id', (req, res) => {
+  if(!req.session.user){
+    return res.status(401).send();
+  }
+  else{
   let _id = req.params._id;
   sign.findById(_id)
     .then(signs => {
       if(!signs){ return res.sendStatus(401); }
       return res.json({'signs': sings})
   })
-});
-*/
-router.post('/:_id_admin/:_id_reservation',(req,res)=>{
-  userModel.find({_id:req.params._id_admin})
+
+}});
+
+router.post('/:_id',(req,res)=>{
+  if(!req.session.user){
+    return res.status(401).send();
+  }
+  else{
+  userModel.find({_id:req.params._id})
    .populate('permits')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
@@ -44,9 +70,13 @@ router.post('/:_id_admin/:_id_reservation',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
     })
-});
+}});
 
 router.put('/:_id_admin/:_id',(req,res)=>{
+  if(!req.session.user){
+    return res.status(401).send();
+  }
+  else{
   userModel.find({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
@@ -64,9 +94,13 @@ router.put('/:_id_admin/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
   })
-});
+}});
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
+  if(!req.session.user){
+    return res.status(401).send();
+  }
+  else{
   userModel.find({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
@@ -85,6 +119,6 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
   })
-});
+}});
 
 module.exports=router;
