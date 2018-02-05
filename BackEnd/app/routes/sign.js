@@ -9,17 +9,21 @@ var session = require('express-session');
 
 
 router.get('/:_idReservation', (req,res) => {
+  if(!session.email){
+    return res.status(401).send();
+  }
+  else{
   let _idReservation = req.params._idReservation
   Reserva.findById(_idReservation)
   .populate('sing')
   .then(reservation=>{
     return res.status(200).send(reservation.sing)
   })
-});
+}});
 
 
 router.get('/', (req,res) => {
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
@@ -32,7 +36,7 @@ router.get('/', (req,res) => {
 
 
 router.get('/:_id', (req, res) => {
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
@@ -46,7 +50,7 @@ router.get('/:_id', (req, res) => {
 }});
 
 router.post('/:_id',(req,res)=>{
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
@@ -73,7 +77,7 @@ router.post('/:_id',(req,res)=>{
 }});
 
 router.put('/:_id_admin/:_id',(req,res)=>{
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
@@ -97,7 +101,7 @@ router.put('/:_id_admin/:_id',(req,res)=>{
 }});
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{

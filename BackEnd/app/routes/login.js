@@ -10,14 +10,13 @@ router.get('/:email/:password', (req,res) => {
     .then(user=>{
         if(!user){ return res.sendStatus(404)}
         else{
-          req.session.user = user;
+            session.email = user.email;
     /*      if(user[0].permits.type==="administrador"){
             req.session.admin = true;
           }
           else {
             req.session.admin = false;
           } */
-          req.session.save();
           return res.json(user)
         }
     })

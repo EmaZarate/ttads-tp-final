@@ -8,11 +8,11 @@ var userModel = mongoose.model('user')
 
 
 router.get('/', (req,res) => {
-  if(!req.session.user){
-    console.log(req.session.user);
+  if(!session.email){
     return res.status(401).send();
   }
   else{
+  console.log(session.email);
   room.find({})
   .then( rooms => {
     if(!rooms) {return res.sendStatus(404) ; }
@@ -23,7 +23,7 @@ router.get('/', (req,res) => {
 }});
 
 router.get('/:_id', (req,res) =>{
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
@@ -37,7 +37,7 @@ router.get('/:_id', (req,res) =>{
 
 
 router.post('/:_id',(req,res)=>{
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
@@ -59,7 +59,7 @@ router.post('/:_id',(req,res)=>{
 }});
 
 router.put('/:_id_admin/:_id',(req,res)=>{
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
@@ -86,7 +86,7 @@ router.put('/:_id_admin/:_id',(req,res)=>{
 }});
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{

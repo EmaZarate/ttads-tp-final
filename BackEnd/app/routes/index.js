@@ -1,4 +1,3 @@
-var session = require('express-session');
 var router = require('express').Router();
 
 router.use('/api/users', require('./user'));

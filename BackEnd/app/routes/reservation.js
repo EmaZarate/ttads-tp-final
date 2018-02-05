@@ -10,7 +10,7 @@ var session = require('express-session');
 
 
 router.get('/:_id', (req,res) => {
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
@@ -30,7 +30,7 @@ router.get('/:_id', (req,res) => {
 }});
 
 router.get('/:_id/:_id_reservation', (req,res) => {
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
@@ -54,7 +54,7 @@ router.get('/:_id/:_id_reservation', (req,res) => {
 }});
 
 router.post('/:_id',(req,res)=>{
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
@@ -75,7 +75,7 @@ router.post('/:_id',(req,res)=>{
 }});
 
 router.put('/:_id/:_id_reservation',(req,res)=>{
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
@@ -105,7 +105,7 @@ router.put('/:_id/:_id_reservation',(req,res)=>{
 }});
 
 router.delete('/:_id/:_id_reservation',(req,res)=>{
-  if(!req.session.user){
+  if(!session.email){
     return res.status(401).send();
   }
   else{
