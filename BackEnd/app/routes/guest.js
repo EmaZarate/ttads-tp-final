@@ -6,16 +6,12 @@ var session = require('express-session');
 
 
 router.get('/',(req,res)=>{
-  if(!req.session.user){
-    return res.status(401).send();
-  }
-  else{
    let guests = guest.find({})
    .then( guests=>{
         if(!guests){return res.sendStatus(404)}
         return res.json(guests)
    })
-}});
+});
 
 router.post('/',(req,res)=>{
   if(!req.session.user){
@@ -48,15 +44,11 @@ router.put('/:_id',(req,res)=>{
 }});
 
 router.delete('/:_id',(req,res)=>{
-  if(!req.session.user){
-    return res.status(401).send();
-  }
-  else{
     guest.findByIdAndRemove(req.params._id)
     .then(guest=>{
         if(!guest){return res.sendStatus(400)}
         return res.sendStatus(200)
     })
-}});
+});
 
 module.exports = router;

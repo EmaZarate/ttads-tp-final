@@ -5,6 +5,12 @@
   label{
     margin-top: 10px
 }  
+.lista{
+  display: none
+}
+.tipo{
+  display: none
+}
 
   @media (min-width: 991.99px) {
   button{

@@ -19,23 +19,15 @@ router.get('/:_idReservation', (req,res) => {
 
 
 router.get('/', (req,res) => {
-  if(!req.session.user){
-    return res.status(401).send();
-  }
-  else{
   sign.find({})
   .then( signs => {
     if(!signs) {return res.sendStatus(404) ; }
     return res.json(signs)
   })
-}});
+});
 
 
 router.get('/:_id', (req, res) => {
-  if(!req.session.user){
-    return res.status(401).send();
-  }
-  else{
   let _id = req.params._id;
   sign.findById(_id)
     .then(signs => {
@@ -43,13 +35,9 @@ router.get('/:_id', (req, res) => {
       return res.json({'signs': sings})
   })
 
-}});
+});
 
 router.post('/:_id',(req,res)=>{
-  if(!req.session.user){
-    return res.status(401).send();
-  }
-  else{
   userModel.find({_id:req.params._id})
    .populate('permits')
    .then(user=>{
@@ -70,13 +58,9 @@ router.post('/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
     })
-}});
+});
 
 router.put('/:_id_admin/:_id',(req,res)=>{
-  if(!req.session.user){
-    return res.status(401).send();
-  }
-  else{
   userModel.find({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
@@ -94,13 +78,9 @@ router.put('/:_id_admin/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
   })
-}});
+});
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
-  if(!req.session.user){
-    return res.status(401).send();
-  }
-  else{
   userModel.find({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
@@ -119,6 +99,6 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
   })
-}});
+});
 
 module.exports=router;

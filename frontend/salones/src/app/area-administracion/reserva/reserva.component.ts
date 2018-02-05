@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,ParamMap, Router } from '@angular/router';
 import {AdministracionService} from '../administracion.service'
+import { Data } from '@angular/router/src/config';
 
 
 @Component({
@@ -11,11 +12,13 @@ import {AdministracionService} from '../administracion.service'
 export class ReservaComponent implements OnInit {
 
   id:String;
-  reserva:any={}
-  salones:any={};
-  clientes:any={};
-  menus:any={};
-
+  reserva:any={};
+  salones:any=[];
+  clientes:any=[];
+  menus:any=[];
+  senas:any=[];
+  sena:any={};
+  lista:boolean=true;
   constructor(
     private route:ActivatedRoute,
     private service:AdministracionService,
@@ -33,6 +36,7 @@ export class ReservaComponent implements OnInit {
     }
     else{
       this.service.getReserva(this.id).subscribe( reserva=>{ this.reserva=reserva[0] } );
+      this.service.getSeñas(this.id).subscribe( señas => {this.senas=señas});
     }
     
   }
@@ -55,6 +59,18 @@ export class ReservaComponent implements OnInit {
       });
     }*/
     
+  }
+  listaSenas(){
+    if(this.lista===true){
+        this.lista=false
+    }
+    else{
+        this.lista=true
+    }
+  }
+  guardarPago(monto,fecha){
+    this.sena.amount=monto;
+    this.sena.date=fecha;
   }
 
 }
