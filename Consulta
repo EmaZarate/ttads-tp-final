@@ -1,0 +1,2 @@
+- req.body No funciona en el BackEnd
+- Como pasar el _id del usuario a la string de conexion de los servicios

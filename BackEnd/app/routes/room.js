@@ -12,7 +12,6 @@ router.get('/', (req,res) => {
     return res.status(401).send();
   }
   else{
-  console.log(session.email);
   room.find({})
   .then( rooms => {
     if(!rooms) {return res.sendStatus(404) ; }
@@ -41,10 +40,10 @@ router.post('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id})
+  userModel.findOne({_id:req.params._id})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let instRoom = new room(req.body);
         instRoom.save()
        .then(room => {
@@ -63,10 +62,10 @@ router.put('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id_admin})
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let id = req.params._id;
         let name = req.body.name;
         let address = req.body.address;
@@ -90,10 +89,10 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id_admin})
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let id = req.params._id;
         room.findByIdAndRemove(id)
         .then( room => {

@@ -6,7 +6,9 @@ var roomModel = mongoose.model('room');
 var guestModel = mongoose.model('guest');
 var signModel = mongoose.model('sign');
 var menuModel = mongoose.model('menu');
+var userModel = mongoose.model('user');
 var session = require('express-session');
+
 
 
 router.get('/:_id', (req,res) => {
@@ -14,10 +16,10 @@ router.get('/:_id', (req,res) => {
     return res.status(401).send();
   }
   else{
-    userModel.find({_id:req.params._id})
+    userModel.findOne({_id:req.params._id})
    .populate('room')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         reservationModel.find({})
         .then(reservations=>{
           return res.json(reservations)
@@ -34,14 +36,14 @@ router.get('/:_id/:_id_reservation', (req,res) => {
     return res.status(401).send();
   }
   else{
-    userModel.find({_id:req.params._id})
+    userModel.findOne({_id:req.params._id})
    .populate('client')
    .populate('room')
    .populate('sign')
    .populate('guest')
    .populate('menu')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         reservationModel.find({_id:req.params._id_reservation })
         .then(reservation=>{
           return res.json(reservation)
@@ -58,9 +60,9 @@ router.post('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id})
+  userModel.findOne({_id:req.params._id})
   .then(user=>{
-     if(user[0].permits.type==="administrador"){
+     if(user.permits.type==="administrador"){
        let instReservation = new reservation(req.body);
        instReservation.save()
       .then(reservation => {
@@ -79,9 +81,9 @@ router.put('/:_id/:_id_reservation',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id})
+  userModel.findOne({_id:req.params._id})
   .then(user=>{
-     if(user[0].permits.type==="administrador"){
+     if(user.permits.type==="administrador"){
         let _id_reservation = req.params._id_reservation;
         let fecha = req.body.fecha;
         let tipo = req.body.tipo;
@@ -109,9 +111,9 @@ router.delete('/:_id/:_id_reservation',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id})
+  userModel.findOne({_id:req.params._id})
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let _id_reservation = req.params._id_reservation;
         reservationModel.findByIdAndRemove(_id_reservation)
         .then( reservation => {

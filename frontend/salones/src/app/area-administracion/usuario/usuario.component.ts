@@ -25,12 +25,12 @@ export class UsuarioComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     if(this.id===null){
-        
+
     }
     else{
-      this.service.getUsuario(this.id).subscribe( usuario=>{ this.usuario=usuario[0] 
+      this.service.getUsuario(this.id).subscribe( usuario=>{ this.usuario=usuario[0]
         this.seleccionarPermiso();} );
-      
+
     }
   }
 
@@ -54,7 +54,7 @@ export class UsuarioComponent implements OnInit {
     this.usuario.address=address;
     this.usuario.email=email;
     this.usuario.password=password;
-    this.usuario.permission=tipo
+    this.usuario.permits=tipo;
     if(this.id===null){
        this.service.insertUsuario(this.usuario).subscribe(()=>{
         this.router.navigate(['/administracion/usuarios'])
@@ -65,7 +65,7 @@ export class UsuarioComponent implements OnInit {
         this.router.navigate(['/administracion/usuarios'])
       });
     }
-    
+
   }
 
 }

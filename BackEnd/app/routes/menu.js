@@ -37,11 +37,18 @@ router.post('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id})
+  userModel.findOne({_id:req.params._id})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
-        let instMenu = new menu(req.body);
+      if(user.permits.type==="administrador"){
+        let instMenu = new menu();
+        instMenu.price = req.body.price;
+        instMenu.name = req.body.name;
+        instMenu.drink = req.body.drink;
+        instMenu.starter = req.body.starter
+        instMenu.mainCourse = req.body.mainCourse;
+        instMenu.dessert = req.body.dessert;
+        console.log(instMenu);
         instMenu.save()
        .then(menu => {
         if(!menu){return res.sendStatus(404);}
@@ -59,10 +66,10 @@ router.put('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id_admin})
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let id = req.params._id;
         let price = req.body.price;
         let name = req.body.name;
@@ -87,10 +94,10 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id_admin})
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let id = req.params._id;
         menu.findByIdAndRemove(id)
         .then( menu => {

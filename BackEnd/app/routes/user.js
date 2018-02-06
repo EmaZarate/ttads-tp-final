@@ -12,10 +12,10 @@ router.get('/:_id', (req,res) => {
     return res.status(401).send();
   }
   else{
-    userModel.find({_id:req.params._id})
+    userModel.findOne({_id:req.params._id})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         userModel.find({})
         .then(users=>{
           return res.json(users)
@@ -33,11 +33,11 @@ router.get('/:_id_admin/:_id', (req,res) =>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id_admin})
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
       if(!user){return res.sendStatus(404) }
-      else if(user[0].permits.type==="administrador"){
+      else if(user.permits.type==="administrador"){
         userModel.find({_id:req.params._id})
         .populate('permits')
         .then(users=>{
@@ -56,11 +56,11 @@ router.get('/:_id_admin/:name/:surname', (req,res) =>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id_admin})
+  userModel.findOne({_id:req.params._id_admin})
   .populate('permits')
   .then(user=>{
      if(!user){return res.sendStatus(404) }
-     else if(user[0].permits.type==="administrador"){
+     else if(user.permits.type==="administrador"){
        userModel.find({name:req.params.name,surname:req.params.surname})
        .then(users=>{
          if(!users) { return res.json('usuario no encontrado') }
@@ -79,12 +79,12 @@ router.post('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id})
+  userModel.findOne({_id:req.params._id})
   .populate('permits')
   .then(user=>{
-     if(user[0].permits.type==="administrador"){
-       permitsModel.find({type:req.body.permission})
-       .then(permits=>{
+    if(user.permits.type==="administrador"){
+       permitsModel.find({'type':req.body.permits})
+       .then(permisos=>{
          let instUser = new userModel();
          instUser.name = req.body.name;
          instUser.surname = req.body.surname;
@@ -92,7 +92,7 @@ router.post('/:_id',(req,res)=>{
          instUser.email = req.body.email;
          instUser.address = req.body.address;
          instUser.password = req.body.password;
-         instUser.permits = permits[0]._id;
+         instUser.permits = permisos[0]._id;
          instUser.save()
          .then(user => {
            if(!user) { return res.sendStatus(404) }
@@ -111,11 +111,11 @@ router.put('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id})
+  userModel.findOne({_id:req.params._id})
   .populate('permits')
   .then(user=>{
-     if(user[0].permits.type==="administrador"){
-       permitsModel.find({type:req.body.permission})
+     if(user.permits.type==="administrador"){
+       permitsModel.find({type:req.body.permits})
        .then(permission=>{
         let id = req.body._id;
         let name = req.body.name;
@@ -143,10 +143,10 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id_admin})
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let id = req.params._id;
         userModel.findByIdAndRemove(id)
         .then( user => {

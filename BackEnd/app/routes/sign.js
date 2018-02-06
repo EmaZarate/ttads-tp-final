@@ -54,10 +54,10 @@ router.post('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id})
+  userModel.findOne({_id:req.params._id})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let instSign = new sign(req.body);
         let id = req.params._id_reservation
         instSign.save()
@@ -81,10 +81,10 @@ router.put('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id_admin})
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let id = req.params._id;
         let date = req.body.date;
         let amount = req.body.amount;
@@ -105,10 +105,10 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.find({_id:req.params._id_admin})
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let _id = req.params._id;
         sign.findByIdAndRemove(_id)
         .then(Reserva.findOne({"sign" : _id}).then(reserva => {
