@@ -10,8 +10,7 @@ router.get('/:email/:password', (req,res) => {
   .then(user=>{
       if(!user){ return res.sendStatus(404)}
       else{
-          session.id = user._id
-          session.email = user.email;
+          session.user = user
           if(user.permits.type==="administrador"){
           session.admin = true;
         }
