@@ -1,41 +1,44 @@
 <form>
+  {{prueba}}
+  {{fechaPrueba}}
   <div class="row">
     <div class="col-md-3">
       <label >Fecha</label>
-      <input type="date" class="form-control" #name value="{{usuario.name}}">
+      <input type="date" class="form-control" #fecha>
     </div>
     <div class="col-md-3">
       <label >Tipo</label>
-      <select #tipo class="form-control">
+      <select #tipo class="form-control" >
         <option  value="Con Servicio">Con Servicio</option>
         <option value="Sin Servicio">Sin Servicio</option>
       </select>
+      <button >Seleccionar</button>
     </div>
     <div class="col-md-3">
       <label >Hora de Inicio</label>
-      <input type="time" class="form-control" #phone value="{{usuario.phone}}">
+      <input type="time" class="form-control" #inicio >
     </div>
     <div class="col-md-3">
       <label >Hora Fin</label>
-      <input type="time" class="form-control" #phone value="{{usuario.phone}}">
+      <input type="time" class="form-control" #fin >
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
       <label >Salon</label>
-      <select #tipo class="form-control">
+      <select #salon class="form-control">
         <option *ngFor="let salon of salones" value={{salon_id}}>{{salon.name}}</option>
       </select>
     </div>
     <div class="col-md-4">
       <label >Cliente</label>
-      <select #tipo class="form-control">
+      <select #cliente class="form-control">
         <option *ngFor="let cliente of clientes" value={{cliente._id}}>{{cliente.name}} {{cliente.surname}}</option>
       </select>
     </div>
     <div class="col-md-4">
       <label >Menu</label>
-      <select #tipo class="form-control">
+      <select #menu class="form-control">
         <option *ngFor="let menu of menus" value={{menus._id}}>{{menu.name}}</option>
       </select>
     </div>
@@ -43,53 +46,62 @@
   <div class="row">
     <div class="col-md-4">
       <label >Cantidad de Adultos</label>
-      <input type="number" class="form-control" #address value="{{usuario.address}}">
+      <input type="number" class="form-control" #adultos>
     </div>
     <div class="col-md-4">
       <label >Cantidad de menores</label>
-      <input type="number" class="form-control" #email value="{{usuario.email}}">
+      <input type="number" class="form-control" #menores>
     </div>
     <div class="col-md-4">
       <label >Cantidad de bebes</label>
-      <input type="number" class="form-control" #password value="{{usuario.password}}">
+      <input type="number" class="form-control" #bebes>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
       <label >Estado</label>
-      <input type="text" class="form-control" #address value="{{usuario.address}}">
+      <input type="text" class="form-control" #estado >
     </div>
     <div class="col-md-4">
       <label >Precio hora extra</label>
-      <input type="number" class="form-control" #address value="{{usuario.address}}">
+      <input type="number" class="form-control" #precioHoraExtra >
     </div>
     <div class="col-md-4">
       <label >Monto</label>
-      <input type="number" class="form-control" #email value="{{usuario.email}}">
+      <input type="number" class="form-control" #monto>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
       <label >Descripción</label>
-      <input type="text" class="form-control" #email value="{{usuario.email}}">
+      <input type="text" class="form-control" #descripcion>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <label >Seña y entragas</label>
-      <input type="text" class="form-control" #email value="{{usuario.email}}">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let sena of senas">
+               {{sena.date}}
+              <span class="badge badge-primary badge-pill">{{sena.amount}}</span>
+            </li>
+        </ul>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <label >Invitados</label>
-      <input type="text" class="form-control" #email value="{{usuario.email}}">
+  <button (click)="listaSenas()">Nueva Seña o Pago</button>
+  <div class="row" [class.lista]="lista">
+    <div class="col-md-6">
+        <label for="">Monto</label>
+        <input type="number" class="form-control" #montoSena>
     </div>
+    <div class="col-md-6">
+        <label for="">Fecha</label>
+        <input type="date" class="form-control" #fechaSena>
+    </div>
+    <button (click)="guardarPago(montoSena.value,fechaSena.value)">Guardar pago</button>
   </div>
-  
   <div class="row">
     <div class="col-md-5 offset-md-2 col-6 marginbutton">
-        <button  class="btn btn-primary" type="button" 
+        <button  class="btn btn-primary" type="button"
         (click)="save(name.value,surname.value,phone.value,address.value,email.value,password.value,tipo.value)">Guardar</button>
     </div>
     <div class="col-md-5 col-6">

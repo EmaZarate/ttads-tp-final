@@ -48,7 +48,6 @@ router.post('/:_id',(req,res)=>{
         instMenu.starter = req.body.starter
         instMenu.mainCourse = req.body.mainCourse;
         instMenu.dessert = req.body.dessert;
-        console.log(instMenu);
         instMenu.save()
        .then(menu => {
         if(!menu){return res.sendStatus(404);}

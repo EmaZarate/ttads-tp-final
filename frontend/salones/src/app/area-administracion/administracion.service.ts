@@ -129,11 +129,10 @@ export class AdministracionService {
              .map((res:Response)=>res.json());
       }
 
-    
+    //seña
     getSeñas(idReserva){
       let señas: string=this.coneccion+"sings"+"/"+idReserva;
       return this.http.get(señas).map((res:Response) => res.json());
     }
+    //
 }
-
-
