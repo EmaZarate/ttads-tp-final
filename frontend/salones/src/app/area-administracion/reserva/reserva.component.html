@@ -1,6 +1,5 @@
 <form>
-  {{prueba}}
-  {{fechaPrueba}}
+  {{tiempoPrueba}}
   <div class="row">
     <div class="col-md-3">
       <label >Fecha</label>
@@ -12,7 +11,6 @@
         <option  value="Con Servicio">Con Servicio</option>
         <option value="Sin Servicio">Sin Servicio</option>
       </select>
-      <button >Seleccionar</button>
     </div>
     <div class="col-md-3">
       <label >Hora de Inicio</label>
@@ -27,7 +25,7 @@
     <div class="col-md-4">
       <label >Salon</label>
       <select #salon class="form-control">
-        <option *ngFor="let salon of salones" value={{salon_id}}>{{salon.name}}</option>
+        <option *ngFor="let salon of salones" value={{salon._id}}>{{salon.name}}</option>
       </select>
     </div>
     <div class="col-md-4">
@@ -39,7 +37,7 @@
     <div class="col-md-4">
       <label >Menu</label>
       <select #menu class="form-control">
-        <option *ngFor="let menu of menus" value={{menus._id}}>{{menu.name}}</option>
+        <option *ngFor="let menu of menus" value={{menu._id}}>{{menu.name}}</option>
       </select>
     </div>
   </div>
@@ -102,7 +100,8 @@
   <div class="row">
     <div class="col-md-5 offset-md-2 col-6 marginbutton">
         <button  class="btn btn-primary" type="button" 
-        (click)="save(name.value,surname.value,phone.value,address.value,email.value,password.value,tipo.value)">Guardar</button>
+        (click)="save(fecha.value, tipo.value, inicio.value, fin.value, salon.value,
+         cliente.value, menu.value, adultos.value, menores.value, bebes.value, estado.value, precioHoraExtra.value, monto.value, descripcion.value)">Guardar</button>
     </div>
     <div class="col-md-5 col-6">
         <button type="button" class="btn btn-secondary" (click)="goBack()" >Atras y Deshacer</button>

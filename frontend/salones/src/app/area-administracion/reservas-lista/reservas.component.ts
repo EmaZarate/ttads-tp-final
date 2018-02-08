@@ -8,7 +8,7 @@ import {AdministracionService} from '../administracion.service'
   styleUrls: ['./reservas.component.css']
 })
 export class ReservasComponent implements OnInit {
-  reservas:any={}
+  reservas:any=[]
   delete:Boolean=true;
 
   constructor(private service:AdministracionService,private router:Router) { }

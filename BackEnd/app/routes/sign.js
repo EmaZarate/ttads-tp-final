@@ -37,7 +37,7 @@ router.get('/:_id', (req, res) => {
 
 });
 
-router.post('/:_id',(req,res)=>{
+router.post('/:_id/:_id_reservation',(req,res)=>{
   userModel.find({_id:req.params._id})
    .populate('permits')
    .then(user=>{
@@ -45,7 +45,8 @@ router.post('/:_id',(req,res)=>{
         let instSign = new sign(req.body);
         let id = req.params._id_reservation
         instSign.save()
-       .then(Reserva.findOne({"_id": id}).then(reserva => {
+       .then(Reserva.findOne({"_id": id})
+       .then(reserva => {
         if(!reserva){return res.sendStatus(404);}
         else{
           reserva.sign.push(instSign);

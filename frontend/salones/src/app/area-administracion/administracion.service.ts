@@ -134,6 +134,12 @@ export class AdministracionService {
       let señas: string=this.coneccion+"sings"+"/"+idReserva;
       return this.http.get(señas).map((res:Response) => res.json());
     }
+    insertSena(sing,id_reserva): Observable<any>{
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post(this.coneccion + "signs/5a552002110466aafe6141e9/"+id_reserva,sing, options)
+                 .map((res:Response)=>res.json());
+      }
     //
 }
 

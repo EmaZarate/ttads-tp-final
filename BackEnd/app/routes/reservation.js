@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 const router = require('express').Router();
 const bodyParser = require('body-parser');
 var reservationModel = mongoose.model('reservation');
+var userModel = mongoose.model('user');
 var roomModel = mongoose.model('room');
 var guestModel = mongoose.model('guest');
 var signModel = mongoose.model('sign');
@@ -11,7 +12,7 @@ var session = require('express-session');
 
 router.get('/:_id', (req,res) => {
     userModel.find({_id:req.params._id})
-   .populate('room')
+   .populate('permits')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
         reservationModel.find({})
@@ -47,9 +48,10 @@ router.get('/:_id/:_id_reservation', (req,res) => {
 
 router.post('/:_id',(req,res)=>{
   userModel.find({_id:req.params._id})
+  .populate('permits')
   .then(user=>{
      if(user[0].permits.type==="administrador"){
-       let instReservation = new reservation(req.body);
+       let instReservation = new reservationModel(req.body);
        instReservation.save()
       .then(reservation => {
        if(!reservation){return res.sendStatus(404);}

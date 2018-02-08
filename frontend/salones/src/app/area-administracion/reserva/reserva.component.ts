@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,ParamMap, Router } from '@angular/router';
 import {AdministracionService} from '../administracion.service'
 import { Data } from '@angular/router/src/config';
+import { Time } from '@angular/common/src/i18n/locale_data_api';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class ReservaComponent implements OnInit {
   senas:any=[];
   sena:any={};
   lista:boolean=true;
+  tiempoPrueba:Time
   constructor(
     private route:ActivatedRoute,
     private service:AdministracionService,
@@ -43,22 +45,36 @@ export class ReservaComponent implements OnInit {
   goBack(){
     this.router.navigate(['/administracion/salones']);
   }
-  save(name,address,capacity,description){
-    /*this.salon.name=name;
-    this.salon.address=address;
-    this.salon.capacity=capacity;
-    this.salon.description=description;
-    if(this.id===null){
-       this.service.insertRoom(this.salon).subscribe(()=>{
-        this.router.navigate(['/administracion/salones'])
-       });
-    }
-    else{
-      this.service.updateRoom(this.salon).subscribe(()=>{
-        this.router.navigate(['/administracion/salones'])
-      });
-    }*/
-    
+  save(fecha, tipo, inicio, fin, salon,
+    cliente, menu, adultos, menores, bebes, estado, precioHoraExtra, monto, descripcion){
+    inicio=fecha+"T"+inicio+":00.000Z";
+    fin=fecha+"T"+fin+":00.000Z";
+    this.reserva.date=fecha;
+    this.reserva.type=tipo;
+    this.reserva.startTime=inicio;
+    this.reserva.endTime=fin;
+    this.reserva.room=salon;
+    this.reserva.client=cliente;
+    this.reserva.menu=menu;
+    this.reserva.cantAdultPeople=adultos;
+    this.reserva.cantChildren=menores;
+    this.reserva.cantBaby=bebes;
+    this.reserva.state=estado;
+    this.reserva.extraHourPrice=precioHoraExtra;
+    this.reserva.description=descripcion;
+    this.reserva.amount=monto;
+    this.service.insertReserva(this.reserva).subscribe((reserva)=>{
+      if(this.sena==={}){
+        this.router.navigate(['/administracion/reservas'])
+      }
+      else{
+        this.service.insertSena(this.sena,reserva._id).subscribe(()=>{
+          this.router.navigate(['/administracion/reservas'])
+        });
+      }
+    })
+   
+
   }
   listaSenas(){
     if(this.lista===true){

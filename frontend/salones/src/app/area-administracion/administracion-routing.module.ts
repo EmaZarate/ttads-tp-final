@@ -10,7 +10,7 @@ import {UsuariosComponent}       from './usuarios/usuarios.component';
 import {UsuarioComponent}        from './usuario/usuario.component';
 import {ReservasVistasComponent} from './reservas-vistas/reservas-vistas.component'; 
 import {ReservasCalendarioComponent} from './reservas-calendario/reservas-calendario.component'        
-import {ReservasComponent}       from './reservas/reservas.component'; 
+import {ReservasComponent}       from './reservas-lista/reservas.component'; 
 import {ReservaComponent } from './reserva/reserva.component';
 
 const AreaAdministracionRoutes: Routes = [
