@@ -8,15 +8,6 @@ var session = require('express-session');
 
 
 
-router.get('/:_idReservation', (req,res) => {
-  let _idReservation = req.params._idReservation
-  Reserva.findById(_idReservation)
-  .populate('sing')
-  .then(reservation=>{
-    return res.status(200).send(reservation.sing)
-  })
-});
-
 
 router.get('/', (req,res) => {
   sign.find({})

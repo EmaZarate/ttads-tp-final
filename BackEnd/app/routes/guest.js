@@ -2,29 +2,31 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var guest = mongoose.model('guest');
+var reservationModel = mongoose.model('reservation');
 var session = require('express-session');
 
 
-router.get('/',(req,res)=>{
-   let guests = guest.find({})
-   .then( guests=>{
-        if(!guests){return res.sendStatus(404)}
-        return res.json(guests)
-   })
+router.get('/:_id_reservation',(req,res)=>{
+    let id = req.params._id_reservation;
+    reservationModel.findOne({_id:id})
+    .populate('guest')
+    .then(reservation=>{
+      return res.status(202).send(reservation.guest)
+    })
 });
 
-router.post('/',(req,res)=>{
-  if(!req.session.user){
-    return res.status(401).send();
-  }
-  else{
+router.post('/:_id_reservation',(req,res)=>{
     let instGuest = new guest(req.body);
     instGuest.save()
     .then(guest=>{
         if(!guest){return res.sendStatus(400)}
-        return res.sendStatus(200)
+        else{
+
+          return res.sendStatus(200)
+        }
+        
     })
-}});
+});
 
 router.put('/:_id',(req,res)=>{
   if(!req.session.user){

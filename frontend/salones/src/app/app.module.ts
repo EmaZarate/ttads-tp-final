@@ -30,7 +30,6 @@ import { PaginaNoEncontradaComponent } from './paginaNoEncontrada/paginaNoEncont
   ],
   imports: [
     BrowserModule,
-    //AreaAdministracionModule,
     AppRoutingModule,
     HttpModule,
   ],

@@ -5,7 +5,7 @@ var menuSchema = mongoose.Schema({
  name:{type:String, required:true},
  drink:{type:String},
  starter:{type:String},
- mainCourse:{type:String,required:true},
+ mainCourse:{type:String},
  dessert:{type:String}
 },{timestamps:true});
 

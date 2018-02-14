@@ -5,13 +5,27 @@
   label{
     margin-top: 10px
 }  
-.lista{
+.listaSign{
   display: none
 }
 .tipo{
   display: none
 }
-
+.alert-sing{
+  display: none
+}
+.alert-sing-save{
+  display: none
+}
+.buttonSaveSign{
+  display: none
+}
+.amount{
+  display: none
+}
+h3{
+  margin-top: 20px;
+}
   @media (min-width: 991.99px) {
   button{
     margin-top: 50px

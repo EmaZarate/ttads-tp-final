@@ -27,7 +27,7 @@ export class MenusComponent implements OnInit {
   }
   deleteMenu(id){
     this.service.deleteMenu(id).subscribe(()=>{
-      window.location.reload(true);
+      this.ngOnInit()
     })
   }
   goNewMenu(){

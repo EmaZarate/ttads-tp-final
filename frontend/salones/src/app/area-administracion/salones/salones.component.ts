@@ -27,7 +27,7 @@ export class SalonesComponent implements OnInit {
   }
   deleteRoom(id){
     this.service.deleteRoom(id).subscribe(()=>{
-      window.location.reload(true);
+      this.ngOnInit()
     })
   }
   goNewSalon(){

@@ -16,6 +16,7 @@ router.get('/:_id', (req,res) => {
    .then(user=>{
       if(user[0].permits.type==="administrador"){
         reservationModel.find({})
+        .populate('client')
         .then(reservations=>{
           return res.json(reservations)
         })
@@ -28,14 +29,15 @@ router.get('/:_id', (req,res) => {
 
 router.get('/:_id/:_id_reservation', (req,res) => {
     userModel.find({_id:req.params._id})
-   .populate('client')
-   .populate('room')
-   .populate('sign')
-   .populate('guest')
-   .populate('menu')
+   .populate('permits')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
-        reservationModel.find({_id:req.params._id_reservation })
+        reservationModel.findOne({_id:req.params._id_reservation })
+        .populate('client')
+        .populate('room')
+        .populate('sign')
+        .populate('guest')
+        .populate('menu')
         .then(reservation=>{
           return res.json(reservation)
         })
@@ -52,10 +54,13 @@ router.post('/:_id',(req,res)=>{
   .then(user=>{
      if(user[0].permits.type==="administrador"){
        let instReservation = new reservationModel(req.body);
+       instReservation.setAmount()
        instReservation.save()
       .then(reservation => {
        if(!reservation){return res.sendStatus(404);}
-       return res.json(reservation)
+       else{
+        return res.json(reservation)
+       }
       });
      }
     else{
@@ -64,24 +69,33 @@ router.post('/:_id',(req,res)=>{
    })
 });
 
-router.put('/:_id/:_id_reservation',(req,res)=>{
+router.put('/:_id',(req,res)=>{
   userModel.find({_id:req.params._id})
+  .populate('permits')
   .then(user=>{
      if(user[0].permits.type==="administrador"){
-        let _id_reservation = req.params._id_reservation;
-        let fecha = req.body.fecha;
-        let tipo = req.body.tipo;
-        let hora_fin = req.body.hora_fin;
-        let cant_adultos = req.body.cant_adultos;
-        let cant_menores = req.body.cant_menores;
-        let cant_bebes = req.body.cant_bebes;
-        let precio_hora_extra = req.body.precio-hora_extra;
-        let estado = req.body.estado;
-        let monto = req.body.monto;
-        reservationModel.findOneAndUpdate({ "_id":_id_reservation },{ "$set": { "fecha":fecha, "tipo":tipo,"hora_fin":hora_fin,"cant_adultos":cant_adultos,"cant_menores":cant_menores,"cant_bebes":cant_bebes,"precio_hora_extra":precio_hora_extra,"estado":estado,"monto":monto }})
+        let _id = req.body._id;
+        let date = req.body.date;
+        let type = req.body.type;
+        let startTime = req.body.startTime
+        let endTime = req.body.endTime;
+        let cantAdultPeople = req.body.cantAdultPeople;
+        let cantChildren = req.body.cantChildren;
+        let cantBaby = req.body.cantBaby;
+        let extraHourPrice = req.body.extraHourPrice;
+        let state = req.body.state;
+        let amount = req.body.amount;
+        let description = req.body.description;
+        let client =req.body.client;
+        let menu = req.body.menu;
+        let room = req.body.room;
+        reservationModel.findOneAndUpdate({ "_id":_id },{ "$set": { "date":date, "type":type,"startTime":startTime,"endTime":endTime,"cantAdultPeople":cantAdultPeople,"cantChildren":cantChildren,"cantBaby":cantBaby,"extraHourPrice":extraHourPrice,"state":state,"amount":amount,"description":description,"room":room,"menu":menu,"client":client }})
          .then(reservation => {
            if(!reservation) { return res.sendStatus(404) }
-           else { return res.status(200).send(reservation); }
+           else { 
+             reservation.setAmount()
+             return res.status(200).send(reservation); 
+            }
           })
       }
      else{
@@ -92,13 +106,19 @@ router.put('/:_id/:_id_reservation',(req,res)=>{
 
 router.delete('/:_id/:_id_reservation',(req,res)=>{
   userModel.find({_id:req.params._id})
+   .populate('permits')
    .then(user=>{
       if(user[0].permits.type==="administrador"){
         let _id_reservation = req.params._id_reservation;
         reservationModel.findByIdAndRemove(_id_reservation)
         .then( reservation => {
           if(!reservation){ return res.sendStatus(404);}
-          return res.status(200).send(reservation);
+          else{
+            signModel.remove({"_id": {"$in" : reservation.sign}}).
+            then(()=>{
+              return res.status(200).send(reservation);
+            })
+          }
          })
       }
      else{

@@ -26,8 +26,8 @@ export class ReservasComponent implements OnInit {
     }
   }
   deleteReservation(id){
-    this.service.deleteMenu(id).subscribe(()=>{
-      window.location.reload(true);
+    this.service.deleteReserva(id).subscribe(()=>{
+      this.ngOnInit()
     })
   }
   goNewReservation(){

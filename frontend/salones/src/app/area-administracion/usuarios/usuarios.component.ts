@@ -28,7 +28,7 @@ export class UsuariosComponent implements OnInit {
   }
   deleteUsuario(id){
     this.service.deleteUsuario(id).subscribe(()=>{
-      window.location.reload(true);
+      this.ngOnInit()
     })
   }
   goNewUsuario(){

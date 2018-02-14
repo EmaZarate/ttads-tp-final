@@ -1,42 +1,46 @@
 <form>
-  {{tiempoPrueba}}
+    {{reserva.startTime | slice:11:16}}
   <div class="row">
     <div class="col-md-3">
       <label >Fecha</label>
-      <input type="date" class="form-control" #fecha>
+      <input type="date" class="form-control" #fecha value="{{reserva.date | slice:0:10}}">
     </div>
     <div class="col-md-3">
       <label >Tipo</label>
-      <select #tipo class="form-control" >
+      <select #tipo class="form-control" (click)="type(tipo.value)">
+        <option value="{{reserva.type}}">- {{reserva.type}} -</option>
         <option  value="Con Servicio">Con Servicio</option>
         <option value="Sin Servicio">Sin Servicio</option>
       </select>
     </div>
     <div class="col-md-3">
       <label >Hora de Inicio</label>
-      <input type="time" class="form-control" #inicio >
+      <input type="time" class="form-control" #inicio value="{{reserva.startTime | slice:11:16}}">
     </div>
     <div class="col-md-3">
       <label >Hora Fin</label>
-      <input type="time" class="form-control" #fin >
+      <input type="time" class="form-control" #fin value="{{reserva.endTime | slice:11:16}}">
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
       <label >Salon</label>
       <select #salon class="form-control">
+        <option value="{{reserva.room._id}}">- {{reserva.room.name}} -</option>
         <option *ngFor="let salon of salones" value={{salon._id}}>{{salon.name}}</option>
       </select>
     </div>
     <div class="col-md-4">
       <label >Cliente</label>
       <select #cliente class="form-control">
+        <option value="{{reserva.client._id}}">- {{reserva.client.name}} {{reserva.client.surname}} -</option>
         <option *ngFor="let cliente of clientes" value={{cliente._id}}>{{cliente.name}} {{cliente.surname}}</option>
       </select>
     </div>
     <div class="col-md-4">
       <label >Menu</label>
       <select #menu class="form-control">
+        <option value="{{reserva.menu._id}}">- {{reserva.menu.name}} -</option>
         <option *ngFor="let menu of menus" value={{menu._id}}>{{menu.name}}</option>
       </select>
     </div>
@@ -44,58 +48,81 @@
   <div class="row">
     <div class="col-md-4">
       <label >Cantidad de Adultos</label>
-      <input type="number" class="form-control" #adultos>
+      <input type="number" class="form-control" #adultos value="{{reserva.cantAdultPeople}}">
     </div>
     <div class="col-md-4">
       <label >Cantidad de menores</label>
-      <input type="number" class="form-control" #menores>
+      <input type="number" class="form-control" #menores value="{{reserva.cantChildren}}">
     </div>
     <div class="col-md-4">
       <label >Cantidad de bebes</label>
-      <input type="number" class="form-control" #bebes>
+      <input type="number" class="form-control" #bebes value="{{reserva.cantBaby}}">
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
       <label >Estado</label>
-      <input type="text" class="form-control" #estado >
+      <input type="text" class="form-control" #estado value="{{reserva.state}}">
     </div>
     <div class="col-md-4">
       <label >Precio hora extra</label>
-      <input type="number" class="form-control" #precioHoraExtra >
+      <input type="number" class="form-control" #precioHoraExtra value="{{reserva.extraHourPrice}}">
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" [class.amount]="amountBool">
       <label >Monto</label>
-      <input type="number" class="form-control" #monto>
+      <input type="number" class="form-control" #monto value="{{reserva.amount}}">
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
       <label >Descripción</label>
-      <input type="text" class="form-control" #descripcion>
+      <input type="text" class="form-control" #descripcion value="{{reserva.description}}">
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let sena of senas">
-               {{sena.date}}
-              <span class="badge badge-primary badge-pill">{{sena.amount}}</span>
-            </li>
-        </ul>
+      <h3>Sena y Pagos</h3>
+      <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sena of senas index as i; first as isFirst">
+              <th scope="row" >{{i+1}}</th>
+              <td>{{sena.date | slice:0:10}}</td>
+              <td>{{sena.amount}}</td>
+            </tr>
+          </tbody>
+        </table>
     </div>
   </div>
-  <button (click)="listaSenas()">Nueva Seña o Pago</button>
-  <div class="row" [class.lista]="lista">
+  <div class="row">
+    <button (click)="listaSenas()" class="btn btn-success">Nueva Seña o Pago</button>
+  </div>
+  <div class="row" [class.listaSign]="listaSign">
     <div class="col-md-6">
         <label for="">Monto</label>
         <input type="number" class="form-control" #montoSena>
     </div>
     <div class="col-md-6">
         <label for="">Fecha</label>
-        <input type="date" class="form-control" #fechaSena>
+        <input type="date" class="form-control" #fechaSena value="today">
     </div>
-    <button (click)="guardarPago(montoSena.value,fechaSena.value)">Guardar pago</button> 
+    <div class="row">
+        <button (click)="guardarPago(montoSena.value,fechaSena.value)" class="btn btn-secondary" [class.buttonSaveSign]="buttonSaveSign">Guardar pago</button>
+    </div>
+    <div class="row">
+        <div class="alert alert-primary" role="alert" [class.alert-sing]="alertSign">
+            Recuerde guardar la reserva para guardar el pago!
+        </div>
+        <div class="alert alert-primary" role="alert" [class.alert-sing-save]="alertSignSave">
+          Pago Guardado!
+        </div>
+    </div>
   </div>   
   <div class="row">
     <div class="col-md-5 offset-md-2 col-6 marginbutton">
