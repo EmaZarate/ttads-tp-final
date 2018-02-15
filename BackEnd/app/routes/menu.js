@@ -25,10 +25,14 @@ router.get('/:_id', (req,res) =>{
 
 
 router.post('/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let instMenu = new menu(req.body);
         instMenu.save()
        .then(menu => {
@@ -40,13 +44,17 @@ router.post('/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
     })
-});
+}});
 
 router.put('/:_id_admin/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id_admin})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let id = req.params._id;
         let price = req.body.price;
         let name = req.body.name;
@@ -64,13 +72,17 @@ router.put('/:_id_admin/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
   })
-});
+}});
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id_admin})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let id = req.params._id;
         menu.findByIdAndRemove(id)
         .then( menu => {
@@ -82,7 +94,7 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
   })
-});
+}});
 
 
 module.exports=router;

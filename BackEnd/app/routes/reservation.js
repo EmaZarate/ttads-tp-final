@@ -11,10 +11,14 @@ var session = require('express-session');
 
 
 router.get('/:_id', (req,res) => {
-    userModel.find({_id:req.params._id})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+    userModel.findOne({_id:req.params._id})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         reservationModel.find({})
         .populate('client')
         .then(reservations=>{
@@ -25,13 +29,17 @@ router.get('/:_id', (req,res) => {
        return res.json({permiso:'no tiene permiso'})
       }
     })
-});
+}});
 
 router.get('/:_id/:_id_reservation', (req,res) => {
-    userModel.find({_id:req.params._id})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+    userModel.findOne({_id:req.params._id})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         reservationModel.findOne({_id:req.params._id_reservation })
         .populate('client')
         .populate('room')
@@ -46,15 +54,19 @@ router.get('/:_id/:_id_reservation', (req,res) => {
        return res.json({permiso:'no tiene permiso'})
       }
     })
-});
+}});
 
 router.post('/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id})
   .populate('permits')
   .then(user=>{
-     if(user[0].permits.type==="administrador"){
+     if(user.permits.type==="administrador"){
        let instReservation = new reservationModel(req.body);
-       instReservation.setAmount()
+       //instReservation.setAmount()
        instReservation.save()
       .then(reservation => {
        if(!reservation){return res.sendStatus(404);}
@@ -67,13 +79,17 @@ router.post('/:_id',(req,res)=>{
       return res.json({permiso:'no tiene permiso'})
      }
    })
-});
+}});
 
 router.put('/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id})
   .populate('permits')
   .then(user=>{
-     if(user[0].permits.type==="administrador"){
+     if(user.permits.type==="administrador"){
         let _id = req.body._id;
         let date = req.body.date;
         let type = req.body.type;
@@ -102,13 +118,17 @@ router.put('/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
    })
-});
+}});
 
 router.delete('/:_id/:_id_reservation',(req,res)=>{
-  userModel.find({_id:req.params._id})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let _id_reservation = req.params._id_reservation;
         reservationModel.findByIdAndRemove(_id_reservation)
         .then( reservation => {
@@ -125,7 +145,7 @@ router.delete('/:_id/:_id_reservation',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
     })
-});
+}});
 
 
 module.exports=router;

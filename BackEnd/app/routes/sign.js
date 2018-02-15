@@ -10,15 +10,23 @@ var session = require('express-session');
 
 
 router.get('/', (req,res) => {
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
   sign.find({})
   .then( signs => {
     if(!signs) {return res.sendStatus(404) ; }
     return res.json(signs)
   })
-});
+}});
 
 
 router.get('/:_id', (req, res) => {
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
   let _id = req.params._id;
   sign.findById(_id)
     .then(signs => {
@@ -26,13 +34,17 @@ router.get('/:_id', (req, res) => {
       return res.json({'signs': sings})
   })
 
-});
+}});
 
 router.post('/:_id/:_id_reservation',(req,res)=>{
-  userModel.find({_id:req.params._id})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let instSign = new sign(req.body);
         let id = req.params._id_reservation
         instSign.save()
@@ -50,13 +62,17 @@ router.post('/:_id/:_id_reservation',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
     })
-});
+}});
 
 router.put('/:_id_admin/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id_admin})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let id = req.params._id;
         let date = req.body.date;
         let amount = req.body.amount;
@@ -70,13 +86,17 @@ router.put('/:_id_admin/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
   })
-});
+}});
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id_admin})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let _id = req.params._id;
         sign.findByIdAndRemove(_id)
         .then(Reserva.findOne({"sign" : _id}).then(reserva => {
@@ -91,6 +111,6 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
   })
-});
+}});
 
 module.exports=router;

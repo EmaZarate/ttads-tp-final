@@ -24,4 +24,9 @@ export class SalonesService {
     let login: string = this.coneccion+"login"+"/"+email+"/"+password;
     return this.http.get(login).map((res:Response)=> res.json());
   }
+  getSession():Observable <any>{
+    let session:"asdasd"
+    return this.http.get(session).map((res:Response)=> res.json());
+    
+  }
 }

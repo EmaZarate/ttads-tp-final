@@ -18,7 +18,6 @@ router.get('/', (req,res) => {
 });
 
 router.get('/:_id', (req,res) =>{
-  
     let id=req.params._id;
     room.find({ _id:id})
     .then( room =>{
@@ -29,10 +28,14 @@ router.get('/:_id', (req,res) =>{
 
 
 router.post('/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let instRoom = new room(req.body);
         instRoom.save()
        .then(room => {
@@ -44,13 +47,17 @@ router.post('/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
     })
-});
+}});
 
 router.put('/:_id_admin/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id_admin})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let id = req.params._id;
         let name = req.body.name;
         let address = req.body.address;
@@ -67,13 +74,17 @@ router.put('/:_id_admin/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
   })
-});
+}});
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
-  userModel.find({_id:req.params._id_admin})
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
+  userModel.findOne({_id:req.params._id_admin})
    .populate('permits')
    .then(user=>{
-      if(user[0].permits.type==="administrador"){
+      if(user.permits.type==="administrador"){
         let id = req.params._id;
         room.findByIdAndRemove(id)
         .then( room => {
@@ -85,7 +96,7 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
        return res.json({permiso:'no tiene permiso'})
       }
   })
-});
+}});
 
 
 module.exports=router;

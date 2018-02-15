@@ -21,18 +21,18 @@ var reservationSchema = new mongoose.Schema({
    guest: [{type:mongoose.Schema.Types.ObjectId, ref:'guest'}],
 },{timestamps:true});
 
-reservationSchema.methods.setAmount= function(){
-  if(this.type==="Con Servicio"){
-    menuModel.findOne({"_id":this.menu})
+reservationSchema.methods.findAndSetData= function(){
+  let obj=this.toObject();
+  if(obj.type==="Con Servicio"){
+    menuModel.findOne({"_id":obj.menu})
     .then(menu=>{
-      amount= (menu.price*this.cantAdultPeople)+((menu.price*this.cantChildren)/2)
-      this.amount=amount
+      amount= (menu.price*obj.cantAdultPeople)+((menu.price*obj.cantChildren)/2)
+      obj.amount=amount
     })
   }
   else{
-    
   }
-  
+  return obj;
 }
 mongoose.model('reservation',reservationSchema);
 

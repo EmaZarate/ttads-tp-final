@@ -23,7 +23,7 @@ export class ReservaComponent implements OnInit {
   alertSign:boolean=true;
   alertSignSave:boolean=true;
   buttonSaveSign:boolean=false;
-  amountBool:boolean=false;
+ 
 
 
   constructor(
@@ -45,28 +45,11 @@ export class ReservaComponent implements OnInit {
       this.service.getReserva(this.id).subscribe( reserva=>{ 
         this.reserva=reserva;
         this.senas=this.reserva.sign
-        this.initForm(reserva)
+       
       });
     }
   }
-  initForm(reserva){
-    if(reserva.type==="Sin Servicio"){
-      this.amountBool=false
-    }
-    else{
-      this.amountBool=true
-    }
-  }
-  type(type){
-    if(type==="Sin Servicio"){
-      this.amountBool=false;
-      
-    }
-    else if(type==="Con Servicio"){
-      this.amountBool=true;
-      
-    }
-  }
+  
   goBack(){
     this.router.navigate(['/administracion/reservas']);
   }
