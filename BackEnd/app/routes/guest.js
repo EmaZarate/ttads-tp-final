@@ -6,7 +6,7 @@ var reservationModel = mongoose.model('reservation');
 var session = require('express-session');
 
 
-router.get('/:_id_reservation',(req,res)=>{
+router.get('/:_id_user',(req,res)=>{
     if(!session.admin){
         let _id_user=req.session.user._id;
         reservationModel.find({client:_id_user})

@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'principal', component: PrincipalComponent},
   { path: 'administracion', loadChildren: 'app/area-administracion/area-administracion.module#AreaAdministracionModule'},
-  { path: 'administracion-invitados', loadChildren: 'app/guest-administration/guest-administration.module#GuestAdministrationModule'},
+  { path: 'tus-reservas', loadChildren: 'app/guest-administration/guest-administration.module#GuestAdministrationModule'},
   { path: '', redirectTo: '/principal', pathMatch: 'full' },
   { path: '**', component: PaginaNoEncontradaComponent}
 ];

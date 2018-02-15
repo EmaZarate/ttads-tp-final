@@ -63,22 +63,15 @@ export class ReservaComponent implements OnInit {
     this.reserva.endTime=fin;
     this.reserva.room=salon;
     this.reserva.client=cliente;
-    
+    this.reserva.menu=menu
     this.reserva.cantAdultPeople=adultos;
     this.reserva.cantChildren=menores;
     this.reserva.cantBaby=bebes;
     this.reserva.state=estado;
     this.reserva.extraHourPrice=precioHoraExtra;
     this.reserva.description=descripcion;
-    
-    if(tipo==="Sin Servicio"){
-      this.reserva.amount=monto
-      this.reserva.menu="asd"
-    }
-    else if(tipo==="Con Servicio"){
-      this.reserva.menu=menu
-    }
-    console.log(this.reserva)
+    this.reserva.amount=monto
+  
     if(this.id===null){
       this.service.insertReserva(this.reserva).subscribe((reserva)=>{
         if(this.sena.amount===0){
