@@ -13,6 +13,8 @@ export class HeaderComponent implements OnInit {
   constructor(private service:SalonesService) { }
 
   ngOnInit() {
+
+    // SI BORRO EL CODIGO DE ACA ABAJO, EL NGIF SIGUE HACIENDO LO MISMO, CUANDO ME LOGUEO APARECE LA PESTAÑA DE ADMINISTRADOR!
     this.service.checklogin().subscribe( admin => {
       this.admin=admin;
       if(this.admin === null)
