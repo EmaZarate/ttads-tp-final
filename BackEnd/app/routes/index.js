@@ -8,5 +8,6 @@ router.use('/api/login', require('./login'));
 router.use('/api/menus', require('./menu'));
 router.use('/api/signs', require('./sign'));
 router.use('/api/reservation', require('./reservation'));
+router.use('/api/checkLogs', require('./checkLog'));
 
 module.exports=router;

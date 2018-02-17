@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import{Headers, Http, Response, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable }     from 'rxjs/Observable';
@@ -16,7 +15,7 @@ export class SalonesService {
       let oneRoom: string=this.coneccion+"rooms"+"/"+name;
       return this.http.get(oneRoom).map((res:Response) => res.json());
     }
-    getRooms(): Observable <any>{
+  getRooms(): Observable <any>{
         let oneRoom: string=this.coneccion+"rooms";
         return this.http.get(oneRoom).map((res:Response) => res.json());
       }
@@ -24,9 +23,8 @@ export class SalonesService {
     let login: string = this.coneccion+"login"+"/"+email+"/"+password;
     return this.http.get(login).map((res:Response)=> res.json());
   }
-  getSession():Observable <any>{
-    let session:"asdasd"
-    return this.http.get(session).map((res:Response)=> res.json());
-    
+  checklogin(): Observable<any>{
+    let checklog: string = this.coneccion+"checkLogs";
+    return this.http.get(checklog).map((res:Response) => res.json());
   }
 }
