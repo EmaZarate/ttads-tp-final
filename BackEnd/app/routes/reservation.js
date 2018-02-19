@@ -12,7 +12,7 @@ var session = require('express-session');
 
 router.get('/:_id', (req,res) => {
   if(!session.admin){
-    return res.status(401).send();
+    return res.status(401).send({permiso:'no tiene permiso'});
   }
   else{
     userModel.findOne({_id:req.params._id})

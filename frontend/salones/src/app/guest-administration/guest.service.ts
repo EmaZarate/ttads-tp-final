@@ -5,11 +5,15 @@ import { Observable }  from 'rxjs/Observable';
 
 @Injectable()
 export class GuestService {
-  coneccion: String="http://localhost:3000/api/";
+  coneccion: string="http://localhost:3000/api/";
   constructor(private http:Http) { }
 
-  getReservation(id_client):Observable:<any>{
-    let oneRoom: string = this.coneccion+"users"+"/5a552002110466aafe6141e9"+"/"+id_client;
-    return this.http.get(oneRoom).map((res:Response) => res.json());
+  getReservations(): Observable<any>{
+     let reservation:string = this.coneccion+"guests"
+     return this.http.get(reservation).map((res:Response)=>res.json())
+  }
+  getReservation(id):Observable<any>{
+    let reservation:string = this.coneccion+"guests/"+id
+    return this.http.get(reservation).map((res:Response)=>res.json())
   }
 }

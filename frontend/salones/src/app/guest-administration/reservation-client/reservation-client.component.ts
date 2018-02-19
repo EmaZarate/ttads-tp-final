@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {GuestService} from '../guest.service'
 
 @Component({
   selector: 'app-reservation-client',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reservation-client.component.css']
 })
 export class ReservationClientComponent implements OnInit {
-
-  constructor() { }
+  id:string
+  reservation:any
+  constructor(private activatedRoute:ActivatedRoute, private service:GuestService) {}
 
   ngOnInit() {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
   }
 
 }

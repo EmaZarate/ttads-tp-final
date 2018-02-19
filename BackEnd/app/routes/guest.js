@@ -6,14 +6,29 @@ var reservationModel = mongoose.model('reservation');
 var session = require('express-session');
 
 
-router.get('/:_id_user',(req,res)=>{
+router.get('/',(req,res)=>{
     if(!session.admin){
-        let _id_user=req.session.user._id;
+        let _id_user=session.user._id;
         reservationModel.find({client:_id_user})
         .populate('guest')
         .populate('menu')
         .populate('room')
         .populate('client')
+        .then(reservations=>{
+          return res.status(200).send(reservations)
+        })
+      }
+      else{
+        return res.status(401).send();
+}});
+
+router.get('/:_id',(req,res)=>{
+    if(!session.admin){
+        let _id=req.params._id;
+        reservationModel.findOne({_id:_id})
+        .populate('guest')
+        .populate('menu')
+        .populate('room')
         .then(reservation=>{
           return res.status(200).send(reservation)
         })
