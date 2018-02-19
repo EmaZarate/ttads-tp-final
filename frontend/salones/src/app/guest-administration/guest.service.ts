@@ -8,6 +8,7 @@ export class GuestService {
   coneccion: string="http://localhost:3000/api/";
   constructor(private http:Http) { }
 
+
   getReservations(): Observable<any>{
      let reservation:string = this.coneccion+"guests"
      return this.http.get(reservation).map((res:Response)=>res.json())

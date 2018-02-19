@@ -1,4 +1,4 @@
-  var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 const router = require('express').Router();
 const bodyParser = require('body-parser');
 var session = require('express-session');
@@ -10,8 +10,10 @@ router.get('/:email/:password', (req,res) => {
   .then(user=>{
       if(!user){ return res.sendStatus(404)}
       else{
-          session.user = user
-          if(user.permits.type==="administrador"){
+        session.user = user
+        console.log("VALOR DE ADMIN EN LOGIN.JS");
+        console.log(session.user.permits.type);
+        if(user.permits.type==="administrador"){
           session.admin = true;
         }
         else {

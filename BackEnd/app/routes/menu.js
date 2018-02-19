@@ -7,12 +7,16 @@ var session = require('express-session');
 
 
 router.get('/', (req,res) => {
+  if(!session.admin){
+    return res.status(401).send();
+  }
+  else{
   menu.find({})
   .then( menus => {
     if(!menus) {return res.sendStatus(404) ; }
     return res.json(menus)
   })
-});
+}});
 
 router.get('/:_id', (req,res) =>{
     let id=req.params._id;

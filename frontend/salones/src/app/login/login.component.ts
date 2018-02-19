@@ -15,13 +15,14 @@ export class LoginComponent implements OnInit {
   constructor(private service:SalonesService) { }
 
   ngOnInit() {
-      // this.service.login("claudiaangelamerlo1965@gmail.com","claudia1965").subscribe(user=>this.user=user[0])
+
   }
 
   login(email, password){
 
     this.service.login(email,password).subscribe(user=>{
-       this.user=user[0];
+       this.user=user;
+       window.location.reload();
   })
   }
 }
