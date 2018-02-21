@@ -29,12 +29,38 @@
   <div class="col-md-12">
     <h2>Invitados</h2>
     <button (click)="newGuest()"><i class="far fa-plus-square fa-2x"></i></button>
-    <button><i class="far fa-trash-alt fa-2x"></i></button>
+    <button (click)="deletedGuestButton()"><i class="far fa-trash-alt fa-2x"></i></button>
   </div>
 </div>
-div
+<div class="row" [class.new]="newGuestbool">
+  <div class="col-md-3">
+      <label for="">Nombre</label>
+      <input type="text" class="form-control" #name>
+  </div>
+  <div class="col-md-3">
+      <label for="">Apellido</label>
+      <input type="text" class="form-control" #surname>
+  </div>
+  <div class="col-md-3">
+    <label for="">Telefono</label>
+    <input type="tel" class="form-control" #phone>
+  </div>
+  <div class="col-md-3">
+    <label for="">Terjeta Paga</label>
+    <select name="" id="" class="form-control" #payCard>
+      <option value="true">Si</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+  <div class="col-md-12">
+      <button (click)="saveGuest(name.value,surname.value,phone.value,payCard.value)" class="btn btn-secondary" >Guardar Invitado</button>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-12">
-
+   <p *ngFor="let guest of reservation.guest">
+     {{guest.surname}} <button (click)="deletedGuest(guest._id)" [class.deletedGuest]="deletedGuestbool">x</button>
+   </p>
   </div>
 </div>

@@ -17,4 +17,14 @@ export class GuestService {
     let reservation:string = this.coneccion+"guests/"+id
     return this.http.get(reservation).map((res:Response)=>res.json())
   }
+  saveGuest(guest,id_reservation){
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.coneccion + "guests/"+id_reservation,guest, options)         
+  }
+  deleteGuest(id_guest,id_reservation): Observable<any>{
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.delete(this.coneccion + "guests/"+id_guest+"/"+id_reservation, options)
+   }
 }

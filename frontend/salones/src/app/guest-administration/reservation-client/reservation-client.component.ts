@@ -9,7 +9,12 @@ import {GuestService} from '../guest.service'
 })
 export class ReservationClientComponent implements OnInit {
   id:string
-  reservation:any
+  reservation:any={guest:[]}
+  guest:any={name:"",surname:"",phone:"",payCard:""}
+
+  newGuestbool:boolean=true
+  deletedGuestbool:boolean=true
+  
   constructor(private activatedRoute:ActivatedRoute, private service:GuestService) {}
 
   ngOnInit() {
@@ -17,4 +22,38 @@ export class ReservationClientComponent implements OnInit {
     this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
   }
 
+  newGuest(){
+    if(this.newGuestbool){
+      this.newGuestbool=false
+    } 
+    else{
+      this.newGuestbool=true
+    }
+  }
+
+  deletedGuestButton(){
+    if(this.deletedGuestbool){
+      this.deletedGuestbool=false
+    }
+    else{
+      this.deletedGuestbool=true
+    }
+  }
+
+  deletedGuest(id_guest){
+    this.service.deleteGuest(id_guest,this.id).subscribe(()=>{
+      this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
+    })
+  }
+
+
+  saveGuest(name,surname,phone,payCard){
+    this.guest.name=name;
+    this.guest.surname=surname;
+    this.guest.phone=phone;
+    this.guest.payCard=payCard;
+    this.service.saveGuest(this.guest,this.id).subscribe(()=>{
+      this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
+    });
+  }
 }
