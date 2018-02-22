@@ -22,14 +22,16 @@
         </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/tus-reservas">Gestiona tu Reservación</a>
+          <div *ngIf="isClient">
+              <a class="nav-link" routerLink="/tus-reservas">Gestiona tu Reservación</a>
+          </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Contacto</a>
         </li>
       </ul>
 
-
+      
       <label class="form-inline my-2 my-lg-0">
         <a routerLink="/login"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Ingresar</button></a>
       </label>

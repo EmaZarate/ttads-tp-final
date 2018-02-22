@@ -14,12 +14,30 @@ export class ReservationClientComponent implements OnInit {
 
   newGuestbool:boolean=true
   deletedGuestbool:boolean=true
+  updateGuestBool: Array<boolean>=[false,false]
   
   constructor(private activatedRoute:ActivatedRoute, private service:GuestService) {}
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
+    this.initArrayGuest()
+  }
+  
+  initArrayGuest(){
+    for (let index = 0; index < 100; index++) {
+      this.updateGuestBool[index]=true; 
+    }
+    this.updateGuestBool
+  }
+
+  GuestBool(i){
+    if(this.updateGuestBool[i]){
+      this.updateGuestBool[i]=false
+    }
+      else{
+        this.updateGuestBool[i]=true
+      }
   }
 
   newGuest(){
@@ -54,6 +72,17 @@ export class ReservationClientComponent implements OnInit {
     this.guest.payCard=payCard;
     this.service.saveGuest(this.guest,this.id).subscribe(()=>{
       this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
+    });
+  }
+  updateGuest(id,name,surname,phone,payCard,i){
+    this.guest._id=id
+    this.guest.name=name;
+    this.guest.surname=surname;
+    this.guest.phone=phone;
+    this.guest.payCard=payCard;
+    this.service.updateGuest(this.guest).subscribe(()=>{
+      this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation});
+      this.GuestBool(i)
     });
   }
 }

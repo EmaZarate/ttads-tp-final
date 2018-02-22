@@ -50,7 +50,8 @@ router.post('/:_id_reservation',(req,res)=>{
       }
       else{
         return res.status(401).send();
-}});
+      }
+    });
 
 router.put('/:_id',(req,res)=>{
   if(session.admin){

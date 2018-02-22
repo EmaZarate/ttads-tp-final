@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   admin:boolean;
   isAdmin:boolean;
+  isClient:boolean
   constructor(private service:SalonesService) { }
 
   ngOnInit() {
@@ -20,10 +21,16 @@ export class HeaderComponent implements OnInit {
       if(this.admin === null)
       {
           this.isAdmin = false;
+          this.isClient = false;
       }
-      else
+      else if(this.admin===true)
       {
           this.isAdmin = true;
+          this.isClient = false;
+      }
+      else if(this.admin===false){
+        this.isAdmin = false;
+        this.isClient = true;
       }
     });
   }
