@@ -1,0 +1,33 @@
+
+  <div class="row">
+      <div class="col-md-12">
+       <button (click)="GuestBool(i)">
+         {{guest.name}} {{guest.surname}} <button (click)="deletedGuest(guest._id)" *ngIf="deletedGuestbool">x</button>
+       </button>
+      </div>
+   </div>
+   <div class="row" *ngIf="updateGuestBool[i]">
+      <div class="col-md-3">
+        <label for="">Nombre</label>
+        <input type="text" class="form-control" #name value={{guest.name}}>
+      </div>
+      <div class="col-md-3">
+        <label for="">Apellido</label>
+        <input type="text" class="form-control" #surname value={{guest.surname}}>
+      </div>
+      <div class="col-md-3">
+      <label for="">Telefono</label>
+      <input type="tel" class="form-control" #phone value={{guest.phone}}>
+      </div>
+      <div class="col-md-3">
+      <label for="">Terjeta Paga</label>
+      <select name="" id="" class="form-control" #payCard>
+        <option value="guest.payCard"></option>
+        <option value="true">Si</option>
+        <option value="false">No</option>
+      </select>
+      </div>
+      <div class="col-md-12">
+        <button (click)="updateGuest(guest._id,name.value,surname.value,phone.value,payCard.value,i)" class="btn btn-secondary" >Guardar Cambios</button>
+      </div>
+    </div>

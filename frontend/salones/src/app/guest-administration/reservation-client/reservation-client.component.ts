@@ -11,35 +11,20 @@ export class ReservationClientComponent implements OnInit {
   id:string
   reservation:any={guest:[]}
   guest:any={name:"",surname:"",phone:"",payCard:""}
+  prueba="qweadasd"
 
   newGuestbool:boolean=true
-  deletedGuestbool:boolean=true
-  updateGuestBool: Array<boolean>=[false,false]
+  deletedGuestbool:boolean=false
+  
   
   constructor(private activatedRoute:ActivatedRoute, private service:GuestService) {}
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
-    this.initArrayGuest()
+    
   }
   
-  initArrayGuest(){
-    for (let index = 0; index < 100; index++) {
-      this.updateGuestBool[index]=true; 
-    }
-    this.updateGuestBool
-  }
-
-  GuestBool(i){
-    if(this.updateGuestBool[i]){
-      this.updateGuestBool[i]=false
-    }
-      else{
-        this.updateGuestBool[i]=true
-      }
-  }
-
   newGuest(){
     if(this.newGuestbool){
       this.newGuestbool=false
@@ -58,12 +43,10 @@ export class ReservationClientComponent implements OnInit {
     }
   }
 
-  deletedGuest(id_guest){
-    this.service.deleteGuest(id_guest,this.id).subscribe(()=>{
-      this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
-    })
+  deletedAndUpdate(event:boolean){
+    this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
+    
   }
-
 
   saveGuest(name,surname,phone,payCard){
     this.guest.name=name;
@@ -71,18 +54,11 @@ export class ReservationClientComponent implements OnInit {
     this.guest.phone=phone;
     this.guest.payCard=payCard;
     this.service.saveGuest(this.guest,this.id).subscribe(()=>{
-      this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
+      this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation
+      this.newGuest()
+      })
     });
   }
-  updateGuest(id,name,surname,phone,payCard,i){
-    this.guest._id=id
-    this.guest.name=name;
-    this.guest.surname=surname;
-    this.guest.phone=phone;
-    this.guest.payCard=payCard;
-    this.service.updateGuest(this.guest).subscribe(()=>{
-      this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation});
-      this.GuestBool(i)
-    });
-  }
+ 
+
 }

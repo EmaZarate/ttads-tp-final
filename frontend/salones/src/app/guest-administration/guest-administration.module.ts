@@ -6,7 +6,8 @@ import {GuestService} from './guest.service';
 import { ReservationClientComponent } from './reservation-client/reservation-client.component';
 import { ReservationListClientComponent } from './reservation-list-client/reservation-list-client.component'
 import {GuestRoutingModule} from './guest-routing.module';
-import { GuestFormComponent } from './guest-form/guest-form.component'
+import { GuestFormComponent } from './guest-form/guest-form.component';
+import { ListGuestComponent } from './list-guest/list-guest.component'
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { GuestFormComponent } from './guest-form/guest-form.component'
   declarations: [
     ReservationClientComponent,
     ReservationListClientComponent,
-    GuestFormComponent
+    GuestFormComponent,
+    ListGuestComponent
   ],
   providers: [
     GuestService
