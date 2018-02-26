@@ -31,7 +31,7 @@ const AreaAdministracionRoutes: Routes = [
           ]},
           { path: 'reserva', component:ReservaComponent},
           { path: 'reserva/:id', component:ReservaComponent},
-          { path: '', redirectTo: '/administracion/menus', pathMatch: 'full' },
+          { path: '', redirectTo: '/administracion/reservas/lista', pathMatch: 'full' },
         ]
   }
 ];

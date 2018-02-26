@@ -27,9 +27,8 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h2>Invitados</h2>
-    <button (click)="newGuest()"><i class="far fa-plus-square fa-2x"></i></button>
-    <button (click)="deletedGuestButton()"><i class="far fa-trash-alt fa-2x"></i></button>
+    <button class="btn btn-success" (click)="newGuest()"><i class="far fa-plus-square fa-2x"></i></button>
+    <button class="btn btn-danger" (click)="deletedGuestButton()"><i class="far fa-trash-alt fa-2x"></i></button>
   </div>
 </div>
 <div class="row" [class.new]="newGuestbool">
@@ -56,9 +55,8 @@
     <button (click)="saveGuest(name.value,surname.value,phone.value,payCard.value)" class="btn btn-secondary" >Guardar Invitado</button>
   </div>
 </div>
-
-<div *ngFor="let guest of reservation.guest index as i; first as isFirst">
-  <app-list-guest [guest]="guest" [deletedGuestbool]="deletedGuestbool" [id]="id" (deleted)="deletedAndUpdate($event)"></app-list-guest>
-  {{prueba}}
-</div>
+<h3>Lista de Invitados</h3>
+<ul class="list-group list-group-flush" *ngFor="let guest of reservation.guest index as i; first as isFirst">
+  <li class="list-group-item"> <app-list-guest [guest]="guest" [deletedGuestbool]="deletedGuestbool" [id]="id" (deleted)="deletedAndUpdate($event)"></app-list-guest> </li>
+</ul>
 

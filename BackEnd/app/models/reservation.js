@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 var menuModel = mongoose.model('menu');
 
 var reservationSchema = new mongoose.Schema({
@@ -21,18 +21,10 @@ var reservationSchema = new mongoose.Schema({
    guest: [{type:mongoose.Schema.Types.ObjectId, ref:'guest'}],
 },{timestamps:true});
 
-reservationSchema.methods.findAndSetData= function(){
-  let obj=this.toObject();
-  if(obj.type==="Con Servicio"){
-    menuModel.findOne({"_id":obj.menu})
-    .then(menu=>{
-      amount= (menu.price*obj.cantAdultPeople)+((menu.price*obj.cantChildren)/2)
-      obj.amount=amount
-    })
-  }
-  else{
-  }
-  return obj;
+reservationSchema.methods.setAmount= function(price){
+
+  this.amount= (price*this.cantAdultPeople)+((price*this.cantChildren)/2)
+
 }
 mongoose.model('reservation',reservationSchema);
 

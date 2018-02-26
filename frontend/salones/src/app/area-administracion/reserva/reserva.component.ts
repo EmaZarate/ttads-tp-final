@@ -86,6 +86,7 @@ export class ReservaComponent implements OnInit {
     }
     else{
       this.service.updateReserva(this.reserva).subscribe((reserva)=>{
+        this.router.navigate(['/administracion/reservas'])
       })
     }
   }

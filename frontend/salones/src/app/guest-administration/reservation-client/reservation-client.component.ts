@@ -11,7 +11,7 @@ export class ReservationClientComponent implements OnInit {
   id:string
   reservation:any={guest:[]}
   guest:any={name:"",surname:"",phone:"",payCard:""}
-  prueba="qweadasd"
+ 
 
   newGuestbool:boolean=true
   deletedGuestbool:boolean=false
@@ -45,7 +45,6 @@ export class ReservationClientComponent implements OnInit {
 
   deletedAndUpdate(event:boolean){
     this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
-    
   }
 
   saveGuest(name,surname,phone,payCard){
@@ -55,7 +54,8 @@ export class ReservationClientComponent implements OnInit {
     this.guest.payCard=payCard;
     this.service.saveGuest(this.guest,this.id).subscribe(()=>{
       this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation
-      this.newGuest()
+      this.newGuest();
+      this.guest={name:"",surname:"",phone:"",payCard:""}
       })
     });
   }

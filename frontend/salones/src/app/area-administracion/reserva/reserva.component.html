@@ -1,5 +1,4 @@
 <form>
-    {{reserva.startTime | slice:11:16}}
   <div class="row">
     <div class="col-md-3">
       <label >Fecha</label>
@@ -7,7 +6,7 @@
     </div>
     <div class="col-md-3">
       <label >Tipo</label>
-      <select #tipo class="form-control" (click)="type(tipo.value)">
+      <select #tipo class="form-control" >
         <option value="{{reserva.type}}">- {{reserva.type}} -</option>
         <option  value="Con Servicio">Con Servicio</option>
         <option value="Sin Servicio">Sin Servicio</option>
