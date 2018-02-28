@@ -5,8 +5,6 @@ var session = require('express-session');
 
 
 router.get('/', (req,res) => {
-          console.log("VALOR DE ADMIN EN CHECKLOG.JS");
-          console.log(session.admin);
            return res.json(session.admin);
 });
 

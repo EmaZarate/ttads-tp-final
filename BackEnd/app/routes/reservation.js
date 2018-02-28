@@ -15,20 +15,11 @@ router.get('/:_id', (req,res) => {
     return res.status(401).send({permiso:'no tiene permiso'});
   }
   else{
-    userModel.findOne({_id:req.params._id})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         reservationModel.find({})
         .populate('client')
         .then(reservations=>{
           return res.json(reservations)
         })
-       }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-    })
 }});
 
 router.get('/:_id/:_id_reservation', (req,res) => {
@@ -36,10 +27,6 @@ router.get('/:_id/:_id_reservation', (req,res) => {
     return res.status(401).send();
   }
   else{
-    userModel.findOne({_id:req.params._id})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         reservationModel.findOne({_id:req.params._id_reservation })
         .populate('client')
         .populate('room')
@@ -49,11 +36,6 @@ router.get('/:_id/:_id_reservation', (req,res) => {
         .then(reservation=>{
           return res.json(reservation)
         })
-       }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-    })
 }});
 
 router.post('/:_id',(req,res)=>{
@@ -61,11 +43,7 @@ router.post('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id})
-  .populate('permits')
-  .then(user=>{
-     if(user.permits.type==="administrador"){
-       let instReservation = new reservationModel(req.body);
+      let instReservation = new reservationModel(req.body);
        if(instReservation.type==="Con Servicio"){
          menuModel.findOne({_id:instReservation.menu})
          .then(menu=>{
@@ -88,11 +66,6 @@ router.post('/:_id',(req,res)=>{
          }
         });
        }
-     }
-    else{
-      return res.json({permiso:'no tiene permiso'})
-     }
-   })
 }});
 
 router.put('/:_id',(req,res)=>{
@@ -100,10 +73,6 @@ router.put('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id})
-  .populate('permits')
-  .then(user=>{
-     if(user.permits.type==="administrador"){
         let _id = req.body._id;
         let date = req.body.date;
         let type = req.body.type;
@@ -126,8 +95,8 @@ router.put('/:_id',(req,res)=>{
             reservationModel.findOneAndUpdate({ "_id":_id },{ "$set": { "date":date, "type":type,"startTime":startTime,"endTime":endTime,"cantAdultPeople":cantAdultPeople,"cantChildren":cantChildren,"cantBaby":cantBaby,"extraHourPrice":extraHourPrice,"state":state,"amount":amount,"description":description,"room":room,"menu":menu,"client":client }})
          .then(reservation => {
            if(!reservation) { return res.sendStatus(404) }
-           else { 
-             return res.status(200).send(reservation); 
+           else {
+             return res.status(200).send(reservation);
             }
           })
           })
@@ -136,16 +105,11 @@ router.put('/:_id',(req,res)=>{
           reservationModel.findOneAndUpdate({ "_id":_id },{ "$set": { "date":date, "type":type,"startTime":startTime,"endTime":endTime,"cantAdultPeople":cantAdultPeople,"cantChildren":cantChildren,"cantBaby":cantBaby,"extraHourPrice":extraHourPrice,"state":state,"amount":amount,"description":description,"room":room,"menu":menu,"client":client }})
          .then(reservation => {
            if(!reservation) { return res.sendStatus(404) }
-           else { 
-             return res.status(200).send(reservation); 
+           else {
+             return res.status(200).send(reservation);
             }
           })
         }
-      }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-   })
 }});
 
 router.delete('/:_id/:_id_reservation',(req,res)=>{
@@ -153,10 +117,6 @@ router.delete('/:_id/:_id_reservation',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         let _id_reservation = req.params._id_reservation;
         reservationModel.findByIdAndRemove(_id_reservation)
         .then( reservation => {
@@ -168,11 +128,6 @@ router.delete('/:_id/:_id_reservation',(req,res)=>{
             })
           }
          })
-      }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-    })
 }});
 
 

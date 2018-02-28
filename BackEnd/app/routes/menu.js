@@ -33,21 +33,12 @@ router.post('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         let instMenu = new menu(req.body);
         instMenu.save()
        .then(menu => {
         if(!menu){return res.sendStatus(404);}
         return res.json(menu)
        });
-      }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-    })
 }});
 
 router.put('/:_id_admin/:_id',(req,res)=>{
@@ -55,10 +46,6 @@ router.put('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id_admin})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         let id = req.params._id;
         let price = req.body.price;
         let name = req.body.name;
@@ -71,11 +58,6 @@ router.put('/:_id_admin/:_id',(req,res)=>{
         if(!menu){return res.sendStatus(401);}
         return res.json(menu);
        })
-      }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-  })
 }});
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
@@ -83,21 +65,12 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id_admin})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         let id = req.params._id;
         menu.findByIdAndRemove(id)
         .then( menu => {
          if(!menu){ return res.sendStatus(404);}
           return res.json(menu.name)
         })
-      }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-  })
 }});
 
 

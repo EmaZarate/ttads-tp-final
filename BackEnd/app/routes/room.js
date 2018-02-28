@@ -32,21 +32,12 @@ router.post('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         let instRoom = new room(req.body);
         instRoom.save()
        .then(room => {
         if(!room){return res.sendStatus(404);}
         return res.json(room)
        });
-      }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-    })
 }});
 
 router.put('/:_id_admin/:_id',(req,res)=>{
@@ -54,10 +45,6 @@ router.put('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id_admin})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         let id = req.params._id;
         let name = req.body.name;
         let address = req.body.address;
@@ -69,11 +56,6 @@ router.put('/:_id_admin/:_id',(req,res)=>{
         if(!room){return res.sendStatus(401);}
         return res.json(room);
        })
-      }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-  })
 }});
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
@@ -81,21 +63,12 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id_admin})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         let id = req.params._id;
         room.findByIdAndRemove(id)
         .then( room => {
          if(!room){ return res.sendStatus(404);}
           return res.json(room.name)
         })
-      }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-  })
 }});
 
 

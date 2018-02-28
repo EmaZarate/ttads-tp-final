@@ -10,27 +10,19 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   admin:boolean;
   isAdmin:boolean;
-  isClient:boolean
   constructor(private service:SalonesService) { }
 
   ngOnInit() {
-
-    // SI BORRO EL CODIGO DE ACA ABAJO, EL NGIF SIGUE HACIENDO LO MISMO, CUANDO ME LOGUEO APARECE LA PESTAÑA DE ADMINISTRADOR!
+    
     this.service.checklogin().subscribe( admin => {
       this.admin=admin;
       if(this.admin === null)
       {
           this.isAdmin = false;
-          this.isClient = false;
       }
-      else if(this.admin===true)
+      else
       {
           this.isAdmin = true;
-          this.isClient = false;
-      }
-      else if(this.admin===false){
-        this.isAdmin = false;
-        this.isClient = true;
       }
     });
   }

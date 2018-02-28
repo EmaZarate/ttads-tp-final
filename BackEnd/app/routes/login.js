@@ -11,8 +11,6 @@ router.get('/:email/:password', (req,res) => {
       if(!user){ return res.sendStatus(404)}
       else{
         session.user = user
-        console.log("VALOR DE ADMIN EN LOGIN.JS");
-        console.log(session.user.permits.type);
         if(user.permits.type==="administrador"){
           session.admin = true;
         }

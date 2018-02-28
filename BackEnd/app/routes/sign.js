@@ -41,10 +41,6 @@ router.post('/:_id/:_id_reservation',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         let instSign = new sign(req.body);
         let id = req.params._id_reservation
         instSign.save()
@@ -57,11 +53,6 @@ router.post('/:_id/:_id_reservation',(req,res)=>{
           return res.json({'sign': instSign})
         }
       }));
-    }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-    })
 }});
 
 router.put('/:_id_admin/:_id',(req,res)=>{
@@ -69,10 +60,6 @@ router.put('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id_admin})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         let id = req.params._id;
         let date = req.body.date;
         let amount = req.body.amount;
@@ -81,11 +68,6 @@ router.put('/:_id_admin/:_id',(req,res)=>{
         if(!sign){return res.sendStatus(401);}
         return res.json(sign);
        })
-      }
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-  })
 }});
 
 router.delete('/:_id_admin/:_id',(req,res)=>{
@@ -93,10 +75,6 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-  userModel.findOne({_id:req.params._id_admin})
-   .populate('permits')
-   .then(user=>{
-      if(user.permits.type==="administrador"){
         let _id = req.params._id;
         sign.findByIdAndRemove(_id)
         .then(Reserva.findOne({"sign" : _id}).then(reserva => {
@@ -106,11 +84,7 @@ router.delete('/:_id_admin/:_id',(req,res)=>{
           reserva.save();
           return res.json({'reservas': reserva})
         }
-      }))}
-     else{
-       return res.json({permiso:'no tiene permiso'})
-      }
-  })
+      }))
 }});
 
 module.exports=router;
