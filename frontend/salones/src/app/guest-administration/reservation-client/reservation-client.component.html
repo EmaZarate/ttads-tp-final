@@ -1,62 +1,54 @@
 <h1>Fecha: {{reservation.date | slice:0:10}}</h1>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-6">
     <p>Hora de inicio: {{reservation.startTime | slice:11:16}}</p>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-6">
     <p>Hora de fin: {{reservation.endTime | slice:11:16}}</p>
   </div>
+</div>
+<div class="row">
   <div class="col-md-4">
     <p>Tipo: {{reservation.type}}</p>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-3">
-    <p>Fecha: {{reservation.date | slice:0:10}}</p>
+  <div class="col-md-4">
+    <p>Menu: {{reservation.menu.name}}</p>
   </div>
-  <div class="col-md-3">
-    <p>Hora de inicio: {{reservation.startTime | slice:11:16}}</p>
-  </div>
-  <div class="col-md-3">
-    <p>Hora de fin: {{reservation.endTime | slice:11:16}}</p>
-  </div>
-  <div class="col-md-3">
-    <p>: {{reservation.startTime | slice:11:16}}</p>
+  <div class="col-md-4">
+    <p>Monto: {{reservation.amount}}</p>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-md-12">
-    <button class="btn btn-success" (click)="newGuest()"><i class="far fa-plus-square fa-2x"></i></button>
-    <button class="btn btn-danger" (click)="deletedGuestButton()"><i class="far fa-trash-alt fa-2x"></i></button>
-  </div>
-</div>
+<h3>Lista de Invitados 
+  <button class="btn btn-success" (click)="newGuest()"><i class="far fa-plus-square fa-2x"></i></button>
+  <button class="btn btn-danger" (click)="deletedGuestButton()"><i class="far fa-trash-alt fa-2x"></i></button>
+</h3>
 <div class="row" [class.new]="newGuestbool">
-  <div class="col-md-3">
-    <label for="">Nombre</label>
-    <input type="text" class="form-control" #name>
-  </div>
-  <div class="col-md-3">
-    <label for="">Apellido</label>
-    <input type="text" class="form-control" #surname>
-  </div>
-  <div class="col-md-3">
-  <label for="">Telefono</label>
-  <input type="tel" class="form-control" #phone>
-  </div>
-  <div class="col-md-3">
-  <label for="">Terjeta Paga</label>
-  <select name="" id="" class="form-control" #payCard>
-    <option value="true">Si</option>
-    <option value="false">No</option>
-  </select>
-  </div>
-  <div class="col-md-12">
-    <button (click)="saveGuest(name.value,surname.value,phone.value,payCard.value)" class="btn btn-secondary" >Guardar Invitado</button>
-  </div>
+    <div class="col-md-3">
+      <label for="">Nombre</label>
+      <input type="text" class="form-control" #name>
+    </div>
+    <div class="col-md-3">
+      <label for="">Apellido</label>
+      <input type="text" class="form-control" #surname>
+    </div>
+    <div class="col-md-3">
+    <label for="">Telefono</label>
+    <input type="tel" class="form-control" #phone>
+    </div>
+    <div class="col-md-3">
+    <label for="">Terjeta Paga</label>
+    <select name="" id="" class="form-control" #payCard>
+      <option value="true">Si</option>
+      <option value="false">No</option>
+    </select>
+    </div>
+    <div class="col-md-12">
+      <button (click)="saveGuest(name.value,surname.value,phone.value,payCard.value)" class="btn btn-secondary" >Guardar Invitado</button>
+    </div>
 </div>
-<h3>Lista de Invitados</h3>
 <ul class="list-group list-group-flush" *ngFor="let guest of reservation.guest index as i; first as isFirst">
-  <li class="list-group-item"> <app-list-guest [guest]="guest" [deletedGuestbool]="deletedGuestbool" [id]="id" (deleted)="deletedAndUpdate($event)"></app-list-guest> </li>
+  <li class="list-group-item">
+     <app-list-guest [guest]="guest" [deletedGuestbool]="deletedGuestbool" [id]="id" [i]="i"(deleted)="deletedAndUpdate($event)"></app-list-guest>
+  </li>
 </ul>
 

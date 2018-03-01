@@ -10,6 +10,7 @@ export class ListGuestComponent implements OnInit {
   @Input() guest:any
   @Input() deletedGuestbool:boolean
   @Input() id:any
+  @Input() i
   @Output() deleted = new EventEmitter<boolean>();
 
   //guest:any={name:"",surname:"",phone:"",payCard:""}

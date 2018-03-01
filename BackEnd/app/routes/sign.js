@@ -36,7 +36,7 @@ router.get('/:_id', (req, res) => {
 
 }});
 
-router.post('/:_id/:_id_reservation',(req,res)=>{
+router.post('/:_id_reservation',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }
@@ -70,7 +70,7 @@ router.put('/:_id_admin/:_id',(req,res)=>{
        })
 }});
 
-router.delete('/:_id_admin/:_id',(req,res)=>{
+router.delete('/:_id',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }
