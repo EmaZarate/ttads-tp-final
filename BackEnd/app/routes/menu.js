@@ -28,7 +28,7 @@ router.get('/:_id', (req,res) =>{
 });
 
 
-router.post('/:_id',(req,res)=>{
+router.post('/',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }
@@ -41,26 +41,26 @@ router.post('/:_id',(req,res)=>{
        });
 }});
 
-router.put('/:_id_admin/:_id',(req,res)=>{
+router.put('/:_id',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }
   else{
-        let id = req.params._id;
+        let _id = req.params._id;
         let price = req.body.price;
         let name = req.body.name;
         let drink = req.body.drink;
         let starter = req.body.starter;
         let mainCourse = req.body.mainCourse;
         let dessert = req.body.dessert;
-        menu.findOneAndUpdate( {"_id":id} , { "$set": {"price":price,"name":name,"drink":drink,"starter":starter,"mainCourse":mainCourse,"dessert":dessert }})
+        menu.findOneAndUpdate( {"_id":_id} , { "$set": {"price":price,"name":name,"drink":drink,"starter":starter,"mainCourse":mainCourse,"dessert":dessert }})
         .then(menu => {
         if(!menu){return res.sendStatus(401);}
         return res.json(menu);
        })
 }});
 
-router.delete('/:_id_admin/:_id',(req,res)=>{
+router.delete('/:_id',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }

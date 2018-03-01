@@ -21,12 +21,12 @@ export class SalonComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     if(this.id===null){
-        
+
     }
     else{
       this.service.getRoom(this.id).subscribe( salon=>{ this.salon=salon[0] } );
     }
-    
+
   }
   goBack(){
     this.router.navigate(['/administracion/salones']);
@@ -46,6 +46,6 @@ export class SalonComponent implements OnInit {
         this.router.navigate(['/administracion/salones'])
       });
     }
-    
+
   }
 }

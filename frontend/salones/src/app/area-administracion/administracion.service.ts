@@ -13,7 +13,7 @@ export class AdministracionService {
  //Room
 
   getRoom(name): Observable <any>{
-      let oneRoom: string=this.coneccion+"rooms"+"/"+name;
+      let oneRoom: string=this.coneccion+"rooms/"+name;
       return this.http.get(oneRoom).map((res:Response) => res.json());
       }
 
@@ -24,108 +24,108 @@ export class AdministracionService {
   insertRoom(salon): Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.coneccion + "rooms/5a552002110466aafe6141e9",salon, options)
+        return this.http.post(this.coneccion + "rooms/",salon, options)
                    .map((res:Response)=>res.json());
   }
   updateRoom(salon): Observable<any>{
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.put(this.coneccion + "rooms/5a552002110466aafe6141e9/"+salon._id,salon, options)
+        return this.http.put(this.coneccion + "rooms/"+salon._id,salon, options)
                    .map((res:Response)=>res.json());
 
       }
    deleteRoom(id): Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.delete(this.coneccion + "rooms/5a552002110466aafe6141e9/"+id, options)
+    return this.http.delete(this.coneccion + "rooms/"+id, options)
                .map((res:Response)=>res.json());
    }
 
  //Menu
   getMenu(name): Observable <any>{
-    let oneRoom: string=this.coneccion+"menus"+"/"+name;
-    return this.http.get(oneRoom).map((res:Response) => res.json());
+    let oneMenu: string=this.coneccion+"menus/"+name;
+    return this.http.get(oneMenu).map((res:Response) => res.json());
     }
 
   getMenus(): Observable <any>{
-      let oneRoom: string=this.coneccion+"menus";
-      return this.http.get(oneRoom).map((res:Response) => res.json());
+      let oneMenu: string=this.coneccion+"menus";
+      return this.http.get(oneMenu).map((res:Response) => res.json());
     }
   insertMenu(menu): Observable<any>{
   let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.coneccion + "menus/5a552002110466aafe6141e9",menu, options)
+      return this.http.post(this.coneccion + "menus/",menu, options)
                  .map((res:Response)=>res.json());
   }
   updateMenu(menu): Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.put(this.coneccion + "menus/5a552002110466aafe6141e9/"+menu._id,menu, options)
+      return this.http.put(this.coneccion + "menus/"+menu._id,menu, options)
                  .map((res:Response)=>res.json());
 
     }
   deleteMenu(id): Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.delete(this.coneccion + "menus/5a552002110466aafe6141e9/"+id, options)
+    return this.http.delete(this.coneccion + "menus/"+id, options)
              .map((res:Response)=>res.json());
   }
 
 //clientes
   getUsuario(id): Observable <any>{
-    let oneRoom: string=this.coneccion+"users"+"/5a552002110466aafe6141e9"+"/"+id;
-    return this.http.get(oneRoom).map((res:Response) => res.json());
+    let oneUser: string=this.coneccion+"users/"+id;
+    return this.http.get(oneUser).map((res:Response) => res.json());
     }
 
   getUsuarios(): Observable <any>{
-    let oneRoom: string=this.coneccion+"users/5a552002110466aafe6141e9";
-    return this.http.get(oneRoom).map((res:Response) => res.json());
+    let oneUser: string=this.coneccion+"users";
+    return this.http.get(oneUser).map((res:Response) => res.json());
     }
   insertUsuario(usuario): Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.coneccion + "users/5a552002110466aafe6141e9",usuario, options)
+    return this.http.post(this.coneccion + "users/",usuario, options)
                .map((res:Response)=>res.json());
     }
   updateUsuario(usuario): Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.put(this.coneccion + "users/5a552002110466aafe6141e9",usuario, options)
+    return this.http.put(this.coneccion + "users/"+usuario._id,usuario, options)
                .map((res:Response)=>res.json());
     }
   deleteUsuario(id): Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.delete(this.coneccion + "users/5a552002110466aafe6141e9/"+id, options)
+    return this.http.delete(this.coneccion + "users/"+id, options)
            .map((res:Response)=>res.json());
     }
 
     //reservas
     getReserva(id): Observable <any>{
-      let oneRoom: string=this.coneccion+"reservation"+"/5a552002110466aafe6141e9"+"/"+id;
-      return this.http.get(oneRoom).map((res:Response) => res.json());
+      let oneReservation: string=this.coneccion+"reservation/"+id;
+      return this.http.get(oneReservation).map((res:Response) => res.json());
       }
 
     getReservas(): Observable <any>{
-      let oneRoom: string=this.coneccion+"reservation/5a552002110466aafe6141e9";
-      return this.http.get(oneRoom).map((res:Response) => res.json());
+      let oneReservation: string=this.coneccion+"reservation";
+      return this.http.get(oneReservation).map((res:Response) => res.json());
       }
     insertReserva(reserva): Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.coneccion + "reservation/5a552002110466aafe6141e9",reserva, options)
+      return this.http.post(this.coneccion + "reservation/",reserva, options)
                  .map((res:Response)=>res.json());
       }
     updateReserva(reserva): Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.put(this.coneccion + "reservation/5a552002110466aafe6141e9",reserva, options)
+      return this.http.put(this.coneccion + "reservation/"+reserva._id,reserva, options)
                  .map((res:Response)=>res.json());
       }
     deleteReserva(id): Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.delete(this.coneccion + "reservation/5a552002110466aafe6141e9/"+id, options)
+      return this.http.delete(this.coneccion + "reservation/"+id, options)
              .map((res:Response)=>res.json());
       }
 
@@ -133,10 +133,8 @@ export class AdministracionService {
     insertSena(sing,id_reserva): Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
-      return this.http.post(this.coneccion + "signs/5a552002110466aafe6141e9/"+id_reserva,sing, options)
+      return this.http.post(this.coneccion + "signs/"+id_reserva,sing, options)
                  .map((res:Response)=>res.json());
       }
     //
 }
-
-

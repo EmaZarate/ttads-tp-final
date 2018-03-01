@@ -27,7 +27,7 @@ router.get('/:_id', (req,res) =>{
 });
 
 
-router.post('/:_id',(req,res)=>{
+router.post('/',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }
@@ -40,25 +40,25 @@ router.post('/:_id',(req,res)=>{
        });
 }});
 
-router.put('/:_id_admin/:_id',(req,res)=>{
+router.put('/:_id',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }
   else{
-        let id = req.params._id;
+        let _id = req.params._id;
         let name = req.body.name;
         let address = req.body.address;
         let capacity = req.body.capacity;
         let description = req.body.description;
         let images = req.body.images;
-        room.findOneAndUpdate( {"_id":id} , { "$set": {"name":name,"address":address,"capacity":capacity,"description":description,"images":images }})
+        room.findOneAndUpdate( {"_id":_id} , { "$set": {"name":name,"address":address,"capacity":capacity,"description":description,"images":images }})
         .then(room => {
         if(!room){return res.sendStatus(401);}
         return res.json(room);
        })
 }});
 
-router.delete('/:_id_admin/:_id',(req,res)=>{
+router.delete('/:_id',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }

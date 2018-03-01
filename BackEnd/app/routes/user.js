@@ -7,7 +7,7 @@ var reservationModel = mongoose.model('reservation');
 var session = require('express-session');
 
 
-router.get('/:_id', (req,res) => {
+router.get('/', (req,res) => {
   if(!session.admin){
     return res.status(401).send();
   }
@@ -19,7 +19,7 @@ router.get('/:_id', (req,res) => {
 }});
 
 
-router.get('/:_id_admin/:_id', (req,res) =>{
+router.get('/:_id', (req,res) =>{
   if(!session.admin){
     return res.status(401).send();
   }
@@ -32,7 +32,7 @@ router.get('/:_id_admin/:_id', (req,res) =>{
         })
 }});
 
-router.get('/:_id_admin/:name/:surname', (req,res) =>{
+router.get('/:name/:surname', (req,res) =>{
   if(!session.admin){
     return res.status(401).send();
   }
@@ -45,7 +45,7 @@ router.get('/:_id_admin/:name/:surname', (req,res) =>{
 }});
 
 
-router.post('/:_id',(req,res)=>{
+router.post('/',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }
@@ -59,7 +59,7 @@ router.post('/:_id',(req,res)=>{
          instUser.email = req.body.email;
          instUser.address = req.body.address;
          instUser.password = req.body.password;
-         instUser.permits = permits[0]._id;
+         instUser.permits = permits._id;
          instUser.save()
          .then(user => {
            if(!user) { return res.sendStatus(404) }
@@ -75,14 +75,14 @@ router.put('/:_id',(req,res)=>{
   else{
        permitsModel.find({type:req.body.permission})
        .then(permission=>{
-        let id = req.body._id;
+        let id = req.params._id;
         let name = req.body.name;
         let surname = req.body.surname;
         let phone = req.body.phone;
         let email = req.body.email;
         let address = req.body.address;
         let password = req.body.password;
-        let permits = permission[0]._id
+        let permits = permission._id
         userModel.findOneAndUpdate({ "_id":id },{ "$set": { "name":name, "surname":surname,"phone":phone,"email":email,"address":address,"password":password,"permits":permits }})
          .then(user => {
            if(!user) { return res.sendStatus(404) }
@@ -91,7 +91,7 @@ router.put('/:_id',(req,res)=>{
         })
 }});
 
-router.delete('/:_id_admin/:_id',(req,res)=>{
+router.delete('/:_id',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }

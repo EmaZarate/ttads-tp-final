@@ -10,7 +10,7 @@ var menuModel = mongoose.model('menu');
 var session = require('express-session');
 
 
-router.get('/:_id', (req,res) => {
+router.get('/', (req,res) => {
   if(!session.admin){
     return res.status(401).send({permiso:'no tiene permiso'});
   }
@@ -18,11 +18,11 @@ router.get('/:_id', (req,res) => {
         reservationModel.find({})
         .populate('client')
         .then(reservations=>{
-          return res.json(reservations)
+          return res.json(reservations);
         })
 }});
 
-router.get('/:_id/:_id_reservation', (req,res) => {
+router.get('/:_id_reservation', (req,res) => {
   if(!session.admin){
     return res.status(401).send();
   }
@@ -34,25 +34,25 @@ router.get('/:_id/:_id_reservation', (req,res) => {
         .populate('guest')
         .populate('menu')
         .then(reservation=>{
-          return res.json(reservation)
+          return res.json(reservation);
         })
 }});
 
-router.post('/:_id',(req,res)=>{
+router.post('/',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }
   else{
       let instReservation = new reservationModel(req.body);
        if(instReservation.type==="Con Servicio"){
-         menuModel.findOne({_id:instReservation.menu})
+         menuModel.findOne({_id:instReservation.menu._id})
          .then(menu=>{
           instReservation.setAmount(menu.price)
           instReservation.save()
          .then(reservation => {
           if(!reservation){return res.sendStatus(404);}
           else{
-           return res.json(reservation)
+           return res.json(reservation);
           }
          });
          })
@@ -62,7 +62,7 @@ router.post('/:_id',(req,res)=>{
         .then(reservation => {
          if(!reservation){return res.sendStatus(404);}
          else{
-          return res.json(reservation)
+          return res.json(reservation);
          }
         });
        }
@@ -73,7 +73,7 @@ router.put('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-        let _id = req.body._id;
+        let _id = req.params._id;
         let date = req.body.date;
         let type = req.body.type;
         let startTime = req.body.startTime
@@ -89,7 +89,7 @@ router.put('/:_id',(req,res)=>{
         let menu = req.body.menu;
         let room = req.body.room;
         if(type=="Con Servicio"){
-          menuModel.findOne({_id:menu})
+          menuModel.findOne({_id:menu._id})
           .then(menu=>{
             amount= (menu.price*cantAdultPeople)+((menu.price*cantChildren)/2)
             reservationModel.findOneAndUpdate({ "_id":_id },{ "$set": { "date":date, "type":type,"startTime":startTime,"endTime":endTime,"cantAdultPeople":cantAdultPeople,"cantChildren":cantChildren,"cantBaby":cantBaby,"extraHourPrice":extraHourPrice,"state":state,"amount":amount,"description":description,"room":room,"menu":menu,"client":client }})
@@ -112,7 +112,7 @@ router.put('/:_id',(req,res)=>{
         }
 }});
 
-router.delete('/:_id/:_id_reservation',(req,res)=>{
+router.delete('/:_id_reservation',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }
