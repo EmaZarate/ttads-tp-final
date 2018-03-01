@@ -9,7 +9,7 @@ import {GuestService} from '../guest.service'
 })
 export class ReservationClientComponent implements OnInit {
   id:string
-  reservation:any={guest:[]}
+  reservation:any={guest:[],room:{name:""},menu:{name:""}}
   guest:any={name:"",surname:"",phone:"",payCard:""}
  
 

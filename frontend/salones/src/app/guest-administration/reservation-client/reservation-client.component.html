@@ -1,22 +1,41 @@
 <h1>Fecha: {{reservation.date | slice:0:10}}</h1>
 <div class="row">
-  <div class="col-md-6">
-    <p>Hora de inicio: {{reservation.startTime | slice:11:16}}</p>
+  <div class="col-md-2 offset-md-4">
+      <p>Hora de inicio: </p> {{reservation.endTime | slice:11:16}}
   </div>
-  <div class="col-md-6">
-    <p>Hora de fin: {{reservation.endTime | slice:11:16}}</p>
+  <div class="col-md-2 ">
+      <p>Hora de fin: </p> {{reservation.endTime | slice:11:16}}
   </div>
 </div>
 <div class="row">
-  <div class="col-md-4">
-    <p>Tipo: {{reservation.type}}</p>
+  <div class="col-md-3 offset-md-2">
+    <p>Tipo: </p> {{reservation.type}}
   </div>
-  <div class="col-md-4">
-    <p>Menu: {{reservation.menu.name}}</p>
+  <div class="col-md-3">
+    <p>Menu: </p> {{reservation.menu.name}}
   </div>
-  <div class="col-md-4">
-    <p>Monto: {{reservation.amount}}</p>
+  <div class="col-md-3">
+    <p>Monto: </p> {{reservation.amount}}
   </div>
+</div>
+<div class="row">
+  <div class="col-md-3 offset-md-2">
+    <p>Cantidad de adultos: </p> {{reservation.cantAdultPeople}}
+  </div>
+  <div class="col-md-3">
+    <p>Cantidad de menores: </p> {{reservation.cantChildren}}
+  </div>
+  <div class="col-md-3">
+    <p>Cantidad de bebes: </p> {{reservation.cantBaby}}
+  </div>
+</div>
+<div class="row">
+    <div class="col-md-3 offset-md-3">
+      <p>Salon: </p> {{reservation.room.name}}
+    </div>
+    <div class="col-md-3">
+      <p>Direccion: </p> {{reservation.room.address}}
+    </div>
 </div>
 <h3>Lista de Invitados 
   <button class="btn btn-success" (click)="newGuest()"><i class="far fa-plus-square fa-2x"></i></button>
@@ -25,19 +44,19 @@
 <div class="row" [class.new]="newGuestbool">
     <div class="col-md-3">
       <label for="">Nombre</label>
-      <input type="text" class="form-control" #name>
+      <input type="text" class="form-control" #name value={{guest.name}}>
     </div>
     <div class="col-md-3">
       <label for="">Apellido</label>
-      <input type="text" class="form-control" #surname>
+      <input type="text" class="form-control" #surname value={{guest.surname}}>
     </div>
     <div class="col-md-3">
     <label for="">Telefono</label>
-    <input type="tel" class="form-control" #phone>
+    <input type="tel" class="form-control" #phone value={{guest.phone}}>
     </div>
     <div class="col-md-3">
     <label for="">Terjeta Paga</label>
-    <select name="" id="" class="form-control" #payCard>
+    <select name="" id="" class="form-control" #payCard >
       <option value="true">Si</option>
       <option value="false">No</option>
     </select>

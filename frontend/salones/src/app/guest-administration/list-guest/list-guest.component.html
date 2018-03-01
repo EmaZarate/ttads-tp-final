@@ -22,9 +22,8 @@
       <div class="col-md-3">
       <label for="">Terjeta Paga</label>
       <select name="" id="" class="form-control" #payCard>
-        <option value="guest.payCard"></option>
-        <option value="true">Si</option>
-        <option value="false">No</option>
+        <option value="guest.payCard">{{guest.payCard ? 'Si': 'No' }}</option>
+        <option value="!guest.payCard">{{!guest.payCard ? 'Si': 'No' }}</option>
       </select>
       </div>
       <div class="col-md-12">
