@@ -1,0 +1,141 @@
+<form>
+  <div class="row">
+    <div class="col-md-3">
+      <label >Fecha</label>
+      <input type="date" class="form-control" #fecha value="{{reserva.date | slice:0:10}}">
+    </div>
+    <div class="col-md-3">
+      <label >Tipo</label>
+      <select #tipo class="form-control" >
+        <option value="{{reserva.type}}">- {{reserva.type}} -</option>
+        <option  value="Con Servicio">Con Servicio</option>
+        <option value="Sin Servicio">Sin Servicio</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label >Hora de Inicio</label>
+      <input type="time" class="form-control" #inicio value="{{reserva.startTime | slice:11:16}}">
+    </div>
+    <div class="col-md-3">
+      <label >Hora Fin</label>
+      <input type="time" class="form-control" #fin value="{{reserva.endTime | slice:11:16}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Salon</label>
+      <select #salon class="form-control">
+        <option value="{{reserva.room._id}}">- {{reserva.room.name}} -</option>
+        <option *ngFor="let salon of salones" value={{salon._id}}>{{salon.name}}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label >Cliente</label>
+      <select #cliente class="form-control">
+        <option value="{{reserva.client._id}}">- {{reserva.client.name}} {{reserva.client.surname}} -</option>
+        <option *ngFor="let cliente of clientes" value={{cliente._id}}>{{cliente.name}} {{cliente.surname}}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label >Menu</label>
+      <select #menu class="form-control">
+        <option value="{{reserva.menu._id}}">- {{reserva.menu.name}} -</option>
+        <option *ngFor="let menu of menus" value={{menu._id}}>{{menu.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Cantidad de Adultos</label>
+      <input type="number" class="form-control" #adultos value="{{reserva.cantAdultPeople}}">
+    </div>
+    <div class="col-md-4">
+      <label >Cantidad de menores</label>
+      <input type="number" class="form-control" #menores value="{{reserva.cantChildren}}">
+    </div>
+    <div class="col-md-4">
+      <label >Cantidad de bebes</label>
+      <input type="number" class="form-control" #bebes value="{{reserva.cantBaby}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Estado</label>
+      <input type="text" class="form-control" #estado value="{{reserva.state}}">
+    </div>
+    <div class="col-md-4">
+      <label >Precio hora extra</label>
+      <input type="number" class="form-control" #precioHoraExtra value="{{reserva.extraHourPrice}}">
+    </div>
+    <div class="col-md-4">
+      <label >Monto</label>
+      <input type="number" class="form-control" #monto value="{{reserva.amount}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label >Descripción</label>
+      <input type="text" class="form-control" #descripcion value="{{reserva.description}}">
+    </div>
+  </div>
+<div class="row">
+  <div class="col-md-12">
+      <h3>Seña y Pagos
+        <button (click)="listaSenas()" class="btn btn-success"><i class="far fa-plus-square fa-2x"></i></button>
+        <button (click)="buttonDeletedSign()" class="btn btn-danger"><i class="far fa-trash-alt fa-2x"></i></button>
+      </h3>
+  </div>
+</div>
+<div class="row" [class.listaSign]="listaSign">
+  <div class="col-md-6">
+      <label for="">Monto</label>
+      <input type="number" class="form-control" #montoSena>
+  </div>
+  <div class="col-md-6">
+      <label for="">Fecha</label>
+      <input type="date" class="form-control" #fechaSena value="today">
+  </div>
+  <div class="row">
+      <button (click)="guardarPago(montoSena.value,fechaSena.value)" class="btn btn-secondary" [class.buttonSaveSign]="buttonSaveSign">Guardar pago</button>
+  </div>
+  <div class="row">
+      <div class="alert alert-primary" role="alert" [class.alert-sing]="alertSign">
+          Recuerde guardar la reserva para guardar el pago!
+      </div>
+      <div class="alert alert-primary" role="alert" [class.alert-sing-save]="alertSignSave">
+        Pago Guardado!
+      </div>
+  </div>
+</div> 
+<div class="row">
+      <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Monto</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sena of senas index as i; first as isFirst">
+              <th scope="row" >{{i+1}}</th>
+              <td >{{sena.date | slice:0:10}}</td>
+              <td >{{sena.amount}}</td>
+              <td ><button type="button" (click)="deletedSign(sena._id)" class="btn btn-danger" [class.deletedSign]="deletedSing">X</button></td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+   
+  <div class="row">
+    <div class="col-md-5 offset-md-2 col-6 marginbutton">
+        <button  class="btn btn-primary" type="button" 
+        (click)="save(fecha.value, tipo.value, inicio.value, fin.value, salon.value,
+         cliente.value, menu.value, adultos.value, menores.value, bebes.value, estado.value, precioHoraExtra.value, monto.value, descripcion.value)">Guardar</button>
+    </div>
+    <div class="col-md-5 col-6">
+        <button type="button" class="btn btn-secondary" (click)="goBack()" >Atras y Deshacer</button>
+    </div>
+  </div>
+</form>

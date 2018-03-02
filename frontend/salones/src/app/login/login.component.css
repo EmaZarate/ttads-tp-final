@@ -1,6 +1,11 @@
-@media (min-width: 991.99px) {
 
+@media (min-width: 991.99px) {
+.row{
+  margin: 0% 25% 0% 25%;
+  background-color: rgb(219, 219, 219)
+}
 form{
+  margin-top: 10%;
   margin-bottom: 10%
 }
 }

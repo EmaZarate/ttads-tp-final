@@ -7,7 +7,9 @@ h3{
 }
 .margen{
   margin-top: 5%;
-  border: solid #868686 1px;
+  border-color: #a3a3a3;
+  border-style: ridge;
+  border-width: 1px;
   margin-right: 7%;
   margin-left: 7%;
   background-color: #ebebeb
@@ -17,8 +19,9 @@ h3{
   padding: 0;
   margin: 20px 0px 20px 0px;
 }
-
-
+.btn.btn-info{
+  margin-bottom: 20px
+}
 @media (min-width: 991.99px) {
   .margen{
     padding: 0px 30px 0px 30px
