@@ -55,7 +55,7 @@ router.post('/:_id_reservation',(req,res)=>{
       }));
 }});
 
-router.put('/:_id_admin/:_id',(req,res)=>{
+router.put('/:_id',(req,res)=>{
   if(!session.admin){
     return res.status(401).send();
   }
@@ -77,14 +77,16 @@ router.delete('/:_id',(req,res)=>{
   else{
         let _id = req.params._id;
         sign.findByIdAndRemove(_id)
-        .then(Reserva.findOne({"sign" : _id}).then(reserva => {
-         if(!reserva){ return res.sendStatus(404);}
-        else{
-          reserva.sign.pull(_id);
-          reserva.save();
-          return res.json({'reservas': reserva})
-        }
-      }))
+        .then(sign=>{
+          Reserva.findOne({sign:sign._id})
+          .then(reservation=>{
+            reservation.sign.pull(sign);
+            reservation.save()
+            .then(reservation=>{
+              return res.json(reservation)
+            })
+          })
+        })
 }});
 
 module.exports=router;

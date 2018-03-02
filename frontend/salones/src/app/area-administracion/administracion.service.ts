@@ -136,5 +136,11 @@ export class AdministracionService {
       return this.http.post(this.coneccion + "signs/"+id_reserva,sing, options)
                  .map((res:Response)=>res.json());
       }
+      deleteSign(id): Observable<any>{
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.delete(this.coneccion + "signs/"+id, options)
+               .map((res:Response)=>res.json());
+        }
     //
 }

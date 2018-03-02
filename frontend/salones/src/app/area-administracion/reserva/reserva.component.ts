@@ -13,7 +13,7 @@ import { Time } from '@angular/common/src/i18n/locale_data_api';
 export class ReservaComponent implements OnInit {
 
   id:String;
-  reserva:any={"room":{"_id":""},"menu":{"_id":""},"client":{"_id":""}};
+  reserva:any={"room":{"_id":""},"menu":{"_id":""},"client":{"_id":""},type:""};
   salones:any=[];
   clientes:any=[];
   menus:any=[];
@@ -23,6 +23,7 @@ export class ReservaComponent implements OnInit {
   alertSign:boolean=true;
   alertSignSave:boolean=true;
   buttonSaveSign:boolean=false;
+  deletedSing:boolean=true;
  
 
 
@@ -45,7 +46,6 @@ export class ReservaComponent implements OnInit {
       this.service.getReserva(this.id).subscribe( reserva=>{ 
         this.reserva=reserva;
         this.senas=this.reserva.sign
-       
       });
     }
   }
@@ -130,6 +130,22 @@ export class ReservaComponent implements OnInit {
     else{
       this.buttonSaveSign=true
     }
+  }
+  buttonDeletedSign(){
+    if(this.deletedSing){
+      this.deletedSing=false
+    }
+    else{
+      this.deletedSing=true
+    }
+  }
+  deletedSign(id){
+     this.service.deleteSign(id).subscribe((reserva)=>{
+   
+        this.reserva=reserva;
+        this.senas=this.reserva.sign
+      
+     });
   }
 
 }

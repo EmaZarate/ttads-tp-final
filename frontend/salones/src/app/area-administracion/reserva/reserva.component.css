@@ -23,10 +23,14 @@
 h3{
   margin-top: 20px;
 }
-  @media (min-width: 991.99px) {
-  button{
-    margin-top: 50px
-  }
+.btn.btn-success{
+  display: inline;
+}
+.deletedSign{
+  display: none
+}
+  @media (max-width: 991.99px) {
+  
   form{
     margin-bottom: 5%
   }

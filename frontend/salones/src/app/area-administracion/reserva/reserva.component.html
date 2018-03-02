@@ -78,51 +78,56 @@
       <input type="text" class="form-control" #descripcion value="{{reserva.description}}">
     </div>
   </div>
+<div class="row">
+  <div class="col-md-12">
+      <h3>Seña y Pagos
+        <button (click)="listaSenas()" class="btn btn-success"><i class="far fa-plus-square fa-2x"></i></button>
+        <button (click)="buttonDeletedSign()" class="btn btn-danger"><i class="far fa-trash-alt fa-2x"></i></button>
+      </h3>
+  </div>
+</div>
+<div class="row" [class.listaSign]="listaSign">
+  <div class="col-md-6">
+      <label for="">Monto</label>
+      <input type="number" class="form-control" #montoSena>
+  </div>
+  <div class="col-md-6">
+      <label for="">Fecha</label>
+      <input type="date" class="form-control" #fechaSena value="today">
+  </div>
   <div class="row">
-    <div class="col-md-12">
-      <h3>Sena y Pagos</h3>
+      <button (click)="guardarPago(montoSena.value,fechaSena.value)" class="btn btn-secondary" [class.buttonSaveSign]="buttonSaveSign">Guardar pago</button>
+  </div>
+  <div class="row">
+      <div class="alert alert-primary" role="alert" [class.alert-sing]="alertSign">
+          Recuerde guardar la reserva para guardar el pago!
+      </div>
+      <div class="alert alert-primary" role="alert" [class.alert-sing-save]="alertSignSave">
+        Pago Guardado!
+      </div>
+  </div>
+</div> 
+<div class="row">
       <table class="table table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Fecha</th>
               <th scope="col">Monto</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let sena of senas index as i; first as isFirst">
               <th scope="row" >{{i+1}}</th>
-              <td>{{sena.date | slice:0:10}}</td>
-              <td>{{sena.amount}}</td>
+              <td >{{sena.date | slice:0:10}}</td>
+              <td >{{sena.amount}}</td>
+              <td ><button type="button" (click)="deletedSign(sena._id)" class="btn btn-danger" [class.deletedSign]="deletedSing">X</button></td>
             </tr>
           </tbody>
         </table>
-    </div>
-  </div>
-  <div class="row">
-    <button (click)="listaSenas()" class="btn btn-success">Nueva Seña o Pago</button>
-  </div>
-  <div class="row" [class.listaSign]="listaSign">
-    <div class="col-md-6">
-        <label for="">Monto</label>
-        <input type="number" class="form-control" #montoSena>
-    </div>
-    <div class="col-md-6">
-        <label for="">Fecha</label>
-        <input type="date" class="form-control" #fechaSena value="today">
-    </div>
-    <div class="row">
-        <button (click)="guardarPago(montoSena.value,fechaSena.value)" class="btn btn-secondary" [class.buttonSaveSign]="buttonSaveSign">Guardar pago</button>
-    </div>
-    <div class="row">
-        <div class="alert alert-primary" role="alert" [class.alert-sing]="alertSign">
-            Recuerde guardar la reserva para guardar el pago!
-        </div>
-        <div class="alert alert-primary" role="alert" [class.alert-sing-save]="alertSignSave">
-          Pago Guardado!
-        </div>
-    </div>
-  </div>   
+</div>
+   
   <div class="row">
     <div class="col-md-5 offset-md-2 col-6 marginbutton">
         <button  class="btn btn-primary" type="button" 
