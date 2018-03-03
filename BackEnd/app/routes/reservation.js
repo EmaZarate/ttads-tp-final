@@ -43,19 +43,19 @@ router.post('/',(req,res)=>{
     return res.status(401).send();
   }
   else{
-      let instReservation = new reservationModel(req.body);
-       if(instReservation.type==="Con Servicio"){
-         menuModel.findOne({_id:instReservation.menu._id})
-         .then(menu=>{
-          instReservation.setAmount(menu.price)
-          instReservation.save()
-         .then(reservation => {
-          if(!reservation){return res.sendStatus(404);}
-          else{
-           return res.json(reservation);
-          }
-         });
-         })
+    let instReservation = new reservationModel(req.body);
+    if(instReservation.type==="Con Servicio"){
+      menuModel.findOne({_id:instReservation.menu})
+      .then(menu=>{
+       instReservation.setAmount(menu.price)
+       instReservation.save()
+      .then(reservation => {
+       if(!reservation){return res.sendStatus(404);}
+       else{
+        return res.json(reservation)
+       }
+      });
+      })
        }
        else{
         instReservation.save()
@@ -89,7 +89,7 @@ router.put('/:_id',(req,res)=>{
         let menu = req.body.menu;
         let room = req.body.room;
         if(type=="Con Servicio"){
-          menuModel.findOne({_id:menu._id})
+          menuModel.findOne({_id:menu})
           .then(menu=>{
             amount= (menu.price*cantAdultPeople)+((menu.price*cantChildren)/2)
             reservationModel.findOneAndUpdate({ "_id":_id },{ "$set": { "date":date, "type":type,"startTime":startTime,"endTime":endTime,"cantAdultPeople":cantAdultPeople,"cantChildren":cantChildren,"cantBaby":cantBaby,"extraHourPrice":extraHourPrice,"state":state,"amount":amount,"description":description,"room":room,"menu":menu,"client":client }})
