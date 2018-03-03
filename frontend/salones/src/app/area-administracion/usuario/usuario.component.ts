@@ -13,7 +13,7 @@ export class UsuarioComponent implements OnInit {
   usuario:any={};
   primerPermiso:String="Cliente";
   segundoPermiso:String="Administrador";
-  value1Permiso:String="cliente";
+  value1Permiso:String="client";
   value2Permiso:String="administrador";
 
   constructor(
@@ -39,7 +39,7 @@ export class UsuarioComponent implements OnInit {
       this.primerPermiso="Administrador";
       this.segundoPermiso = "Cliente"
       this.value1Permiso="administrador"
-      this.value2Permiso="cliente"
+      this.value2Permiso="client"
     }
   }
 
