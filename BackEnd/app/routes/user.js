@@ -50,7 +50,7 @@ router.post('/',(req,res)=>{
     return res.status(401).send();
   }
   else{
-       permitsModel.find({type:req.body.permission})
+       permitsModel.findOne({type:req.body.permission})
        .then(permits=>{
          let instUser = new userModel();
          instUser.name = req.body.name;
@@ -73,7 +73,7 @@ router.put('/:_id',(req,res)=>{
     return res.status(401).send();
   }
   else{
-       permitsModel.find({type:req.body.permission})
+       permitsModel.findOne({type:req.body.permission})
        .then(permission=>{
         let id = req.params._id;
         let name = req.body.name;
