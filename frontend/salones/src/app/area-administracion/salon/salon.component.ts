@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class SalonComponent implements OnInit {
   id:String;
-  salon:any={};
+  salon:any={images:{frente:"",long:"",inclined:""}};
   constructor(
     private route:ActivatedRoute,
     private service:AdministracionService,
