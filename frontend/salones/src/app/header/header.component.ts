@@ -10,11 +10,12 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   admin:boolean;
   isAdmin:boolean;
-  isClient:boolean
+  isClient:boolean;
+  rooms:any=[{name:"",_id:""}]
   constructor(private service:SalonesService) { }
 
   ngOnInit() {
-    
+    this.service.getRooms().subscribe(rooms=>{ this.rooms=rooms})
     this.service.checklogin().subscribe( admin => {
       this.admin=admin;
       if(this.admin === null)

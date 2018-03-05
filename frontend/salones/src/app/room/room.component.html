@@ -1,0 +1,7 @@
+<h1>{{room.name}}</h1>
+<h4>{{room.description}}</h4>
+<hr>
+<h3>Ubicacion:</h3><p>{{room.address}}</p>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="17">
+  <agm-marker [latitude]="lat" [longitude]="lng"  ></agm-marker>
+</agm-map>

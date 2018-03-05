@@ -5,7 +5,7 @@
          <p>{{room.description}}</p>
          <p>Ubicacion: {{room.address}}</p>
          <p>Capasidad: {{room.capacity}}</p>
-         <button class="btn btn-info">Mas Información</button>
+         <a routerLink="/salon/{{room._id}}"><button class="btn btn-info">Mas Información</button></a> 
       </div>
       <div class="col-lg-5 col-sm-12">
        <img src="http://localhost:3000/images/{{room.name}}/{{room.images.frente}}" alt="" class="img-thumbnail">

@@ -11,8 +11,7 @@
           Salones
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">San Sebastian</a>
-          <a class="dropdown-item" href="#">Matisa</a>
+          <a *ngFor="let room of rooms" class="dropdown-item" routerLink="/salon/{{room._id}}">{{room.name}}</a>
         </div>
       </li>
       <li class="nav-item">

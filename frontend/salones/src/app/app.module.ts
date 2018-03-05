@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule }    from '@angular/http';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -11,6 +12,7 @@ import { PrincipalComponent } from './principal/principal.component';
 import { SalonesService } from './service/salones.service';
 import { SalonComponent } from './salones/salon/salon.component';
 import { PaginaNoEncontradaComponent } from './paginaNoEncontrada/paginaNoEncontrada.component';
+import { RoomComponent } from './room/room.component';
 
 
 
@@ -25,6 +27,7 @@ import { PaginaNoEncontradaComponent } from './paginaNoEncontrada/paginaNoEncont
     PrincipalComponent,
     SalonComponent,
     PaginaNoEncontradaComponent,
+    RoomComponent,
 
 
   ],
@@ -32,6 +35,9 @@ import { PaginaNoEncontradaComponent } from './paginaNoEncontrada/paginaNoEncont
     BrowserModule,
     AppRoutingModule,
     HttpModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCDZLnlCSzobaPVN6vftlaBSvV2NHBnng0'
+    })
   ],
   providers: [SalonesService],
   bootstrap: [AppComponent]

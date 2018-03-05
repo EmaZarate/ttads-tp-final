@@ -31,11 +31,17 @@ export class SalonComponent implements OnInit {
   goBack(){
     this.router.navigate(['/administracion/salones']);
   }
-  save(name,address,capacity,description){
+  save(name,address,capacity,description,latitude,longitude,front,long,inclined){
     this.salon.name=name;
     this.salon.address=address;
     this.salon.capacity=capacity;
     this.salon.description=description;
+    this.salon.latitude=latitude;
+    this.salon.longitude=longitude;
+    this.salon.images.front=front;
+    this.salon.images.long=long;
+    this.salon.images.inclined=inclined;
+
     if(this.id===null){
        this.service.insertRoom(this.salon).subscribe(()=>{
         this.router.navigate(['/administracion/salones'])

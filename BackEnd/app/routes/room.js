@@ -51,7 +51,10 @@ router.put('/:_id',(req,res)=>{
         let capacity = req.body.capacity;
         let description = req.body.description;
         let images = req.body.images;
-        room.findOneAndUpdate( {"_id":_id} , { "$set": {"name":name,"address":address,"capacity":capacity,"description":description,"images":images }})
+        let latitude =req.body.latitude;
+        let longitude = req.body.longitude;
+        room.findOneAndUpdate( {"_id":_id} , 
+        { "$set": {"name":name,"address":address,"capacity":capacity,"description":description,"images":images,"longitude":longitude,"latitude":latitude }})
         .then(room => {
         if(!room){return res.sendStatus(401);}
         return res.json(room);

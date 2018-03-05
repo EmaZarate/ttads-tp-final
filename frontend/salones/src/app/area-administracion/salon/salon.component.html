@@ -14,6 +14,33 @@
     </div>
   </div>
   <div class="row">
+    <h3>Imagenes</h3>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label >Frente</label>
+      <input type="text" class="form-control" #front value="{{salon.images.front}}">
+    </div>
+    <div class="col-md-4">
+      <label >Interior a lo largo</label>
+      <input type="text" class="form-control" #long value="{{salon.images.long}}">
+    </div>
+    <div class="col-md-4">
+      <label >Interior inclinada</label>
+      <input type="text" class="form-control" #inclined value="{{salon.images.inclined}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label >Latitud</label>
+      <input type="number" class="form-control" #latitude value="{{salon.latitude}}">
+    </div>
+    <div class="col-md-6">
+      <label >Longitud</label>
+      <input type="number" class="form-control" #longitude value="{{salon.longitude}}">
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-12">
       <label>Descripción</label>
       <input type="text" class="form-control description" #description value="{{salon.description}}">
@@ -22,7 +49,7 @@
 
   <div class="row">
     <div class="col-md-5 offset-md-2 col-6 marginbutton">
-        <button  class="btn btn-primary" type="button" (click)="save(name.value,address.value,capacity.value,description.value)">Guardar</button>
+        <button  class="btn btn-primary" type="button" (click)="save(name.value,address.value,capacity.value,description.value,latitude.value,longitude.value,front.value,long.value,inclined.value)">Guardar</button>
     </div>
     <div class="col-md-5 col-6">
         <button type="button" class="btn btn-secondary" (click)="goBack()" >Atras y Deshacer</button>
