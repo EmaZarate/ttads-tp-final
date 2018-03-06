@@ -2,12 +2,17 @@ li a{
    text-align: center;
 
 }
-
+button{
+  margin-left: 4px
+}
 
  @media (min-width: 991.99px) {
     a{
         width: 150px;
       }
+ }
+ .mail{
+   color: aliceblue
  }
  @media print {
   nav{

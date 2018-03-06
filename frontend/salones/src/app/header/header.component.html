@@ -36,7 +36,7 @@
   </div>
   <div *ngIf="isLogued">
     <label class="form-inline my-2 my-lg-0">
-      <label>Usted se encuentra logueado como {{mail}} &nbsp;</label>
+      <label class="mail"> {{mail}} </label>
       <a><button class="btn btn-outline-light my-2 my-sm-0" type="submit" (click)="destroySession()">Salir</button></a>
     </label>
   </div>
