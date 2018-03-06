@@ -8,18 +8,28 @@ router.get('/:email/:password', (req,res) => {
   userModel.findOne({email:req.params.email,password:req.params.password})
   .populate('permits')
   .then(user=>{
-      if(!user){ return res.sendStatus(404)}
+      if(!user){
+        session.logued = false;
+        return res.sendStatus(404)
+      }
       else{
-        session.user = user
+        session.user = user;
+        session.user.email = user.email;
         if(user.permits.type==="administrador"){
           session.admin = true;
+          session.logued = true;
         }
         else {
           session.admin = false;
+          session.logued = true;
         }
         return res.json(user)
       }
   })
 });
+
+router.get('/', (req,res) => {
+        return res.json(session.user.email)
+})
 
 module.exports=router;

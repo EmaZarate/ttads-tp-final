@@ -8,11 +8,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  mail:string;
   admin:boolean;
+  logued:boolean;
   isAdmin:boolean;
   isClient:boolean;
+  isLogued:boolean;
+  isNotLogued:boolean;
   rooms:any=[{name:"",_id:""}]
-  constructor(private service:SalonesService) { }
+  constructor(
+    private service:SalonesService,
+    private router:Router) {
+
+  }
 
   ngOnInit() {
     this.service.getRooms().subscribe(rooms=>{ this.rooms=rooms})
@@ -33,6 +41,26 @@ export class HeaderComponent implements OnInit {
         this.isClient = true;
       }
     });
+   this.service.checklogued().subscribe( logued => {
+     this.logued = logued;
+     if(this.logued === false){
+       this.isLogued = false;
+       this.isNotLogued = true;
+     }
+     else{
+       this.isLogued = true;
+       this.isNotLogued = false;
+     }
+   });
+   this.service.logued().subscribe( mail => {
+     this.mail = mail;
+   });
+ }
+
+  destroySession(){
+    this.service.destroy().subscribe( () => {})
+    window.location.reload();
+    window.location.href = "/";
   }
 
 }

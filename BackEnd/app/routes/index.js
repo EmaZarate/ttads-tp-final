@@ -9,5 +9,7 @@ router.use('/api/menus', require('./menu'));
 router.use('/api/signs', require('./sign'));
 router.use('/api/reservation', require('./reservation'));
 router.use('/api/checkLogs', require('./checkLog'));
+router.use('/api/checkLoguedIns', require('./checkLoguedIn'));
+router.use('/api/destroys', require('./destroy'));
 
 module.exports=router;
