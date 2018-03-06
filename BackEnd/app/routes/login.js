@@ -10,7 +10,7 @@ router.get('/:email/:password', (req,res) => {
   .then(user=>{
       if(!user){
         session.logued = false;
-        return res.sendStatus(404)
+        return res.json(user)
       }
       else{
         session.user = user;
