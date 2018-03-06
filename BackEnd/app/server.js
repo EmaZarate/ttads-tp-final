@@ -46,5 +46,6 @@ app.use(function(req, res, next) {
 app.use(router);
 
 app.listen(port, () =>{
+  session.logued = false;
   console.log('we are live on ' + port);
 });

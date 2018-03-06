@@ -29,9 +29,16 @@
       </li>
     </ul>
 
-    
+  <div *ngIf="isNotLogued">
     <label class="form-inline my-2 my-lg-0">
       <a routerLink="/login"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Ingresar</button></a>
     </label>
+  </div>
+  <div *ngIf="isLogued">
+    <label class="form-inline my-2 my-lg-0">
+      <label>Usted se encuentra logueado como {{mail}} &nbsp;</label>
+      <a><button class="btn btn-outline-light my-2 my-sm-0" type="submit" (click)="destroySession()">Salir</button></a>
+    </label>
+  </div>
   </div>
 </nav>
