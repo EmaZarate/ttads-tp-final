@@ -1,16 +1,23 @@
 <form>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label >Nombre</label>
       <input type="text" class="form-control" #name value="{{salon.name}}">
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label >Dirección</label>
       <input type="text" class="form-control" #address value="{{salon.address}}">
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label >Capacidad</label>
       <input type="number" class="form-control" #capacity value="{{salon.capacity}}">
+    </div>
+    <div class="col-md-3">
+        <label for="">Terjeta Paga</label>
+        <select name="" id="" class="form-control" #airConditioner>
+          <option value="salon.airConditioner">{{salon.airConditioner ? 'Si': 'No' }}</option>
+          <option value="!salon.airConditioner">{{!salon.airConditioner ? 'Si': 'No' }}</option>
+        </select>
     </div>
   </div>
   <div class="row">
@@ -49,7 +56,7 @@
 
   <div class="row">
     <div class="col-md-5 offset-md-2 col-6 marginbutton">
-        <button  class="btn btn-primary" type="button" (click)="save(name.value,address.value,capacity.value,description.value,latitude.value,longitude.value,front.value,long.value,inclined.value)">Guardar</button>
+        <button  class="btn btn-primary" type="button" (click)="save(name.value,address.value,capacity.value,airConditioner.value,description.value,latitude.value,longitude.value,front.value,long.value,inclined.value)">Guardar</button>
     </div>
     <div class="col-md-5 col-6">
         <button type="button" class="btn btn-secondary" (click)="goBack()" >Atras y Deshacer</button>

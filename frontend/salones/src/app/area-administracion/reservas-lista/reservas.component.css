@@ -5,10 +5,22 @@
   .delete{
     display: none;
   }
+  .listPrint{
+    display: none
+  }
   
   @media (min-width: 300px){
     .NewDelete{
       margin-right: 5%;
       margin-left: 5%
+    }
+  }
+
+  @media print{
+    .listPrint{
+      display: table-cell
+    }
+    button{
+      display: none
     }
   }

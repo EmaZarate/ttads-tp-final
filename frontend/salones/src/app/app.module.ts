@@ -13,6 +13,7 @@ import { SalonesService } from './service/salones.service';
 import { SalonComponent } from './salones/salon/salon.component';
 import { PaginaNoEncontradaComponent } from './paginaNoEncontrada/paginaNoEncontrada.component';
 import { RoomComponent } from './room/room.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -28,6 +29,7 @@ import { RoomComponent } from './room/room.component';
     SalonComponent,
     PaginaNoEncontradaComponent,
     RoomComponent,
+    ContactComponent,
 
 
   ],

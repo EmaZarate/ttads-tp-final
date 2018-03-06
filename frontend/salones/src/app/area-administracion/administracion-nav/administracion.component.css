@@ -17,3 +17,8 @@
      padding-right: 5px;
   }
 }
+@media print {
+  .margen{
+    display: none
+  }
+}

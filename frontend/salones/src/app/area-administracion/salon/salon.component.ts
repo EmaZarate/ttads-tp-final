@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class SalonComponent implements OnInit {
   id:String;
-  salon:any={images:{frente:"",long:"",inclined:""}};
+  salon:any={images:{frente:"",long:"",inclined:"",airConditioner:false}};
   constructor(
     private route:ActivatedRoute,
     private service:AdministracionService,
@@ -24,14 +24,14 @@ export class SalonComponent implements OnInit {
 
     }
     else{
-      this.service.getRoom(this.id).subscribe( salon=>{ this.salon=salon[0] } );
+      this.service.getRoom(this.id).subscribe( salon=>{ this.salon=salon[0]; } );
     }
 
   }
   goBack(){
     this.router.navigate(['/administracion/salones']);
   }
-  save(name,address,capacity,description,latitude,longitude,front,long,inclined){
+  save(name,address,capacity,airConditioner,description,latitude,longitude,front,long,inclined){
     this.salon.name=name;
     this.salon.address=address;
     this.salon.capacity=capacity;
@@ -41,6 +41,7 @@ export class SalonComponent implements OnInit {
     this.salon.images.front=front;
     this.salon.images.long=long;
     this.salon.images.inclined=inclined;
+    this.salon.airConditioner=airConditioner;
 
     if(this.id===null){
        this.service.insertRoom(this.salon).subscribe(()=>{

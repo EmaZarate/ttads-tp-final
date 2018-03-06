@@ -7,7 +7,8 @@ var roomSchema = mongoose.Schema({
  description:{type:String},
  images:{ type:{} },
  latitude:{type:Number},
- longitude:{type:Number}
+ longitude:{type:Number},
+ airConditioner:{type:Boolean}
 },{timestamps:true});
 
 mongoose.model('room',roomSchema);

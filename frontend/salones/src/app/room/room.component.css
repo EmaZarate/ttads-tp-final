@@ -1,18 +1,25 @@
 h4{
-    color: rgb(151, 151, 151)
+    display: inline-block
 }
 h3{
     display: inline-block
 }
+.strong{
+    font-weight: 700;
+    color: black;
+}
 p{
-    display: inline-block
+    font-family:"Segoe UI", 'sans-serif';
+    color: rgb(107, 107, 107);
+    display: inline-block;
+    padding-left: 10px
+}
+.bottomMap{
+    padding-top: 18px;
 }
 agm-map {
-    height: 300px;
-    
+    height: 300px;    
   }
 @media (min-width: 400px) {
-    h4{
-      margin: 0% 20% 0% 20%
-    }
+    
 }

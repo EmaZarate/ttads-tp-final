@@ -6,3 +6,8 @@ button{
     margin-bottom: 15px;
     width: 130px;
 }
+@media print {
+    .center{
+      display: none
+    }
+  }

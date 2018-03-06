@@ -15,8 +15,10 @@ router.get('/', (req,res) => {
     return res.status(401).send({permiso:'no tiene permiso'});
   }
   else{
-        reservationModel.find({})
+        reservationModel.find()
+        .sort({"date":1})
         .populate('client')
+        .populate('room')
         .then(reservations=>{
           return res.json(reservations);
         })

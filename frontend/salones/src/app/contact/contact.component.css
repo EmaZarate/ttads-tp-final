@@ -1,0 +1,15 @@
+ul{
+    list-style: none;
+}
+.contact{
+padding-top: 8%
+}
+agm-map {
+    height: 400px;    
+}
+
+p{
+    color: rgb(107, 107, 107);
+    display: inline
+}
+

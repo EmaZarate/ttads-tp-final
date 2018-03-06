@@ -10,6 +10,8 @@
           <th scope="col">#</th>
           <th scope="col">Fecha</th>
           <th scope="col">Cliente</th>
+          <th scope="col" class="listPrint">Monto</th>
+          <th scope="col" class="listPrint">Salon</th>
           <th scope="col"></th>
        </tr>
      </thead>
@@ -18,6 +20,8 @@
          <th scope="row">{{i}}</th>
          <td>{{reservation.date | slice:0:10}}</td>
          <td>{{reservation.client.name}} {{reservation.client.surname}}</td>
+         <td class="listPrint">{{reservation.amount}}</td>
+         <td class="listPrint">{{reservation.room.name}}</td>
          <td>
            <button type="button" (click)="goReservation(reservation._id)" class="btn btn-primary">Seleccionar</button>
           <button type="button" (click)="deleteReservation(reservation._id)" class="btn btn-danger" [class.delete]="delete">X</button>
