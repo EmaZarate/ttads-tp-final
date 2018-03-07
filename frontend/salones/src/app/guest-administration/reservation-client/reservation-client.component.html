@@ -37,8 +37,10 @@
       <p>Direccion: </p> {{reservation.room.address}}
     </div>
 </div>
-<h3>Lista de Invitados 
+<h3>Lista de Invitados
+<div *ngIf="fullList">
   <button class="btn btn-success" (click)="newGuest()"><i class="far fa-plus-square fa-2x"></i></button>
+</div>
   <button class="btn btn-danger" (click)="deletedGuestButton()"><i class="far fa-trash-alt fa-2x"></i></button>
 </h3>
 <div class="row" [class.new]="newGuestbool">
@@ -55,13 +57,13 @@
     <input type="tel" class="form-control" #phone value={{guest.phone}}>
     </div>
     <div class="col-md-3">
-    <label for="">Terjeta Paga</label>
+    <label for="">Tarjeta Paga</label>
     <select name="" id="" class="form-control" #payCard >
       <option value="true">Si</option>
       <option value="false">No</option>
     </select>
     </div>
-    <div class="col-md-12">
+    <div ngIfclass="col-md-12">
       <button (click)="saveGuest(name.value,surname.value,phone.value,payCard.value)" class="btn btn-secondary" >Guardar Invitado</button>
     </div>
 </div>
@@ -70,4 +72,3 @@
      <app-list-guest [guest]="guest" [deletedGuestbool]="deletedGuestbool" [id]="id" [i]="i"(deleted)="deletedAndUpdate($event)"></app-list-guest>
   </li>
 </ul>
-

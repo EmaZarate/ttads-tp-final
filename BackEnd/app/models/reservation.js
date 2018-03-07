@@ -14,6 +14,7 @@ var reservationSchema = new mongoose.Schema({
    state: {type:String},
    amount: {type:Number},
    description:{type:String},
+   cantInvitados:{type:Number},
    client:{type:mongoose.Schema.Types.ObjectId, ref:'user'},
    room:{type:mongoose.Schema.Types.ObjectId, ref:'room'},
    menu:{type:mongoose.Schema.Types.ObjectId, ref:'menu'},
@@ -22,9 +23,7 @@ var reservationSchema = new mongoose.Schema({
 },{timestamps:true});
 
 reservationSchema.methods.setAmount= function(price){
-
   this.amount= (price*this.cantAdultPeople)+((price*this.cantChildren)/2)
 
 }
 mongoose.model('reservation',reservationSchema);
-

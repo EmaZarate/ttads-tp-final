@@ -20,12 +20,12 @@ export class GuestService {
   saveGuest(guest,id_reservation){
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.coneccion + "guests/"+id_reservation,guest, options)         
+    return this.http.post(this.coneccion + "guests/"+id_reservation,guest, options)
   }
   updateGuest(guest){
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.put(this.coneccion + "guests/"+guest._id,guest, options)         
+    return this.http.put(this.coneccion + "guests/"+guest._id,guest, options)
   }
   deleteGuest(id_guest,id_reservation): Observable<any>{
     let headers = new Headers({ 'Content-Type': 'application/json' });

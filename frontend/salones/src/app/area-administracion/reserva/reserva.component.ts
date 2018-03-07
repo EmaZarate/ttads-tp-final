@@ -24,7 +24,7 @@ export class ReservaComponent implements OnInit {
   alertSignSave:boolean=true;
   buttonSaveSign:boolean=false;
   deletedSing:boolean=true;
- 
+
 
 
   constructor(
@@ -37,19 +37,23 @@ export class ReservaComponent implements OnInit {
     this.service.getRooms().subscribe(salones=>{ this.salones=salones });
     this.service.getUsuarios().subscribe(clientes=>{ this.clientes=clientes });
     this.service.getMenus().subscribe(menus=>{ this.menus=menus });
-    
+    for(var i=0;i < this.clientes.length; i++){
+    if(this.clientes[i].permits.type === "administrador"){
+      this.clientes[i] = null;
+    }
+  }
     this.id = this.route.snapshot.paramMap.get('id');
     if(this.id===null){
-        
+
     }
     else{
-      this.service.getReserva(this.id).subscribe( reserva=>{ 
+      this.service.getReserva(this.id).subscribe( reserva=>{
         this.reserva=reserva;
         this.senas=this.reserva.sign
       });
     }
   }
-  
+
   goBack(){
     this.router.navigate(['/administracion/reservas']);
   }
@@ -73,7 +77,7 @@ export class ReservaComponent implements OnInit {
           this.reserva.extraHourPrice=precioHoraExtra;
           this.reserva.description=descripcion;
           this.reserva.amount=monto
-        
+
           if(this.id===null){
             this.service.insertReserva(this.reserva).subscribe((reserva)=>{
               if(this.sena.amount===0){
@@ -94,7 +98,7 @@ export class ReservaComponent implements OnInit {
         }
         else{
           alert("Ingrese todos los campos")
-        } 
+        }
   }
   checkForm(fecha, tipo, inicio, fin, salon,
     cliente, menu, adultos, menores, bebes, estado, precioHoraExtra, monto, descripcion){
@@ -128,7 +132,7 @@ export class ReservaComponent implements OnInit {
     }
     else{
       this.service.insertSena(this.sena,this.id).subscribe(()=>{
-        this.service.getReserva(this.id).subscribe( reserva=>{ 
+        this.service.getReserva(this.id).subscribe( reserva=>{
           this.reserva=reserva;
           this.senas=this.reserva.sign
         });
@@ -157,10 +161,10 @@ export class ReservaComponent implements OnInit {
   }
   deletedSign(id){
      this.service.deleteSign(id).subscribe((reserva)=>{
-   
+
         this.reserva=reserva;
         this.senas=this.reserva.sign
-      
+
      });
   }
 

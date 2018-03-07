@@ -11,24 +11,26 @@ export class ReservationClientComponent implements OnInit {
   id:string
   reservation:any={guest:[],room:{name:""},menu:{name:""}}
   guest:any={name:"",surname:"",phone:"",payCard:""}
- 
+  guests:any=[];
+  fullList:boolean;
+
 
   newGuestbool:boolean=true
   deletedGuestbool:boolean=false
-  
-  
+
+
   constructor(private activatedRoute:ActivatedRoute, private service:GuestService) {}
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation})
-    
+
   }
-  
+
   newGuest(){
     if(this.newGuestbool){
       this.newGuestbool=false
-    } 
+    }
     else{
       this.newGuestbool=true
     }
@@ -53,12 +55,19 @@ export class ReservationClientComponent implements OnInit {
     this.guest.phone=phone;
     this.guest.payCard=payCard;
     this.service.saveGuest(this.guest,this.id).subscribe(()=>{
-      this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation
+      this.service.getReservation(this.id).subscribe( reservation=> {this.reservation=reservation;
+      if(this.reservation.cantInvitados === this.reservation.guest.length){
+          alert("La lista de clientes se encuentra llena!")
+          this.fullList = false;
+        }
+        else{
+          this.fullList = true;
+        }
       this.newGuest();
       this.guest={name:"",surname:"",phone:"",payCard:""}
       })
     });
   }
- 
+
 
 }

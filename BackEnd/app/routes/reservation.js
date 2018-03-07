@@ -46,6 +46,8 @@ router.post('/',(req,res)=>{
   }
   else{
     let instReservation = new reservationModel(req.body);
+    let cantInvitados = parseInt(req.body.cantAdultPeople) + parseInt(req.body.cantChildren) + parseInt(req.body.cantBaby);
+    instReservation.cantInvitados = cantInvitados;
     if(instReservation.type==="Con Servicio"){
       menuModel.findOne({_id:instReservation.menu})
       .then(menu=>{
@@ -90,11 +92,12 @@ router.put('/:_id',(req,res)=>{
         let client =req.body.client;
         let menu = req.body.menu;
         let room = req.body.room;
+        let cantInvitados = parseInt(req.body.cantAdultPeople) + parseInt(req.body.cantChildren) + parseInt(req.body.cantBaby);
         if(type=="Con Servicio"){
           menuModel.findOne({_id:menu})
           .then(menu=>{
             amount= (menu.price*cantAdultPeople)+((menu.price*cantChildren)/2)
-            reservationModel.findOneAndUpdate({ "_id":_id },{ "$set": { "date":date, "type":type,"startTime":startTime,"endTime":endTime,"cantAdultPeople":cantAdultPeople,"cantChildren":cantChildren,"cantBaby":cantBaby,"extraHourPrice":extraHourPrice,"state":state,"amount":amount,"description":description,"room":room,"menu":menu,"client":client }})
+            reservationModel.findOneAndUpdate({ "_id":_id },{ "$set": { "date":date, "type":type,"startTime":startTime,"endTime":endTime,"cantAdultPeople":cantAdultPeople,"cantChildren":cantChildren,"cantBaby":cantBaby,"extraHourPrice":extraHourPrice,"state":state,"amount":amount,"description":description,"cantInvitados":cantInvitados,"room":room,"menu":menu,"client":client }})
          .then(reservation => {
            if(!reservation) { return res.sendStatus(404) }
            else {
@@ -104,7 +107,7 @@ router.put('/:_id',(req,res)=>{
           })
         }
         else{
-          reservationModel.findOneAndUpdate({ "_id":_id },{ "$set": { "date":date, "type":type,"startTime":startTime,"endTime":endTime,"cantAdultPeople":cantAdultPeople,"cantChildren":cantChildren,"cantBaby":cantBaby,"extraHourPrice":extraHourPrice,"state":state,"amount":amount,"description":description,"room":room,"menu":menu,"client":client }})
+          reservationModel.findOneAndUpdate({ "_id":_id },{ "$set": { "date":date, "type":type,"startTime":startTime,"endTime":endTime,"cantAdultPeople":cantAdultPeople,"cantChildren":cantChildren,"cantBaby":cantBaby,"extraHourPrice":extraHourPrice,"state":state,"amount":amount,"description":description,"cantInvitados":cantInvitados,"room":room,"menu":menu,"client":client }})
          .then(reservation => {
            if(!reservation) { return res.sendStatus(404) }
            else {
