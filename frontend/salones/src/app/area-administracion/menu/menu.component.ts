@@ -32,23 +32,37 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/administracion/menus']);
   }
   save(name,price,drink,starter,mainCourse,dessert){
-    this.menu.name=name;
-    this.menu.price=price;
-    this.menu.drink=drink;
-    this.menu.starter=starter;
-    this.menu.mainCourse=mainCourse;
-    this.menu.dessert=dessert;
-    if(this.id===null){
-       this.service.insertMenu(this.menu).subscribe(()=>{
-        this.router.navigate(['/administracion/menus'])
-       });
+    if(this.checkForm(name,price,drink,starter,mainCourse,dessert)){
+      this.menu.name=name;
+      this.menu.price=price;
+      this.menu.drink=drink;
+      this.menu.starter=starter;
+      this.menu.mainCourse=mainCourse;
+      this.menu.dessert=dessert;
+      if(this.id===null){
+         this.service.insertMenu(this.menu).subscribe(()=>{
+          this.router.navigate(['/administracion/menus'])
+         });
+      }
+      else{
+        this.service.updateMenu(this.menu).subscribe(()=>{
+          this.router.navigate(['/administracion/menus'])
+        });
+      }
     }
     else{
-      this.service.updateMenu(this.menu).subscribe(()=>{
-        this.router.navigate(['/administracion/menus'])
-      });
+      alert("Complete todos los campos")
     }
     
   }
+  checkForm(name,price,drink,starter,mainCourse,dessert):boolean{
+    if(name==="" || price==="" || drink==="" || starter==="" || mainCourse==="" || dessert===""){
+      return false
+    }
+    else{
+      return true
+    }
+  }
+  
 
 }

@@ -48,24 +48,36 @@ export class UsuarioComponent implements OnInit {
   }
 
   save(name,surname,phone,address,email,password,tipo){
-    this.usuario.name=name;
-    this.usuario.surname=surname;
-    this.usuario.phone=phone;
-    this.usuario.address=address;
-    this.usuario.email=email;
-    this.usuario.password=password;
-    this.usuario.permission=tipo
-    if(this.id===null){
-       this.service.insertUsuario(this.usuario).subscribe(()=>{
-        this.router.navigate(['/administracion/usuarios'])
-       });
+    if(this.checkForm(name,surname,phone,address,email,password,tipo)){
+      this.usuario.name=name;
+      this.usuario.surname=surname;
+      this.usuario.phone=phone;
+      this.usuario.address=address;
+      this.usuario.email=email;
+      this.usuario.password=password;
+      this.usuario.permission=tipo
+      if(this.id===null){
+         this.service.insertUsuario(this.usuario).subscribe(()=>{
+          this.router.navigate(['/administracion/usuarios'])
+         });
+      }
+      else{
+        this.service.updateUsuario(this.usuario).subscribe(()=>{
+          this.router.navigate(['/administracion/usuarios'])
+        });
+      }
     }
     else{
-      this.service.updateUsuario(this.usuario).subscribe(()=>{
-        this.router.navigate(['/administracion/usuarios'])
-      });
+      alert("Ingrese todos los campos")
     }
-    
+  }
+  checkForm(name,surname,phone,address,email,password,tipo){
+     if(name==="" || surname==="" || phone==="" || address==="" || email==="" || password==="" || tipo===""){
+       return false
+     }
+     else{
+       return true
+     }
   }
 
 }

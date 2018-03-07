@@ -32,27 +32,41 @@ export class SalonComponent implements OnInit {
     this.router.navigate(['/administracion/salones']);
   }
   save(name,address,capacity,airConditioner,description,latitude,longitude,front,long,inclined){
-    this.salon.name=name;
-    this.salon.address=address;
-    this.salon.capacity=capacity;
-    this.salon.description=description;
-    this.salon.latitude=latitude;
-    this.salon.longitude=longitude;
-    this.salon.images.front=front;
-    this.salon.images.long=long;
-    this.salon.images.inclined=inclined;
-    this.salon.airConditioner=airConditioner;
-
-    if(this.id===null){
-       this.service.insertRoom(this.salon).subscribe(()=>{
-        this.router.navigate(['/administracion/salones'])
-       });
+    if(this.checkForm(name,address,capacity,airConditioner,description,latitude,longitude,front,long,inclined)){
+      this.salon.name=name;
+      this.salon.address=address;
+      this.salon.capacity=capacity;
+      this.salon.description=description;
+      this.salon.latitude=latitude;
+      this.salon.longitude=longitude;
+      this.salon.images.front=front;
+      this.salon.images.long=long;
+      this.salon.images.inclined=inclined;
+      this.salon.airConditioner=airConditioner;
+  
+      if(this.id===null){
+         this.service.insertRoom(this.salon).subscribe(()=>{
+          this.router.navigate(['/administracion/salones'])
+         });
+      }
+      else{
+        this.service.updateRoom(this.salon).subscribe(()=>{
+          this.router.navigate(['/administracion/salones'])
+        });
+      }
     }
     else{
-      this.service.updateRoom(this.salon).subscribe(()=>{
-        this.router.navigate(['/administracion/salones'])
-      });
+      alert("Ingrese todos los compos")
     }
+    
 
+  }
+  checkForm(name,address,capacity,airConditioner,description,latitude,longitude,front,long,inclined){
+    if(name==="" || address==="" || capacity==="" ||  description==="" || latitude===0 || longitude===0){
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 }
