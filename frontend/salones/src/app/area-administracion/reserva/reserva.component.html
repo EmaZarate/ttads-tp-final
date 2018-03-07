@@ -31,7 +31,7 @@
     </div>
     <div class="col-md-4">
       <label >Cliente</label>
-      <select #cliente class="form-control">
+      <select (click)="checkClients()" #cliente class="form-control">
         <option value="{{reserva.client._id}}">- {{reserva.client.name}} {{reserva.client.surname}} -</option>
         <option *ngFor="let cliente of clientes" value={{cliente._id}}>{{cliente.name}} {{cliente.surname}}</option>
       </select>
@@ -106,7 +106,7 @@
         Pago Guardado!
       </div>
   </div>
-</div> 
+</div>
 <div class="row">
       <table class="table table-sm">
           <thead>
@@ -127,10 +127,10 @@
           </tbody>
         </table>
 </div>
-   
+
   <div class="row">
     <div class="col-md-5 offset-md-2 col-6 marginbutton">
-        <button  class="btn btn-primary" type="button" 
+        <button  class="btn btn-primary" type="button"
         (click)="save(fecha.value, tipo.value, inicio.value, fin.value, salon.value,
          cliente.value, menu.value, adultos.value, menores.value, bebes.value, estado.value, precioHoraExtra.value, monto.value, descripcion.value)">Guardar</button>
     </div>

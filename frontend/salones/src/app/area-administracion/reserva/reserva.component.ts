@@ -37,11 +37,6 @@ export class ReservaComponent implements OnInit {
     this.service.getRooms().subscribe(salones=>{ this.salones=salones });
     this.service.getUsuarios().subscribe(clientes=>{ this.clientes=clientes });
     this.service.getMenus().subscribe(menus=>{ this.menus=menus });
-    for(var i=0;i < this.clientes.length; i++){
-    if(this.clientes[i].permits.type === "administrador"){
-      this.clientes[i] = null;
-    }
-  }
     this.id = this.route.snapshot.paramMap.get('id');
     if(this.id===null){
 
@@ -51,6 +46,14 @@ export class ReservaComponent implements OnInit {
         this.reserva=reserva;
         this.senas=this.reserva.sign
       });
+    }
+  }
+
+  checkClients(){
+    for(var i=0;i < this.clientes.length; i++){
+    if(this.clientes[i].permits.type === "administrador"){
+    this.clientes[i] = null;
+      }
     }
   }
 
