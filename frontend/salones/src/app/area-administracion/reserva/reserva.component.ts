@@ -52,7 +52,7 @@ export class ReservaComponent implements OnInit {
   checkClients(){
     for(var i=0;i < this.clientes.length; i++){
     if(this.clientes[i].permits.type === "administrador"){
-    this.clientes[i] = null;
+    this.clientes.splice(i,1);s
       }
     }
   }

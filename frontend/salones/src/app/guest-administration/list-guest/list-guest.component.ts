@@ -16,7 +16,7 @@ export class ListGuestComponent implements OnInit {
   //guest:any={name:"",surname:"",phone:"",payCard:""}
   updateGuestBool: Array<boolean>=[false,false]
 
-  
+
   constructor(private service:GuestService) { }
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class ListGuestComponent implements OnInit {
 
   initArrayGuest(){
     for (let index = 0; index < 100; index++) {
-      this.updateGuestBool[index]=false; 
+      this.updateGuestBool[index]=false;
     }
     this.updateGuestBool
   }
@@ -43,8 +43,9 @@ export class ListGuestComponent implements OnInit {
     this.service.deleteGuest(id_guest,this.id).subscribe(()=>{
       this.deleted.emit(true)
     })
+    this.fullList = true;
   }
-  
+
   updateGuest(id,name,surname,phone,payCard,i){
     let guest:any={name:"",surname:"",phone:"",payCard:""}
     guest._id=id
@@ -58,6 +59,6 @@ export class ListGuestComponent implements OnInit {
       this.deleted.emit(true)
     });
   }
-  
- 
+
+
 }

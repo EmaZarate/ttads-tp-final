@@ -12,7 +12,8 @@ router.get('/', (req,res) => {
     return res.status(401).send();
   }
   else{
-        userModel.find({})
+        userModel.find({}).
+        populate('permits')
         .then(users=>{
           return res.json(users)
     })
